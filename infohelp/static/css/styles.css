@@ -4,6 +4,12 @@
     margin: 0;
     padding: 0;
     font-family: 'Work Sans', sans-serif;
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+}
+
+body{
+    display: block;
 }
 
 header {
@@ -35,7 +41,7 @@ img {
     --text-color: #002451;
     --second-color: #007AF0;
     --bg-color: #fff;
-    --line-color: #A5A5A5;
+    --border-color: #A5A5A5;
     --box-shadow: 2px 2px 18px rgb(14 52 54 / 15%);
 }
 
@@ -54,24 +60,23 @@ img {
 
 .pesquisar {
     background: var(--bg-color);
-    height: 40px;
-    border-radius: 40px;
+    height: 30px;
+    border-radius: 30px;
     padding: 10px;
-    border: 1px var(--line-color) solid;
+    border: 1px var(--border-color) solid;
 }
 
 .btn-pesquisar {
     text-decoration: none;
     color: var(--bg-color);
     float: right;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: var(--second-color);
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 2s;
 }
 
 .pesquisar-txt {
@@ -80,21 +85,17 @@ img {
     outline: none;
     float: left;
     padding: 0;
-    color: var(--bg-color);
+    color: var(--text-color);
     font-size: 16px;
     transition: 0.4s;
-    line-height: 40px;
-    width: 0px;
+    line-height: 30px;
+    width: 200px;
 }
 
-.pesquisar-txt:hover > .pesquisar-txt {
-    width: 240px;
+/*.pesquisar:hover > .pesquisar-txt {
+    width: 200px;
     padding: 0 6px;
-}
-
-.pesquisar-txt:hover > .btn-pesquisar {
-    background: var(--bg-color);
-}
+}*/
 
 .links {
     list-style: none;
@@ -117,3 +118,43 @@ img {
     border-radius: 15px;
     font-weight: 600;
 }
+
+/*Rodapé*/
+footer {
+    background-color: var(--bg-color);
+
+}
+
+.rodape{
+    width: 400px;
+}
+
+.logo-rodape {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.logo-rodape img {
+    height: 250px;
+    width: 250px;
+}
+
+.redes-sociais {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.redes-sociais i {
+    display: block;
+}
+
+.final-rodape {
+    border-top: 1px var(--border-color) solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
