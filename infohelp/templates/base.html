@@ -9,8 +9,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 </head>
 <body>
+
     <!--Barra de Navegação-->
-    <header>
+    <header class="shadow">
         <div class="nav container">
             <div class="logo"><img src="static/assets/LogoInfoHelp.png" alt="Logo InfoHelp"></div>
             <div class="pesquisar">
@@ -24,17 +25,27 @@
             <a class="login">LOGIN</a>
         </div>
     </header>
+
+    <!--Conteúdo-->
+    {% block content %}
+    {% endblock content %}
+    <!--Rodapé-->
     <footer>
         <div class="rodape container">
-            <div class="logo-rodape"><img src="static/assets/LogoInfoHelp.png" alt="Logo InfoHelp"></div>
-            <div class="redes-sociais">
-                <p>Redes Sociais</p>
-                <i class="bx bxl-instagram"></i>
-                <i class="bx bxl-facebook"></i>
+            <div class="inicio-rodape">
+                <div class="logo-section">
+                    <div class="logo-rodape"><img src="static/assets/LogoInfoHelp.png" alt="Logo InfoHelp"></div>
+                </div>
+                <div class="redes-sociais">
+                    <p>Redes Sociais:</p>
+                    <div class="icones">
+                        <i class="bx bxl-instagram"></i>
+                        <i class="bx bxl-facebook"></i>
+                    </div>
+                </div>
             </div>
-            <div class="final-rodape">
-                <p>InfoHelp</p>
-                <p>Copyright © 2024</p>
+            <div class="final-rodape container">
+                <p>InfoHelp<br>Copyright © 2024.</p>
             </div>
         </div>
     </footer>

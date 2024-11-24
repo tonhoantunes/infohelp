@@ -14,11 +14,14 @@ body{
 
 header {
     background: var(--bg-color);
-    position: fixed;
+    position: relative; /*para deixar a navbar fixa é só colocar "fixed"*/
     top: 0;
     left: 0;
     width: 100%;
     z-index: 200;
+}
+
+header.shadow {
     box-shadow: 0 1px 4px hsl(0 4% 14% / 10%);
 }
 
@@ -39,13 +42,14 @@ img {
 /*Variáveis*/
 :root {
     --text-color: #002451;
+    --primary-color: #0051A2;
     --second-color: #007AF0;
     --bg-color: #fff;
     --border-color: #A5A5A5;
     --box-shadow: 2px 2px 18px rgb(14 52 54 / 15%);
 }
 
-/*Menu*/
+/*Barra de Navegação*/
 .nav {
     display: flex;
     align-items: center;
@@ -121,40 +125,108 @@ img {
 
 /*Rodapé*/
 footer {
-    background-color: var(--bg-color);
-
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
-.rodape{
-    width: 400px;
+.inicio-rodape {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, auto));
+    justify-content: center;
+    gap: 5px;
 }
 
-.logo-rodape {
-    display: flex;
-    justify-content: start;
-    align-items: center;
+.logo-section {
+    margin-bottom: 20px;
 }
 
 .logo-rodape img {
-    height: 250px;
-    width: 250px;
+    width: 200px;
+    height: 200px;
 }
 
 .redes-sociais {
-    display: flex;
-    justify-content: end;
-    align-items: center;
+    margin: 60px 0 0;
 }
 
-.redes-sociais i {
-    display: block;
+.redes-sociais p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--border-color);
+}
+
+.icones .bx {
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 40px;
+    cursor: pointer;
 }
 
 .final-rodape {
     border-top: 1px var(--border-color) solid;
+    width: 400px;
+    padding-top: 20px;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/*Produzido (Tela Inicial)*/
+.producao {
+    background: var(--primary-color);
+    height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    
 }
 
+.producao h1 {
+    font-size: 40px;
+    font-weight: 400;
+    color: var(--bg-color);
+}
+
+.logo-producao {
+    width: 300px;
+    height: 300px;
+}
+
+/*Apresentação (Tela Inicial)*/
+.apresentacao {
+    height: 780px;
+    background: var(--second-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.foto-estudante img {
+    height: 780px;
+    width: 518px;
+}
+
+.textos h1 {
+    font-size: 80px;
+    font-weight: 700;
+    color: var(--bg-color);
+}
+
+.textos p {
+    margin-top: 70px;
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--bg-color);
+}
+
+.btn-recursos {
+    background: var(--bg-color);
+    color: var(--text-color);
+    text-decoration: none;
+    width: 350px;
+    padding: 18px 30px;
+    border-radius: 50px;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+}
