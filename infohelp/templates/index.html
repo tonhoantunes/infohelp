@@ -2,14 +2,43 @@
 {% load static %}
 
 {% block content %}
-    <section>
-        <div class="apresentacao">
-            <div class="foto-estudante"><img src="static/assets/estudante.png" alt="Estudante InfoHelp"></div>
+    <!--Header Apresentação-->
+    <section class="header-apresentacao">
+        <div class="apresentacao container">
+            <img src="static/assets/estudante.png" alt="Estudante InfoHelp" class="imagem">
             <div class="textos">
                 <h1>A SOLUÇÃO PARA SUAS DIFICULADADES</h1>
                 <p>Contamos com a plataforma que ensina o aluno desde o básico ao avançado.</p>
+                <a class="btn-recursos" href="#">Conheça nossos recursos</a>
             </div>
-            <a class="btn-recursos" href="#">Conheça nossos recursos</a>
+        </div>
+    </section>
+
+    <!--Recursos-->
+    <section class="recursos container">
+        <p>RECURSOS</p>
+        <h1>Uma plataforma completa e disposta a solucionar seus problemas</h1>
+        <div class="recursos-cards">
+            <div class="card card-1">
+                <div class="icon"><i class='bx bx-award'></i></div>
+                <h2>Excelência</h2>
+                <p>Plataforma que traz materiais de excelência para facilitar sua busca</p>
+            </div>
+            <div class="card card-2">
+                <div class="icon"><i class='bx bx-calendar-alt'></i></div>
+                <h2>Disponibilidade</h2>
+                <p>Aprenda no seu ritmo. Não tenha preocupações com indisponibilidade de material</p>
+            </div>
+            <div class="card card-3">
+                <div class="icon"><i class='bx bx-home'></i></div>
+                <h2>De qualquer lugar</h2>
+                <p>Assista nossas vídeo-aulas de qualquer lugar, na sua comodidade</p>
+            </div>
+            <div class="card card-4">
+                <div class="icon"><i class='bx bx-book'></i></div>
+                <h2>Didática</h2>
+                <p>Aqui na InfoHelp você tem uma didática leve e compreensiva</p>
+            </div>
         </div>
     </section>
 
