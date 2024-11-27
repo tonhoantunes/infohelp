@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfoHelp</title>
-    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <!--Box Icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 </head>
@@ -15,7 +15,7 @@
     <!--Barra de Navegação-->
     <header class="shadow">
         <div class="nav container">
-            <div class="logo"><img src="static/assets/LogoInfoHelp.png" alt="Logo InfoHelp"></div>
+            <div class="logo"><img src="{% static 'assets/LogoInfoHelp.png' %}" alt="Logo InfoHelp"></div>
             <div class="pesquisar">
                 <input class="pesquisar-txt" type="text" name="" placeholder="Pesquisar">
                 <a class="btn-pesquisar" href="#"><i class='bx bx-search'></i></a>
@@ -24,7 +24,7 @@
                 <li class="cursos"><a href="#">Cursos</a></li>
                 <li class="biblioteca"><a href="#">Biblioteca</a></li>
             </ul>
-            <a class="login">LOGIN</a>
+            <a class="login" href="{% url 'login' %}">LOGIN</a>
         </div>
     </header>
 
@@ -36,7 +36,7 @@
         <div class="rodape container">
             <div class="inicio-rodape">
                 <div class="logo-section">
-                    <div class="logo-rodape"><img src="static/assets/LogoInfoHelp.png" alt="Logo InfoHelp"></div>
+                    <div class="logo-rodape"><img src="{% static 'assets/LogoInfoHelp.png' %}" alt="Logo InfoHelp"></div>
                 </div>
                 <div class="redes-sociais">
                     <p>Redes Sociais:</p>
@@ -51,5 +51,6 @@
             </div>
         </div>
     </footer>
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>

@@ -1,6 +1,12 @@
-//Mudar Background do Cabeçalho ao Scrollar
-let header = document.querySelector('header')
 
-window.addEventListener("scroll", () => {
-    header.classList.toggle("shadow", window.scrollY > 0);
+const container = document.getElementById('containerLogin');
+const registerBtn = document.getElementById('register');
+const loginBtn = document.getElementById('login');
+
+registerBtn.addEventListener('click', () => {
+    container.classList.add("active");
+});
+
+loginBtn.addEventListener('click', () => {
+    container.classList.remove("active");
 });
