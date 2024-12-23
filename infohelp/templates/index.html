@@ -1,6 +1,24 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block navbar %}
+    <!--Barra de Navegação-->
+    <header class="shadow">
+        <div class="nav container">
+            <div class="logo"><img src="{% static 'assets/LogoInfoHelp.png' %}" alt="Logo InfoHelp"></div>
+            <div class="pesquisar">
+                <input class="pesquisar-txt" type="text" name="" placeholder="Pesquisar">
+                <a class="btn-pesquisar" href="#"><i class='bx bx-search'></i></a>
+            </div>
+            <ul class="links">
+                <li class="cursos"><a href="#">Cursos</a></li>
+                <li class="biblioteca"><a href="#">Biblioteca</a></li>
+            </ul>
+            <a class="login" href="{% url 'login' %}">LOGIN</a>
+        </div>
+    </header>
+{% endblock navbar %}
+
 {% block content %}
     <!--Header Apresentação-->
     <section class="header-apresentacao">
@@ -42,7 +60,7 @@
         </div>
     </section>
 
-    <section>
+    <section class="producao-section">
         <div class="producao">
             <h1>Produzido por</h1>
             <div class="logo-producao"><img src="{% static 'assets/logoInfoHelpProdução.png' %}" alt="Logo InfoHelp"></div>

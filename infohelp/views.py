@@ -8,3 +8,16 @@ def index(request):
 def login(request):
 
     return render(request, "login.html")
+
+
+def inicio(request):
+
+    return render(request, "inicio.html")
+
+def cursos(request):
+
+    return render(request, "cursos.html")
+
+def biblioteca(request):
+
+    return render(request, "biblioteca.html")

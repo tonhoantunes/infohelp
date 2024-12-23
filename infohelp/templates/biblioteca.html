@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Biblioteca - InfoHelp{% endblock title %}
+
+{% block navbar %}
+    <!--Barra de Navegação-->
+    <header class="shadow">
+        <div class="nav container">
+            <div class="logo"><img src="{% static 'assets/LogoInfoHelp.png' %}" alt="Logo InfoHelp"></div>
+            <div class="pesquisar">
+                <input class="pesquisar-txt" type="text" name="" placeholder="Pesquisar">
+                <a class="btn-pesquisar" href="#"><i class='bx bx-search'></i></a>
+            </div>
+            <ul class="links">
+                <li class="cursos"><a href="{% url "inicio" %}">Início</a></li>
+                <li class="cursos"><a href="#">Cursos</a></li>
+                <li class="biblioteca"><a href="#">Biblioteca</a></li>
+            </ul>
+            <a class="perfil" href="#"><i class='bx bx-user-circle'></i></a>
+        </div>
+    </header>
+{% endblock navbar %}
+
+{% block content %}
+    <section class="biblioteca-pag container">
+        <div class="titulo-biblioteca">
+            <h1>Salvos</h1>
+            <p>Categoria <i class='bx bxs-down-arrow'></i></p>
+        </div>
+    </section>
+
+    <section>
+        <div class="cursos-cards container">
+            <div class="card-curso card_curso-1">
+                <div class="img-curso"><img src="{% static "assets/logoInfoHelp.png" %}" alt=""></div>
+                <h2>Nome do curso</h2>
+                <div class="categoria"><p>Categoria</p></div>
+                <div class="horario-nivel">
+                    <p>00h00min</p>
+                    <p>Nível avançado</p>
+                </div>
+            </div>
+            <div class="card-curso card_curso-2">
+                <div class="img-curso"><img src="{% static "assets/logoInfoHelp.png" %}" alt=""></div>
+                <h2>Nome do curso</h2>
+                <div class="categoria"><p>Categoria</p></div>
+                <div class="horario-nivel">
+                    <p>00h00min</p>
+                    <p>Nível médio</p>
+                </div>
+            </div>
+            <div class="card-curso card_curso-3">
+                <div class="img-curso"><img src="{% static "assets/logoInfoHelp.png" %}" alt=""></div>
+                <h2>Nome do curso</h2>
+                <div class="categoria"><p>Categoria</p></div>
+                <div class="horario-nivel">
+                    <p>00h00min</p>
+                    <p>Nível básico</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="biblioteca-pag container">
+        <div class="titulo-biblioteca">
+            <h1>Inscritos</h1>
+            <p>Categoria <i class='bx bxs-down-arrow'></i></p>
+        </div>
+    </section>
+
+    <section>
+        <div class="cursos-cards container">
+            <div class="card-curso card_curso-1">
+                <div class="img-curso"><img src="{% static "assets/logoInfoHelp.png" %}" alt=""></div>
+                <h2>Nome do curso</h2>
+                <div class="categoria"><p>Categoria</p></div>
+                <div class="horario-nivel">
+                    <p>00h00min</p>
+                    <p>Nível avançado</p>
+                </div>
+            </div>
+            <div class="card-curso card_curso-2">
+                <div class="img-curso"><img src="{% static "assets/logoInfoHelp.png" %}" alt=""></div>
+                <h2>Nome do curso</h2>
+                <div class="categoria"><p>Categoria</p></div>
+                <div class="horario-nivel">
+                    <p>00h00min</p>
+                    <p>Nível médio</p>
+                </div>
+            </div>
+            <div class="card-curso card_curso-3">
+                <div class="img-curso"><img src="{% static "assets/logoInfoHelp.png" %}" alt=""></div>
+                <h2>Nome do curso</h2>
+                <div class="categoria"><p>Categoria</p></div>
+                <div class="horario-nivel">
+                    <p>00h00min</p>
+                    <p>Nível básico</p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
