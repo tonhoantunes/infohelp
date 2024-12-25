@@ -14,8 +14,8 @@
             </div>
             <ul class="links">
                 <li class="inicio"><a href="{% url "inicio" %}">Início</a></li>
-                <li class="cursos"><a href="#">Cursos</a></li>
-                <li class="biblioteca"><a href="#">Biblioteca</a></li>
+                <li class="cursos"><a href="{% url "cursos" %}">Cursos</a></li>
+                <li class="biblioteca"><a href="{% url "biblioteca" %}">Biblioteca</a></li>
             </ul>
             <a class="perfil" href="#"><i class='bx bx-user-circle'></i></a>
         </div>
@@ -23,8 +23,8 @@
 {% endblock navbar %}
 
 {% block content %}
-    <section class="cursos-pag container">
-        <div class="titulo-cursos">
+    <section class="titulos-pagina container">
+        <div class="titulo-pag">
             <h1>Cursos da plataforma</h1>
             <p>Categoria <i class='bx bxs-down-arrow'></i></p>
         </div>

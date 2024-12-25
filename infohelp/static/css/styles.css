@@ -47,6 +47,8 @@ img {
     --bg-color: #fff;
     --border-color: #A5A5A5;
     --box-shadow: 2px 2px 20px rgb(14 52 54 / 15%);
+    --shadow-2: 1px solid rgba(0, 0, 0, 0.05);
+    --shadow-3: 1px solid rgba(0, 0, 0, 0.10);
     --category: #00dc00;
 }
 
@@ -139,7 +141,7 @@ img {
 footer {
     text-align: center;
     margin-bottom: 100px;
-    border-top: 1px solid rgba(0, 0, 0, 0.10);
+    border-top: var(--shadow-3);
 }
 
 .rodape {
@@ -524,7 +526,7 @@ footer {
 
 /*Início*/
 .inicio-pag {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+    border-bottom: var(--shadow-3);
 }
 
 .inicio-conteudo {
@@ -565,7 +567,7 @@ footer {
 
 .card-curso {
     box-shadow: var(--box-shadow);
-    border: 1px solid rgba(0, 0, 0, 0.10);
+    border: var(--shadow-3);
     width: 300px;
     height: 400px;
     border-radius: 10px;
@@ -577,7 +579,7 @@ footer {
     height: 200px;
     overflow: hidden;
     border-radius: 10px 10px 0 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: var(--shadow-2);
 }
 
 .img-curso img {
@@ -614,10 +616,11 @@ footer {
     font-weight: 600;
     text-transform: uppercase;
     margin: 20px 20px 0;
+    text-align: center;
 }
 
-/*Cursos*/
-.titulo-cursos {
+/*TÍTULO DAS PÁGINAS*/
+.titulo-pag {
     display: flex;
     justify-content: flex-start;
     align-items: start;
@@ -625,37 +628,83 @@ footer {
     margin: 120px 0 72px;
 }
 
-.titulo-cursos h1 {
+.titulo-pag h1 {
     color: var(--text-color);
     font-weight: 700;
 }
 
-.titulo-cursos p {
+.titulo-pag p {
     font-size: 24px;
 }
 
-.titulo-cursos p .bx {
+.titulo-pag p .bx {
     font-size: 16px;
 }
 
-/*Biblioteca*/
-.titulo-biblioteca {
+/*Busca*/
+
+.link-voltar {
+    color: var(--second-color);
+    font-size: 24px;
+}
+
+.caixa-busca {
     display: flex;
-    justify-content: flex-start;
-    align-items: start;
-    gap: 50px;
-    margin: 120px 0 72px;
+    align-items: center;
+    padding: 30px;
+    margin-bottom: 48px;
+    border-radius: 20px;
+    border: var(--shadow-3);
 }
 
-.titulo-biblioteca h1 {
+.tipo-busca {
+    font-size: 16px;
+    color: var(--text-color);
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.titulo-busca {
+    font-size: 24px;
     color: var(--text-color);
     font-weight: 700;
+    margin-bottom: 30px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /*aqui altera a quantidade de linhas*/
+    -webkit-box-orient: vertical; /*orientação do texto*/
 }
 
-.titulo-biblioteca p {
-    font-size: 24px;
-}
-
-.titulo-biblioteca p .bx {
+.descricao-busca {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /*aqui altera a quantidade de linhas*/
+    -webkit-box-orient: vertical; /*orientação do texto*/
+    overflow: hidden;
+    width: 70%;
     font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 50px;
+}
+
+.btn-busca {
+    text-decoration: none;
+    background-color: var(--second-color);
+    color: var(--bg-color);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.img-busca {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 20px;
+    border: var(--shadow-2);
+}
+
+.img-busca img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
 }
