@@ -21,3 +21,7 @@ def cursos(request):
 def biblioteca(request):
 
     return render(request, "biblioteca.html")
+
+def busca(request):
+
+    return render(request, "busca.html")
