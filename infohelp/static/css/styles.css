@@ -708,3 +708,59 @@ footer {
     object-fit: cover;
     border-radius: 20px;
 }
+
+/*Página do curso*/
+.curso-apresentacao {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 400px;
+    height: 800px;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+}
+
+.img-curso_pag {
+    margin: 50px 50px 0;
+    width: 300px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 20px;
+    border: var(--shadow-2);
+    box-shadow: var(--box-shadow);
+}
+
+.img-curso_pag img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.descricao-curso {
+    display: -webkit-box;
+    -webkit-line-clamp: 6; /*aqui altera a quantidade de linhas*/
+    -webkit-box-orient: vertical; /*orientação do texto*/
+    overflow: hidden;
+    margin: 50px 50px 0;
+    width: 300px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--bg-color);
+}
+
+.num-conteudo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 300px;
+    gap: 50px;
+    margin: 50px 0 0;
+}
+
+.num-conteudo p {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--bg-color);
+}
