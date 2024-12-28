@@ -710,6 +710,11 @@ footer {
 }
 
 /*Página do curso*/
+.section-centeudo_curso {
+    display: flex;
+    justify-content: space-between;
+}
+
 .curso-apresentacao {
     display: flex;
     align-items: center;
@@ -719,6 +724,7 @@ footer {
     height: 800px;
     border-radius: 10px;
     background-color: var(--primary-color);
+    margin: 10px 0 0;
 }
 
 .img-curso_pag {
@@ -726,7 +732,7 @@ footer {
     width: 300px;
     height: 200px;
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: 10px;
     border: var(--shadow-2);
     box-shadow: var(--box-shadow);
 }
@@ -735,7 +741,7 @@ footer {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .descricao-curso {
@@ -763,4 +769,59 @@ footer {
     font-size: 16px;
     font-weight: 400;
     color: var(--bg-color);
+}
+
+.conteudo-curso {
+    width: 600px;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0 10px;
+}
+
+.titulo_desc-conteudo {
+    display: inline;
+    width: 330px;
+}
+
+.titulo_desc-conteudo h1 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 10px;
+    color: var(--text-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /*aqui altera a quantidade de linhas*/
+    -webkit-box-orient: vertical; /*orientação do texto*/
+    overflow: hidden;
+}
+
+.titulo_desc-conteudo p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 20px;
+    color: var(--text-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 7; /*aqui altera a quantidade de linhas*/
+    -webkit-box-orient: vertical; /*orientação do texto*/
+    overflow: hidden;
+}
+
+.img-conteudo_curso {
+    width: 250px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 20px;
+    border: var(--shadow-2);
+    box-shadow: var(--box-shadow);
+}
+
+.img-conteudo_curso img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.video_texto-curso {
+    display: inline-block;
 }
