@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Perfil - InfoHelp{% endblock title %}
+
+{% block navbar %}
+    <!--Barra de Navegação-->
+    <header class="shadow">
+        <div class="nav container">
+            <div class="logo"><img src="{% static 'assets/LogoInfoHelp.png' %}" alt="Logo InfoHelp"></div>
+            <div class="pesquisar">
+                <input class="pesquisar-txt" type="text" name="" placeholder="Pesquisar">
+                <a class="btn-pesquisar" href="#"><i class='bx bx-search'></i></a>
+            </div>
+            <ul class="links">
+                <li class="inicio"><a href="{% url "inicio" %}">Início</a></li>
+                <li class="cursos"><a href="{% url "cursos" %}">Cursos</a></li>
+                <li class="biblioteca"><a href="{% url "biblioteca" %}">Biblioteca</a></li>
+            </ul>
+            <a class="perfil" href="{% url "perfil" %}"><i class='bx bx-user-circle'></i></a>
+        </div>
+    </header>
+{% endblock navbar %}
+
+{% block content %}
+    <section class="titulos-pagina container">
+        <div class="titulo-pag">
+            <h1>Minha conta</h1>
+        </div>
+    </section>
+
+    <section class="section-perfil container">
+        <div class="box-perfil">
+            <div class="info-perfil">
+                <table>
+                    <tr>
+                      <th>Nome:</th>
+                      <td>João Maria</td>
+                    </tr>
+                    <tr>
+                      <th>Email:</th>
+                      <td>jmbass@aqui.com</td>
+                    </tr>
+                    <tr>
+                      <th>Telefone:</th>
+                      <td>(84) 98898-7700</td>
+                    </tr>
+                    <tr>
+                      <th>Nascimento:</th>
+                      <td>24/04/2006</td>
+                    </tr>
+                    <tr>
+                      <th>Estado:</th>
+                      <td>RN</td>
+                    </tr>
+                    <tr>
+                      <th>Cidade:</th>
+                      <td>Bom Descanso</td>
+                    </tr>
+                  </table>
+            </div>
+            <div class="links-perfil">
+                <div class="custom-perfil">
+                    <a href="#" class="editar-perfil">Editar meus dados</a>
+                    <a href="#" class="sair-perfil">Sair dessa conta</a>
+                </div>
+                <a href="#" class="link-admin">Acessar como administrador</a>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

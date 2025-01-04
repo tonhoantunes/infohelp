@@ -17,7 +17,7 @@
                 <li class="cursos"><a href="{% url "cursos" %}">Cursos</a></li>
                 <li class="biblioteca"><a href="{% url "biblioteca" %}">Biblioteca</a></li>
             </ul>
-            <a class="perfil" href="#"><i class='bx bx-user-circle'></i></a>
+            <a class="perfil" href="{% url "perfil" %}"><i class='bx bx-user-circle'></i></a>
         </div>
     </header>
 {% endblock navbar %}
@@ -42,34 +42,42 @@
         </div>
 
         <div class="video_texto-curso">
-            <div class="conteudo-curso">
-                <div class="img-conteudo_curso"><img src="{% static "assets/logoInfoHelpProdução.png" %}" alt=""></div>
-                <div class="titulo_desc-conteudo">
-                    <h1>Aprenda Word</h1>
-                    <p>Vídeo 1 do curso Word. Com esse curso você irá aprender a editar arquivos .docx</p>
+            <a href="#" class="link-aula">
+                <div class="conteudo-curso">
+                    <div class="img-conteudo_curso"><img src="{% static "assets/logoInfoHelpProdução.png" %}" alt=""></div>
+                    <div class="titulo_desc-conteudo">
+                        <h1>Aprenda Word</h1>
+                        <p>Vídeo 1 do curso Word. Com esse curso você irá aprender a editar arquivos .docx</p>
+                    </div>
                 </div>
-            </div>
-            <div class="conteudo-curso">
-                <div class="img-conteudo_curso"><img src="{% static "assets/logoInfoHelpProdução.png" %}" alt=""></div>
-                <div class="titulo_desc-conteudo">
-                    <h1>Aprenda Word</h1>
-                    <p>Vídeo 1 do curso Word. Com esse curso você irá aprender a editar arquivos .docx</p>
+            </a>
+            <a href="#" class="link-aula">
+                <div class="conteudo-curso">
+                    <div class="img-conteudo_curso"><img src="{% static "assets/logoInfoHelpProdução.png" %}" alt=""></div>
+                    <div class="titulo_desc-conteudo">
+                        <h1>Aprenda Word</h1>
+                        <p>Vídeo 1 do curso Word. Com esse curso você irá aprender a editar arquivos .docx</p>
+                    </div>
                 </div>
-            </div>
-            <div class="conteudo-curso">
-                <div class="img-conteudo_curso"><img src="{% static "assets/logoInfoHelpProdução.png" %}" alt=""></div>
-                <div class="titulo_desc-conteudo">
-                    <h1>Aprenda Word</h1>
-                    <p>Vídeo 1 do curso Word. Com esse curso você irá aprender a editar arquivos .docx</p>
+            </a>
+            <a href="#" class="link-aula">
+                <div class="conteudo-curso">
+                    <div class="img-conteudo_curso"><img src="{% static "assets/logoInfoHelpProdução.png" %}" alt=""></div>
+                    <div class="titulo_desc-conteudo">
+                        <h1>Aprenda Word</h1>
+                        <p>Vídeo 1 do curso Word. Com esse curso você irá aprender a editar arquivos .docx</p>
+                    </div>
                 </div>
-            </div>
-            <div class="conteudo-curso">
-                <div class="img-conteudo_curso"><img src="{% static "assets/logoInfoHelpProdução.png" %}" alt=""></div>
-                <div class="titulo_desc-conteudo">
-                    <h1>Aprenda Word</h1>
-                    <p>Vídeo 1 do curso Word. Com esse curso você irá aprender a editar arquivos .docx</p>
+            </a>
+            <a href="#" class="link-aula">
+                <div class="conteudo-curso">
+                    <div class="img-conteudo_curso"><img src="{% static "assets/logoInfoHelpProdução.png" %}" alt=""></div>
+                    <div class="titulo_desc-conteudo">
+                        <h1>Aprenda Word</h1>
+                        <p>Vídeo 1 do curso Word. Com esse curso você irá aprender a editar arquivos .docx</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
         
     </section>
