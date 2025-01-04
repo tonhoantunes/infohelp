@@ -29,3 +29,7 @@ def busca(request):
 def curso(request):
 
     return render(request, "pag_curso.html")
+
+def perfil(request):
+
+    return render(request, "perfil.html")

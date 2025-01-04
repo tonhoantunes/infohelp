@@ -771,6 +771,10 @@ footer {
     color: var(--bg-color);
 }
 
+.link-aula {
+    text-decoration: none;
+}
+
 .conteudo-curso {
     width: 600px;
     height: 200px;
@@ -824,4 +828,62 @@ footer {
 
 .video_texto-curso {
     display: inline-block;
+}
+
+/*Perfil*/
+.box-perfil {
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    height: 500px;
+}
+
+.info-perfil {
+    display: flex;
+    align-items: center;
+    margin: 40px 80px 0;
+    width: auto;
+    height: 350px;
+}
+
+.info-perfil table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.info-perfil table td {
+    line-height: 2;
+}
+
+.info-perfil table th {
+    width: 0%;
+    font-size: 16px;
+    color: var(--text-color);
+    font-weight: 400;
+    padding: 4px 15px 4px 30px;
+    text-align: right;
+}
+
+.info-perfil table td {
+    font-size: 16px;
+    color: var(--primary-color);
+    font-weight: 400;
+}
+
+.links-perfil {
+    margin: 0 80px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.links-perfil a {
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.custom-perfil {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
 }
