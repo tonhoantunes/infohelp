@@ -3,25 +3,6 @@
 
 {% block title %}Início - InfoHelp{% endblock title %}
 
-{% block navbar %}
-    <!--Barra de Navegação-->
-    <header class="shadow">
-        <div class="nav container">
-            <a href="{% url "inicio" %}" class="logo"><img src="{% static 'assets/LogoInfoHelp.png' %}" alt="Logo InfoHelp"></a>
-            <div class="pesquisar">
-                <input class="pesquisar-txt" type="text" name="" placeholder="Pesquisar">
-                <a class="btn-pesquisar" href="#"><i class='bx bx-search'></i></a>
-            </div>
-            <ul class="links">
-                <li class="cursos"><a href="{% url "inicio" %}">Início</a></li>
-                <li class="cursos"><a href="{% url "cursos" %}">Cursos</a></li>
-                <li class="biblioteca"><a href="{% url "biblioteca" %}">Biblioteca</a></li>
-            </ul>
-            <a class="perfil" href="{% url "perfil" %}"><i class='bx bx-user-circle'></i></a>
-        </div>
-    </header>
-{% endblock navbar %}
-
 {% block content %}
     <section class="inicio-pag container">
         <div class="inicio-conteudo">
