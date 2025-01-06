@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InfoHelp</title>
+    <title>{% block title %}InfoHelp{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <!--Box Icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -13,6 +13,21 @@
 <body>
     <!--Barra de Navegação-->
     {% block navbar %}
+        <header class="shadow">
+            <div class="nav container">
+                <a href="{% url "inicio" %}" class="logo"><img src="{% static 'assets/LogoInfoHelp.png' %}" alt="Logo InfoHelp"></a>
+                <div class="pesquisar">
+                    <input class="pesquisar-txt" type="text" name="" placeholder="Pesquisar">
+                    <a class="btn-pesquisar" href="#"><i class='bx bx-search'></i></a>
+                </div>
+                <ul class="links">
+                    <li class="inicio"><a href="{% url "inicio" %}">Início</a></li>
+                    <li class="cursos"><a href="{% url "cursos" %}">Cursos</a></li>
+                    <li class="biblioteca"><a href="{% url "biblioteca" %}">Biblioteca</a></li>
+                </ul>
+                <a class="perfil" href="{% url "perfil" %}"><i class='bx bx-user-circle'></i></a>
+            </div>
+        </header>
     {% endblock navbar %}
 
     <!--Conteúdo-->
@@ -35,7 +50,7 @@
                 </div>
             </div>
             <div class="final-rodape container">
-                <p>InfoHelp<br>Copyright © 2024.</p>
+                <p>InfoHelp<br>Copyright © {% now 'Y' %}.</p>
             </div>
         </div>
     </footer>
