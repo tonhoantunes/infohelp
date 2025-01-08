@@ -33,3 +33,7 @@ def curso(request):
 def perfil(request):
 
     return render(request, "perfil.html")
+
+def editar_perfil(request):
+
+    return render(request, "editar_perfil.html")

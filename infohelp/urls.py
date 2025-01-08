@@ -10,4 +10,5 @@ urlpatterns = [
     path('busca/', views.busca, name="busca"),
     path('curso/', views.curso, name="curso"),
     path('perfil/', views.perfil, name="perfil"),
+    path('editar_perfil/', views.editar_perfil, name="editar_perfil"),
 ]
