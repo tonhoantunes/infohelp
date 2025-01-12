@@ -50,6 +50,16 @@ img {
     --shadow-2: 1px solid rgba(0, 0, 0, 0.05);
     --shadow-3: 1px solid rgba(0, 0, 0, 0.10);
     --category: #00dc00;
+    --delete: #F00000;
+}
+
+/*TÍTULO DAS PÁGINAS*/
+.titulo-pag {
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+    gap: 50px;
+    margin: 120px 0 72px;
 }
 
 /*Barra de Navegação (TELA INICIAL)*/
@@ -593,7 +603,7 @@ footer {
     box-shadow: var(--box-shadow);
     border: var(--shadow-3);
     width: 300px;
-    height: 400px;
+    height: auto;
     border-radius: 10px;
     display: block;
 }
@@ -647,15 +657,6 @@ footer {
     text-align: center;
 }
 
-/*TÍTULO DAS PÁGINAS*/
-.titulo-pag {
-    display: flex;
-    justify-content: flex-start;
-    align-items: start;
-    gap: 50px;
-    margin: 120px 0 72px;
-}
-
 .titulo-pag h1 {
     color: var(--text-color);
     font-weight: 700;
@@ -667,6 +668,46 @@ footer {
 
 .titulo-pag p .bx {
     font-size: 16px;
+}
+
+.btn-admin_curso {
+    margin: 0 20px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-admin_curso a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px;
+}
+
+.editar-curso {
+    background-color: var(--second-color);
+    color: var(--bg-color);
+    border: 1px solid var(--second-color);
+    border-radius: 15px;
+}
+
+.editar-curso:hover {
+    background-color: var(--bg-color);
+    color: var(--second-color);
+    transition: 0.2s;
+}
+
+.excluir-curso {
+    background-color: var(--delete);
+    color: var(--bg-color);
+    border: 1px solid var(--delete);
+    border-radius: 15px;
+}
+
+.excluir-curso:hover {
+    background-color: var(--bg-color);
+    color: var(--delete);
+    transition: 0.2s;
 }
 
 /*Busca*/
@@ -856,6 +897,149 @@ footer {
 
 .video_texto-curso {
     display: inline-block;
+}
+
+/*Criar Curso*/
+.box-criar_curso {
+    border: 1px solid var(--border-color);
+    width: 100%;
+    height: auto;
+    padding: 50px;
+    border-radius: 15px;
+}
+
+.forms-criar_curso {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-criar_curso {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.btn-criar_curso button {
+    padding: 10px;
+    border: 1px solid var(--second-color);
+    background-color: var(--second-color);
+    color: var(--bg-color);
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btn-criar_curso button:hover {
+    transition: 0.2s;
+    border: 1px solid var(--second-color);
+    background-color: var(--bg-color);
+    color: var(--second-color);
+}
+
+#descricao {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    resize: vertical;
+    max-height: 400px;
+    padding: 5px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/*Excluir curso*/
+.section-excluir_curso {
+    padding: 15rem 0 15rem;
+}
+
+.msg-delete {
+    display: flex;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.box-excluir_curso {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 30px;
+}
+
+.btn-excluir_curso {
+    background-color: var(--delete);
+    color: var(--bg-color);
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--delete);
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+.btn-excluir_curso:hover {
+    background-color: var(--bg-color);
+    color: var(--delete);
+    transition: 0.2s;
+}
+
+.btn-cancelar {
+    text-decoration: none;
+    background-color: #777;
+    color: var(--bg-color);
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #777;
+    text-transform: uppercase;
+}
+
+.btn-cancelar:hover {
+    color: #777;
+    background-color: var(--bg-color);
+    transition: 0.2s;
+}
+
+/*Criar Aula*/
+.box-criar_aula {
+    border: 1px solid var(--border-color);
+    width: 100%;
+    height: auto;
+    padding: 50px;
+    border-radius: 15px;
+}
+
+.forms-criar_aula {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-criar_aula {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-criar_aula button {
+    padding: 10px;
+    border: 1px solid var(--second-color);
+    background-color: var(--second-color);
+    color: var(--bg-color);
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btn-criar_aula button:hover {
+    transition: 0.2s;
+    border: 1px solid var(--second-color);
+    background-color: var(--bg-color);
+    color: var(--second-color);
 }
 
 /*Perfil*/
