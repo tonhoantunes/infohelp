@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Cursos - InfoHelp{% endblock title %}
+
+{% block content %}
+    <section class="titulos-pagina container">
+        <div class="titulo-pag">
+            <h1>Cursos da plataforma</h1>
+            <p>Categoria <i class='bx bxs-down-arrow'></i></p>
+        </div>
+    </section>
+    
+    <section>
+        <div class="cursos-cards container">
+            {% for curso in cursos %}
+                <div class="card-curso card_curso-1">
+                    <a class="acesso-curso" href="{% url "detalhes_curso" curso.id %}">
+                        <div class="img-curso"><img src="{{ curso.capa.url }}" alt="Capa do curso"></div>
+                        <h2>{{ curso.nome }}</h2>
+                        <div class="categoria"><p>{{ curso.categoria }}</p></div>
+                        <div class="horario-nivel">
+                            <p>{{ curso.carga_horaria }}</p>
+                            <p>{{ curso.nivel }}</p>
+                        </div>
+                    </a>
+                    <div class="btn-admin_curso">
+                        <a class="editar-curso" href="{% url "editar_curso" curso.id %}">Editar curso</a>
+                        <a class="excluir-curso" href="{% url "excluir_curso" curso.id %}">Excluir curso</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock content %}

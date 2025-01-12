@@ -15,7 +15,7 @@
         <h1>Principais cursos</h1>
         <div class="cursos-cards">
             <div class="card-curso card_curso-1">
-                <a class="acesso-curso" href="{% url "curso" %}">
+                <a class="acesso-curso" href="#">
                     <div class="img-curso"><img src="{% static "assets/logoInfoHelp.png" %}" alt=""></div>
                     <h2>Nome do curso</h2>
                     <div class="categoria"><p>Categoria</p></div>
@@ -24,9 +24,13 @@
                         <p>Nível avançado</p>
                     </div>
                 </a>
+                <div class="btn-admin_curso">
+                    <a class="editar-curso" href="#">Editar curso</a>
+                    <a class="excluir-curso" href="#">Excluir curso</a>
+                </div>
             </div>
             <div class="card-curso card_curso-2">
-                <a class="acesso-curso" href="{% url "curso" %}">
+                <a class="acesso-curso" href="#">
                     <div class="img-curso"><img src="{% static "assets/logoInfoHelp.png" %}" alt=""></div>
                     <h2>Nome do curso</h2>
                     <div class="categoria"><p>Categoria</p></div>
@@ -37,7 +41,7 @@
                 </a>
             </div>
             <div class="card-curso card_curso-3">
-                <a class="acesso-curso" href="{% url "curso" %}">
+                <a class="acesso-curso" href="#">
                     <div class="img-curso"><img src="{% static "assets/logoInfoHelp.png" %}" alt=""></div>
                     <h2>Nome do curso</h2>
                     <div class="categoria"><p>Categoria</p></div>
