@@ -558,7 +558,30 @@ footer {
     margin: 40px 0 0;
 }
 
+
+
+
 /*Início*/
+.banner {
+    margin-bottom: 6.25rem;
+    object-fit: fill;
+    max-width: 100%;
+}
+
+.titulo {
+    text-align: center;
+
+    margin-bottom: 6rem;
+
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 28px;
+
+    color: var(--text-color);
+}
+
+
+
 .inicio-pag {
     border-bottom: var(--shadow-3);
 }
@@ -581,15 +604,21 @@ footer {
     font-weight: 500;
 }
 
+/*
 .principais-cursos {
     text-align: center;
 }
+*/
 
 .principais-cursos h1 {
     margin: 52px 0 100px;
     color: var(--text-color);
     font-weight: 700;
 }
+
+
+
+
 
 /*Card de Curso*/
 .cursos-cards {
@@ -613,26 +642,34 @@ footer {
 }
 
 .img-curso {
+    display: flex;
     width: 300px;
     height: 200px;
     overflow: hidden;
     border-radius: 10px 10px 0 0;
     border-bottom: var(--shadow-2);
+
+    align-items: center;
+    justify-content: center;
 }
 
 .img-curso img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+
+    width: 85%;
+    height: 85%;
     border-radius: 10px 10px 0 0;
 }
 
 .card-curso h2 {
-    font-size: 20px;
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--text-color);
     margin: 20px 20px;
-    text-align: center;
+    line-height: 1.75rem;
+
+    margin: 1.75rem auto 4.625rem 1.375rem;
+
 }
 
 .card-curso p {
@@ -643,18 +680,54 @@ footer {
 
 .horario-nivel {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 80px 20px 20px;
+    margin-left: 1.375rem;
+    margin-bottom: 1.25rem;
+    align-items: end;
+
+    & img {
+        width: .875rem;
+        aspect-ratio: 1/1;
+    }
+
+    & > p {
+        color: var(--text-color);
+    }
+
+    p:nth-child(2) {
+    font-weight: 300;
+    font-size: .875rem;
+    line-height: 1rem;
+    }
+
+    p:nth-child(3) {
+        font-weight: 300;
+        font-size: .75rem;
+        line-height: .875rem;
+        display: flex;
+        align-items: baseline;
+        padding-left: 4.6875rem;
+    }
+
 }
 
-.categoria p {
-    color: var(--category);
-    font-size: 16px;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin: 20px 20px 0;
-    text-align: center;
+.categoria{
+    margin-bottom: .75rem;
+
+    & p {
+        color: var(--text-color);
+        background-color: var(--category);
+        border-radius: .625rem;
+
+        font-size: .75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-left: 1.375rem;
+        text-align: center;
+
+        padding: 4px 4px 4px 8px;
+
+        display: inline-block;
+    }
 }
 
 .titulo-pag h1 {
@@ -671,7 +744,7 @@ footer {
 }
 
 .btn-admin_curso {
-    margin: 0 20px 20px;
+    margin: 20px 20px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
