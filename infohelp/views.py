@@ -13,8 +13,11 @@ def login(request):
 
 
 def inicio(request):
+    context = {
+        "cursos" : Curso.objects.all()
+    }
 
-    return render(request, "inicio.html")
+    return render(request, "inicio.html", context)
 
 
 

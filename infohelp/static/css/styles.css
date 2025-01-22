@@ -614,7 +614,7 @@ footer {
 .titulo {
     text-align: center;
 
-    margin-bottom: 6rem;
+    margin-bottom: 5rem;
 
     font-weight: 700;
     font-size: 1.6rem;
@@ -647,11 +647,10 @@ footer {
     font-weight: 500;
 }
 
-/*
+
 .principais-cursos {
-    text-align: center;
+    margin-bottom: 2rem;
 }
-*/
 
 .principais-cursos h1 {
     margin: 52px 0 100px;
