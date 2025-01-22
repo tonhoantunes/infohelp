@@ -31,7 +31,9 @@
                 <input type="senha" placeholder="Senha">
                 <a href="#">Esqueceu sua senha?</a>
                 <button>
-                    Login
+                    <a href="{% url "inicio" %}" style="all: unset;">
+                        Login
+                    </a>
                 </button>
                 <a class="sair" href="{% url 'index' %}">SAIR</a>
             </form>
