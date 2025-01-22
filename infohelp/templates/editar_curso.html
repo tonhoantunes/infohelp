@@ -15,18 +15,20 @@
             <div class="forms-criar_curso">
                 <form action="{% if request.method == 'POST' %}{% url "criar_curso" %}{% endif %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
+
+
                     <div class="form-grupo">
                         <label for="nome">Nome:</label>
-                        <input type="text" id="nome" name="nome" value="{{ curso.nome }}">
+                        <input type="text" id="nome" name="nome" value="{{ form.nome.value }}">
                     </div>
                     <div class="form-grupo">
                         <label for="descricao">Descrição:</label>
-                        <textarea name="descricao" id="descricao"></textarea>
+                        <textarea name="descricao" id="descricao">{{ form.descricao.value }}</textarea>
                     </div>
                     <div class="form-linha">
                         <div class="form-grupo">
                             <label for="categoria">Categoria:</label>
-                            <input type="text" id="categoria" name="categoria" value="{{ curso.descricao }}">
+                            <input type="text" id="categoria" name="categoria">
                         </div>
                         <div class="form-grupo">
                             <label for="nivel">Nível:</label>

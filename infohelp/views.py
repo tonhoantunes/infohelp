@@ -52,11 +52,11 @@ def editar_curso(request, curso_id):
     curso = get_object_or_404(Curso, id=curso_id)
 
     context = {
-        "curso" : Curso.objects.all(),
-        "form": CursoForm(instance=curso),
+        "curso" : curso,
+        "form" : CursoForm(instance=curso),
     }
 
-    if request.method == "POST":
+    if request.method == 'POST':
         form = CursoForm(request.POST, instance=curso)
         if form.is_valid():
             form.save()
@@ -64,7 +64,7 @@ def editar_curso(request, curso_id):
         else:
             context["form"] = form
     
-    return render(request, "criar_curso.html", context)
+    return render(request, "editar_curso.html", context)
 
 
 

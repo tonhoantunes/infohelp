@@ -35,7 +35,13 @@
                         </div>
                     </a>
                     <div class="btn-admin_curso">
-                        <a class="editar-curso" href="{% url "editar_curso" curso.id %}">Editar curso</a>
+                        
+                        <a class="editar-curso" href="{% url "editar_curso" curso.id %}">
+                            <button>
+                                Editar curso
+                            </button>
+                        </a>
+                       
                         <a class="excluir-curso" href="{% url "excluir_curso" curso.id %}">Excluir curso</a>
                     </div>
                 </div>
