@@ -13,13 +13,19 @@
 <body>
     <!--Barra de Navegação-->
     {% block navbar %}
-        <header class="shadow">
+        <header class="shadow" id="header">
             <div class="nav container">
-                <a href="{% url "inicio" %}" class="logo"><img src="{% static 'assets/LogoInfoHelp.png' %}" alt="Logo InfoHelp"></a>
+                <a href="{% url "inicio" %}" class="logo">
+                    <img src="{% static 'assets/LogoInfoHelp.png' %}" alt="Logo InfoHelp">
+                </a>
+
                 <div class="pesquisar">
                     <input class="pesquisar-txt" type="text" name="" placeholder="Pesquisar">
-                    <a class="btn-pesquisar" href="#"><i class='bx bx-search'></i></a>
+                    <a class="btn-pesquisar" href="#">
+                        <i class='bx bx-search'></i>
+                    </a>
                 </div>
+                
                 <ul class="links">
                     <li class="inicio"><a href="{% url "inicio" %}">Início</a></li>
                     <li class="cursos"><a href="{% url "listar_cursos" %}">Cursos</a></li>

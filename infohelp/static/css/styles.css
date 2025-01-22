@@ -10,13 +10,16 @@
 
 body{
     display: block;
+    max-width: 100vw;
 }
+
+
+
 
 header {
     background: var(--bg-color);
     position: relative; /*para deixar a navbar fixa é só colocar "fixed"*/
     top: 0;
-    left: 0;
     width: 100%;
     z-index: 200;
 }
@@ -34,10 +37,13 @@ img {
 }
 
 .container {
-    max-width: 1068px;
     margin: auto;
     width: 100%;
+    max-width: 1068px;
 }
+
+
+
 
 /*Variáveis*/
 :root {
@@ -53,6 +59,8 @@ img {
     --delete: #F00000;
 }
 
+
+
 /*TÍTULO DAS PÁGINAS*/
 .titulo-pag {
     display: flex;
@@ -61,6 +69,8 @@ img {
     gap: 50px;
     margin: 120px 0 72px;
 }
+
+
 
 /*Barra de Navegação (TELA INICIAL)*/
 .nav {
@@ -71,14 +81,16 @@ img {
 }
 
 .logo {
-    width: 60px;
-    height: 60px;
+    width: 3.75rem;
+    height: 3.75rem;
 }
+
+
 
 .pesquisar {
     background: var(--bg-color);
-    height: 30px;
-    border-radius: 30px;
+    height: 1.875rem;
+    border-radius: 1.875rem;
     padding: 10px;
     border: 1px var(--border-color) solid;
 }
@@ -114,6 +126,8 @@ img {
     padding: 0 6px;
 }*/
 
+
+
 .links {
     list-style: none;
     display: flex;
@@ -147,6 +161,35 @@ img {
     color: var(--second-color);
     transition: 0.2s;
 }
+
+
+/*@media provisória*/
+
+@media (width < 800px) {
+    .pesquisar {
+        display: none;
+    }
+
+    .nav {
+        justify-content: space-around;
+    }
+
+    .links {
+        gap: 3rem;
+    }
+}
+
+@media (width < 425px) {
+    .links{
+        display: none;
+    }
+
+    .nav{
+        gap: 10rem;
+    }
+}
+
+
 
 /*Barra de Navegação Padrão*/
 .perfil {
@@ -724,7 +767,7 @@ footer {
         margin-left: 1.375rem;
         text-align: center;
 
-        padding: 4px 4px 4px 8px;
+        padding: 4px 8px 4px 8px;
 
         display: inline-block;
     }
