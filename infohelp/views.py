@@ -13,8 +13,14 @@ def login(request):
 
 
 def inicio(request):
+    context = {
+        "cursos" : Curso.objects.all()
+    }
 
-    return render(request, "inicio.html")
+    return render(request, "inicio.html", context)
+
+
+
 
 #CRUD de Cursos
 
@@ -43,13 +49,17 @@ def criar_curso(request):
     
     return render(request, "criar_curso.html", {'form': form})
 
+
+
 def editar_curso(request, curso_id):
     curso = get_object_or_404(Curso, id=curso_id)
+
     context = {
-        "form": CursoForm(instance=curso)
+        "curso" : curso,
+        "form" : CursoForm(instance=curso),
     }
 
-    if request.method == "POST":
+    if request.method == 'POST':
         form = CursoForm(request.POST, instance=curso)
         if form.is_valid():
             form.save()
@@ -57,7 +67,9 @@ def editar_curso(request, curso_id):
         else:
             context["form"] = form
     
-    return render(request, "criar_curso.html", context)
+    return render(request, "editar_curso.html", context)
+
+
 
 def excluir_curso(request, curso_id):
     context = {
@@ -85,6 +97,9 @@ def criar_aula(request, curso_id):
         form = AulaForm()
 
     return render(request, 'criar_aula.html', {'form': form})
+
+
+
 
 def biblioteca(request):
 
