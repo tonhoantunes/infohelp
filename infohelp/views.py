@@ -82,6 +82,8 @@ def excluir_curso(request, curso_id):
     else:
         return render(request, "excluir_curso.html", context)
 
+
+
 #CRUD de Aulas
 
 def criar_aula(request, curso_id):
