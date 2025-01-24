@@ -13,7 +13,11 @@
     <section class="section-centeudo_curso container">
         <div class="curso-apresentacao">
             <div class="img-curso_pag">
+                {% if curso.capa %}
                 <img src="{{ curso.capa.url }}" alt="">
+                {% else %}
+                    <img src="{% static "assets/placeholder.png" %}" alt="Sem capa">
+                {% endif %}
             </div>
             <div class="descricao-curso">{{ curso.descricao }}</div>
             <div class="num-conteudo">
