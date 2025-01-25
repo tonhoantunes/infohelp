@@ -29,12 +29,18 @@ def listar_cursos(request):
 
     return render(request, "listar_cursos.html", {'cursos': cursos})
 
-def detalhes_curso(request, curso_id):
-    context = {
-        "curso": get_object_or_404(Curso, pk=curso_id)
-    }
 
-    return render(request, "pag_curso.html", context)
+
+def detalhes_curso(request, curso_id):
+
+    cursos = get_object_or_404(Curso, pk=curso_id)
+
+    aulas = get_object_or_404(Aula.objects.all())
+
+
+    return render(request, "pag_curso.html", {'curso': cursos,'aula': aulas})
+
+
 
 def criar_curso(request):
     if request.method == "POST":
@@ -81,6 +87,8 @@ def excluir_curso(request, curso_id):
         return redirect('listar_cursos')
     else:
         return render(request, "excluir_curso.html", context)
+
+
 
 #CRUD de Aulas
 

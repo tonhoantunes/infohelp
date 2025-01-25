@@ -4,7 +4,7 @@
 {% block title %}Cursos - InfoHelp{% endblock title %}
 
 {% block content %}
-    <section class="titulos-pagina container">
+    <section class="container">
         <div class="titulo-pag">
             <h1>Cursos da plataforma</h1>
             <p>Categoria <i class='bx bxs-down-arrow'></i></p>
@@ -23,7 +23,6 @@
                             {% else %}
                             <img src="{% static "assets/placeholder.png" %}" alt="Sem capa">
                             {% endif %}
-
                         </div>
 
                         <h2>{{ curso.nome }}</h2>
