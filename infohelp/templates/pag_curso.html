@@ -27,30 +27,33 @@
         </div>
 
         <div class="video_texto-curso">
-            <h1> {{ aula.curso }}</h1>
-            <h1> {{ curso.nome }}</h1>
-            <h1> {{ aula.curso.nome }}</h1>
+            <!--Não está servindo
+            <h1> {{ aula.curso }} 1</h1>
+            -->
+            <!-- Nome do curso
+            <h1> {{ curso.nome }} 2</h1>
+            -->
+            <!-- Nome do curso sendo acessado pela aula
+            <h1> {{ aula.curso.nome }} 3</h1>
+            -->
+            
+            {% for aula in aula %}
 
-            {% if curso.nome == aula.curso.nome %}
-           
-                <a href="#" class="link-aula">
-                    <div class="conteudo-curso">
-                        <div class="img-conteudo_curso">
-                            <img src="{{ aula.capa.url }}" alt="">
+                {% if curso.nome == aula.curso.nome %}
+                    <a href="#" class="link-aula">
+                        <div class="conteudo-curso">
+                            <div class="img-conteudo_curso">
+                                <img src="{{ aula.capa.url }}" alt="">
+                            </div>
+                            <div class="titulo_desc-conteudo">
+                                <h1>{{ aula.titulo }}</h1>
+                                <p>{{ aula.descricao }}</p>
+                            </div>
                         </div>
-
-
-                        <h1>chamaa</h1>
-
-
-                        <div class="titulo_desc-conteudo">
-                            <h1>{{ aula.titulo }}</h1>
-                            <p>{{ aula.descricao }}</p>
-                        </div>
-                    </div>
-                </a>
-
-            {% endif %}
+                    </a>
+                {% endif %}
+                
+            {% endfor %}
 
         </div>
     </section>
