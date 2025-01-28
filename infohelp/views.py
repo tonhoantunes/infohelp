@@ -35,7 +35,7 @@ def detalhes_curso(request, curso_id):
 
     cursos = get_object_or_404(Curso, pk=curso_id)
 
-    aulas = get_object_or_404(Aula.objects.all())
+    aulas = Aula.objects.all()
 
 
     return render(request, "pag_curso.html", {'curso': cursos,'aula': aulas})
