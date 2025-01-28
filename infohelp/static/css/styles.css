@@ -1172,6 +1172,18 @@ footer {
     color: var(--second-color);
 }
 
+
+
+/*Criar Aula*/
+#exibir {
+    background-color: red;
+    width: 10px;
+    height: 10px;
+    display: flex;
+}
+
+
+
 /*Perfil*/
 .box-perfil {
     border: 1px solid var(--border-color);

@@ -29,8 +29,6 @@ def listar_cursos(request):
 
     return render(request, "listar_cursos.html", {'cursos': cursos})
 
-
-
 def detalhes_curso(request, curso_id):
 
     cursos = get_object_or_404(Curso, pk=curso_id)
@@ -39,8 +37,6 @@ def detalhes_curso(request, curso_id):
 
 
     return render(request, "pag_curso.html", {'curso': cursos,'aula': aulas})
-
-
 
 def criar_curso(request):
     if request.method == "POST":
@@ -54,8 +50,6 @@ def criar_curso(request):
         form = CursoForm()
     
     return render(request, "criar_curso.html", {'form': form})
-
-
 
 def editar_curso(request, curso_id):
     curso = get_object_or_404(Curso, id=curso_id)
@@ -74,8 +68,6 @@ def editar_curso(request, curso_id):
             context["form"] = form
     
     return render(request, "editar_curso.html", context)
-
-
 
 def excluir_curso(request, curso_id):
     context = {
@@ -105,6 +97,15 @@ def criar_aula(request, curso_id):
         form = AulaForm()
 
     return render(request, 'criar_aula.html', {'form': form})
+
+def detalhes_aula(request, curso_id, aula_id):
+    aulas = Aula.objects.all()
+
+    aula = get_object_or_404(Aula, id=aula_id)
+    curso = get_object_or_404(Curso, id=curso_id)
+
+    return render(request, "exibir_aula.html", {'aulas' : aulas, 'curso' : curso, 'aula' : aula})
+
 
 
 
