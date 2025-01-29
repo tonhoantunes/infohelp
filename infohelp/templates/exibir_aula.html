@@ -25,24 +25,25 @@
             {% for au in aulas %}
 
                 {% if au.titulo == aula.titulo %}
-                    <div class="item-aula-atual">
-                        <div class="img-icone_exi">
-                            <img src="{% static "assets/icons/iconeVideo.svg" %}" alt="ícone de vídeo">
-                        </div>
-                        <h1 class="aula-atual">
-                            {{ aula.titulo }} 
-                        </h1>
-                    </div>
-                {% else %}
-
-                    <div class="item-aulas">
-                        <div class="img-icone_exi">
-                            <img src="{% static "assets/icons/iconeVideo.svg" %}" alt="ícone de vídeo">
-                        </div>
-                            <h1>
-                            {{ au.titulo }}
+                        <div class="item-aula-atual">
+                            <div class="img-icone_exi">
+                                <img src="{% static "assets/icons/iconeVideo.svg" %}" alt="ícone de vídeo">
+                            </div>
+                            <h1 class="aula-atual">
+                                {{ aula.titulo }} 
                             </h1>
-                    </div>
+                        </div>
+                {% else %}
+                    <a href="{% url "detalhes_aula" curso.id au.id %}" style="all: unset;">
+                        <div class="item-aulas">
+                            <div class="img-icone_exi">
+                                <img src="{% static "assets/icons/iconeVideo.svg" %}" alt="ícone de vídeo">
+                            </div>
+                            <h1>
+                                {{ au.titulo }}
+                            </h1>
+                        </div>
+                    </a>
                 {% endif %}
 
             {% endfor %}

@@ -1232,6 +1232,35 @@ footer {
             }
         }
 
+        & .item-aulas:hover {
+            cursor: pointer;
+
+            background-color: var(--bg-color);
+
+            max-width: calc(85% - .3125rem);
+            margin: auto;
+            border-radius: .3125rem;
+
+            display: flex;
+            align-items: center;
+
+            padding-block: .75rem;
+            padding-left: 1.375rem;
+            margin-bottom: 2.8125rem;
+
+            border-left: .3125rem solid var(--primary-color);
+
+            & h1 {
+                font-weight: 700;
+                font-size: 1.25rem;
+                line-height: 1.5rem;
+
+                margin-left: 1rem;
+
+                color: var(--text-color);
+            }
+        }
+
         & .item-aula-atual {
             background-color: var(--bg-color);
 
@@ -1246,7 +1275,7 @@ footer {
             padding-left: 1.375rem;
             margin-bottom: 2.8125rem;
 
-            border-left: .3125rem solid #0051A2;
+            border-left: .3125rem solid var(--primary-color);
 
             & h1 {
                 font-weight: 700;
