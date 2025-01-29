@@ -1172,6 +1172,145 @@ footer {
     color: var(--second-color);
 }
 
+
+
+/*Exibição de aula*/
+#exibir {
+    max-width: 1068px;
+    display: flex;
+    margin-block: 6.25rem;
+
+    & .aulas {
+        max-width: 22.1875rem;
+        background-color: var(--second-color);
+        height: 100%;
+        
+        padding-top: 2.5rem;
+
+        margin-right: 3.75rem;
+
+        border-radius: .625rem;
+
+        & .topo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+
+            margin-bottom: 3.75rem;
+
+            & h1 {
+                font-weight: 700;
+                font-size: 3rem;
+                line-height: 3.625rem;
+                color: var(--text-color);
+            }
+        }
+
+        & .item-aulas {
+            background-color: var(--bg-color);
+
+            width: 86%;
+            margin: auto;
+            border-radius: .3125rem;
+
+            display: flex;
+            align-items: center;
+
+            padding-block: .75rem;
+            padding-left: 1.375rem;
+            margin-bottom: 2.8125rem;
+
+            & h1 {
+                font-weight: 700;
+                font-size: 1.25rem;
+                line-height: 1.5rem;
+
+                margin-left: 1rem;
+
+                color: var(--text-color);
+            }
+        }
+
+        & .item-aula-atual {
+            background-color: var(--bg-color);
+
+            width: calc(86% - .3125rem);
+            margin: auto;
+            border-radius: .3125rem;
+
+            display: flex;
+            align-items: center;
+
+            padding-block: .75rem;
+            padding-left: 1.375rem;
+            margin-bottom: 2.8125rem;
+
+            border-left: .3125rem solid #0051A2;
+
+            & h1 {
+                font-weight: 700;
+                font-size: 1.25rem;
+                line-height: 1.5rem;
+
+                margin-left: 1rem;
+
+                color: var(--text-color);
+            }
+        }
+    }
+
+    & .img-curso_exi {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 1rem;
+        background-color: var(--bg-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & img {
+            width: 85%;
+            height: 85%;
+        }
+    }
+
+    & .img-icone_exi {
+        width: 2.1875rem;
+        height: 2.1875rem;
+
+        border: .3125rem solid var(--second-color);
+        border-radius: .5rem;
+        background-color: var(--bg-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    & .aula {
+        margin: auto;
+
+        & h1 {
+            font-weight: 700;
+            font-size: 3rem;
+            line-height: 4.8125rem;
+            text-align: center;
+
+            color: var(--text-color);
+
+            margin-block: 3rem 3.125rem;
+        }
+    }
+}
+
+@media  (width > 1068px) {
+    #exibir {
+        margin-inline: auto;
+    }
+}
+
+
+
 /*Perfil*/
 .box-perfil {
     border: 1px solid var(--border-color);
