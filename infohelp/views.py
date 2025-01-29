@@ -106,6 +106,14 @@ def criar_aula(request, curso_id):
 
     return render(request, 'criar_aula.html', {'form': form})
 
+def detalhes_aula(request, curso_id, aula_id):
+    aulas = Aula.objects.all()
+
+    aula = get_object_or_404(Aula, id=aula_id)
+    curso = get_object_or_404(Curso, id=curso_id)
+    
+    return render(request, "exibir_aula.html", {'aulas' : aulas, 'curso' : curso, 'aula' : aula})
+
 
 
 

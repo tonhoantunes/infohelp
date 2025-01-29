@@ -40,7 +40,7 @@
             {% for aula in aula %}
 
                 {% if curso.nome == aula.curso.nome %}
-                    <a href="#" class="link-aula">
+                    <a href="{% url "detalhes_aula" curso.id aula.id %}" class="link-aula">
                         <div class="conteudo-curso">
                             <div class="img-conteudo_curso">
                                 <img src="{{ aula.capa.url }}" alt="">
