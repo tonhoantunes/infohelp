@@ -918,7 +918,6 @@ footer {
     height: 800px;
     border-radius: 10px;
     background-color: var(--primary-color);
-    margin: 10px 0 0;
 }
 
 .img-curso_pag {
@@ -971,7 +970,9 @@ footer {
 }
 
 .link-aula {
+    display: inline-block;
     text-decoration: none;
+    margin-bottom: 1.125rem;
 }
 
 .conteudo-curso {
@@ -979,16 +980,36 @@ footer {
     height: 200px;
     display: flex;
     justify-content: space-between;
-    margin: 10px 0 10px;
 }
 
 .titulo_desc-conteudo {
+    margin-left: 1.25rem;
     display: inline;
     width: 330px;
+    height: fit-content;
+
+    & h1 {
+        font-weight: 700;
+        font-size: 1.75rem;
+        line-height: 2.0625rem;
+
+        color: var(--primary-color);
+
+        padding-top: 1.25rem;
+
+        padding-bottom: 1rem;
+    }
+
+    & p {
+        font-weight: 400;
+        font-size: 1.25rem;
+        line-height: 1.4375rem;
+
+        color: var(--primary-color);
+    }
 }
 
 .titulo_desc-conteudo h1 {
-    font-size: 20px;
     font-weight: 700;
     margin-top: 10px;
     color: var(--text-color);
@@ -1010,8 +1031,8 @@ footer {
 }
 
 .img-conteudo_curso {
-    width: 250px;
-    height: 200px;
+    width: 284px;
+    height: 160px;
     overflow: hidden;
     border-radius: 20px;
     border: var(--shadow-2);
