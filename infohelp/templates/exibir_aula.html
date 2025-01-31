@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ aula.titulo }}{% endblock title %}
+
+{% block content %}
+<main>
+    <div id="exibir">
+        <div class="aulas">
+            <div class="topo">
+                <div class="img-curso_exi">
+                    {% if curso.capa %}
+                    <img src="{{ curso.capa.url }}" alt="Logo do curso">
+                    {% else %}
+                        <img src="{% static "assets/placeholder.png" %}" alt="Sem capa">
+                    {% endif %}
+                </div>
+                <h1>
+                    {{ curso.nome }}
+                </h1>
+            </div>
+
+
+
+            {% for au in aulas %}
+
+                {% if au.titulo == aula.titulo %}
+                        <div class="item-aula-atual">
+                            <div class="img-icone_exi">
+                                <img src="{% static "assets/icons/iconeVideo.svg" %}" alt="ícone de vídeo">
+                            </div>
+                            <h1 class="aula-atual">
+                                {{ aula.titulo }} 
+                            </h1>
+                        </div>
+                {% else %}
+                    <a href="{% url "detalhes_aula" curso.id au.id %}" style="all: unset;">
+                        <div class="item-aulas">
+                            <div class="img-icone_exi">
+                                <img src="{% static "assets/icons/iconeVideo.svg" %}" alt="ícone de vídeo">
+                            </div>
+                            <h1>
+                                {{ au.titulo }}
+                            </h1>
+                        </div>
+                    </a>
+                {% endif %}
+
+            {% endfor %}
+
+
+        </div>
+
+        <div class="aula">
+            <h1>
+                {{aula.titulo}}
+            </h1>
+            <div class="video">
+                <iframe width="690" height="380" src="https://www.youtube.com/embed/pfUnnEKSn2g?si=rlkrZGpGqoQaCk2X"
+                title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}

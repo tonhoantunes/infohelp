@@ -26,7 +26,7 @@
         {% for curso in cursos  %}
         <div class="cursos-cards">
             <div class="card-curso card_curso-1">
-                <a class="acesso-curso" href="#">
+                <a class="acesso-curso" href="{% url "detalhes_curso" curso.id %}">
 
                     <div class="img-curso">
                         {% if curso.capa %}
