@@ -1,0 +1,23 @@
+{% extends "base_usuarios.html" %}
+{% load static %}
+
+{% block title %}Login - InfoHelp{% endblock title %}
+
+{% block content %}
+    <div class="form-container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <i class="fa fa-user"></i>
+                {{ form.username }}
+            </div>
+            <div class="input-group">
+                <i class="fa fa-lock"></i>
+                {{ form.password }}
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+        <p>Não tem uma conta? <a href="{% url 'cadastro' %}">Cadastre-se</a></p>
+    </div>
+{% endblock content %}
