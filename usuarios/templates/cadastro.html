@@ -18,14 +18,15 @@
             </div>
             <div class="input-group">
                 <i class="fa fa-lock"></i>
-                <input type="password" name="password" class="input" placeholder="Senha" required="" id="id_password">
+                <input type="password" name="password1" class="input" placeholder="Senha" required="" id="id_password1">
             </div>
             <div class="input-group">
                 <i class="fa fa-lock"></i>
-                <input type="password" name="password" class="input" placeholder="Senha" required="" id="id_password">
+                <input type="password" name="password2" class="input" placeholder="Senha" required="" id="id_password2">
             </div>
             <button type="submit">Cadastrar</button>
         </form>
+
         <p>Já tem uma conta? <a href="{% url 'login' %}">Faça login</a></p>
         <a class="sair" href="{% url "index" %}">SAIR</a>
     </div>
