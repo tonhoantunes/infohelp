@@ -45,4 +45,14 @@
             {% endfor %}
         </div>
     </section>
+
+    {% if request.user.is_authenticated and perms.infohelp.criar_curso %}
+    <section>
+        <div class="box_criar-curso container">
+            <p>Adicione novos cursos à sua lista</p>
+            <a href="{% url "criar_curso" %}" class="btn-criar-curso">Criar novo curso</a>
+        </div>
+    </section>
+    {% endif %}
+
 {% endblock content %}

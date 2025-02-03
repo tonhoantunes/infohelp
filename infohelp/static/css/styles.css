@@ -841,6 +841,39 @@ footer {
     display: inline-block;
 }
 
+.box_criar-curso {
+    border: 1px solid var(--border-color);
+    width: 300px;
+    height: auto;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.box_criar-curso p {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.btn-criar-curso {
+    text-decoration: none;
+    background-color: var(--second-color);
+    color: var(--bg-color);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btn-criar-curso:hover {
+    border: 1px solid var(--second-color);
+    background-color: var(--bg-color);
+    color: var(--second-color);
+    transition: 0.2s;
+}
+
 /*Criar Curso*/
 .box-criar_curso {
     border: 1px solid var(--border-color);
