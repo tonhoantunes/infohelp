@@ -10,14 +10,15 @@
             {% csrf_token %}
             <div class="input-group">
                 <i class="fa fa-user"></i>
-                {{ form.username }}
+                <input type="text" name="username" class="input" placeholder="Usuário" maxlength="150" required="" aria-describedby="id_username_helptext" id="id_username">
             </div>
             <div class="input-group">
                 <i class="fa fa-lock"></i>
-                {{ form.password }}
+                <input type="password" name="password" class="input" placeholder="Senha" required="" id="id_password">
             </div>
             <button type="submit">Entrar</button>
         </form>
         <p>Não tem uma conta? <a href="{% url 'cadastro' %}">Cadastre-se</a></p>
+        <a class="sair" href="{% url "index" %}">SAIR</a>
     </div>
 {% endblock content %}

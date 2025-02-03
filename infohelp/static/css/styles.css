@@ -1197,14 +1197,16 @@ footer {
     margin-top: 70px;
 }
 
-.links-perfil a {
+.links-perfil button {
+    background-color: var(--bg-color);
+    border: none;
     font-size: 16px;
     font-weight: 500;
     text-decoration: none;
     color: var(--text-color);
 }
 
-.links-perfil a:hover {
+.links-perfil button:hover {
     color: var(--second-color);
     transition: 0.2s;
 }

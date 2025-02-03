@@ -10,22 +10,23 @@
             {% csrf_token %}
             <div class="input-group">
                 <i class="fa fa-user"></i>
-                {{ form.username }}
+                <input type="text" name="username" class="input" placeholder="Usuário" maxlength="150" required="" aria-describedby="id_username_helptext" id="id_username">
             </div>
             <div class="input-group">
                 <i class="fa fa-envelope"></i>
-                {{ form.email }}
+                <input type="email" name="email" class="input" placeholder="E-mail" maxlength="254" id="id_email">
             </div>
             <div class="input-group">
                 <i class="fa fa-lock"></i>
-                {{ form.password }}
+                <input type="password" name="password" class="input" placeholder="Senha" required="" id="id_password">
             </div>
             <div class="input-group">
                 <i class="fa fa-lock"></i>
-                {{ form.confirm_password }}
+                <input type="password" name="password" class="input" placeholder="Senha" required="" id="id_password">
             </div>
             <button type="submit">Cadastrar</button>
         </form>
         <p>Já tem uma conta? <a href="{% url 'login' %}">Faça login</a></p>
+        <a class="sair" href="{% url "index" %}">SAIR</a>
     </div>
 {% endblock content %}
