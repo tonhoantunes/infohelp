@@ -1,11 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
 from .forms import CadastroForm
-
-# Create your views here.
-def login(request):
-    
-    return render(request, "login.html")
 
 def cadastro(request):
     context = {}
@@ -18,5 +12,4 @@ def cadastro(request):
         context = {
             'form': CadastroForm(),
         }
-
     return render(request, 'cadastro.html', context)

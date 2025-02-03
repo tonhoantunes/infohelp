@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Curso, Aula
 from .forms import CursoForm, AulaForm
+from django.contrib.auth.decorators import login_required, permission_required
 # Create your views here.
 
 def index(request):
@@ -41,12 +42,15 @@ def detalhes_curso(request, curso_id):
     return render(request, "pag_curso.html", {'curso': cursos,'aula': aulas})
 
 
-
+@login_required
+@permission_required('infohelp.criar_curso', raise_exception=True)
 def criar_curso(request):
     if request.method == "POST":
         form = CursoForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            curso = form.save(commit=False)
+            curso.usuario = request.user
+            curso.save()
             return redirect('listar_cursos')
         else:
             form = CursoForm()
@@ -56,7 +60,7 @@ def criar_curso(request):
     return render(request, "criar_curso.html", {'form': form})
 
 
-
+@permission_required('infohelp.editar_curso', raise_exception=True)
 def editar_curso(request, curso_id):
     curso = get_object_or_404(Curso, id=curso_id)
 

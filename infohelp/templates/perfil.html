@@ -45,12 +45,12 @@
                     <button href="{% url "editar_perfil" %}" class="editar-perfil">Editar meus dados</button>
                     <button type="button" href="{% url "index" %}" class="sair-perfil">Sair dessa conta</button>
 
-                    <!--{% if request.user.is_authenticated %}-->
-                      <!--<form method="post" action="{% url 'logout' %}">-->
-                      <!--  {% csrf_token %}-->
-                    <button type="button" href="{% url "index" %}" class="sair-perfil">Sair dessa conta</button>
-                      <!--</form>-->
-                    <!--{% endif %}-->
+                    {% if request.user.is_authenticated %}
+                      <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="button" href="{% url "index" %}" class="sair-perfil">Sair dessa conta</button>
+                      </form>
+                    {% endif %}
                 </div>
                 <button href="#" class="link-admin">Acessar como administrador</button>
             </div>
