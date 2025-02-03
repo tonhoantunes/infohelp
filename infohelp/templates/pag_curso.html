@@ -58,6 +58,14 @@
                 
             {% endfor %}
 
+            <div class="adicionar-aula">
+                <p>Adicione uma nova aula ao seu curso</p>
+                
+                <a href="{% url "criar_aula" curso.id %}">
+                    <h1>Adicionar aula</h1>
+                </a>
+            </div>
+
         </div>
     </section>
 
