@@ -8,9 +8,13 @@
     <div id="exibir">
         <div class="aulas">
             <div class="topo">
-                <div class="img-curso_exi">
+                <div>
                     {% if curso.capa %}
-                    <img src="{{ curso.capa.url }}" alt="Logo do curso">
+                    <a href="{% url "detalhes_curso" curso.id %}" style="all: unset;">
+                        <div  class="img-curso_exi">
+                            <img src="{{ curso.capa.url }}" alt="Logo do curso">
+                        </div>
+                    </a>
                     {% else %}
                         <img src="{% static "assets/placeholder.png" %}" alt="Sem capa">
                     {% endif %}
@@ -53,13 +57,19 @@
 
         <div class="aula">
             <h1>
-                {{aula.titulo}}
+                {{ aula.titulo }}
             </h1>
             <div class="video">
-                <iframe width="690" height="380" src="https://www.youtube.com/embed/pfUnnEKSn2g?si=rlkrZGpGqoQaCk2X"
+                <iframe width="690" height="380" src="{{ aula.link }}"
                 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
             </div>
+
+            <div class="texto">
+                <p>{{ aula.texto }}</p>
+            </div>
+
         </div>
     </div>
 </main>
