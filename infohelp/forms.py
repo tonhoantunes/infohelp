@@ -10,4 +10,4 @@ class CursoForm(forms.ModelForm):
 class AulaForm(forms.ModelForm):
     class Meta:
         model = Aula
-        fields = ['titulo', 'descricao', 'capa']
+        fields = ['titulo', 'descricao', 'capa', 'link', 'texto']

@@ -31,7 +31,6 @@ def listar_cursos(request):
     return render(request, "listar_cursos.html", {'cursos': cursos})
 
 
-
 def detalhes_curso(request, curso_id):
 
     cursos = get_object_or_404(Curso, pk=curso_id)
@@ -98,17 +97,17 @@ def excluir_curso(request, curso_id):
 
 def criar_aula(request, curso_id):
     curso = get_object_or_404(Curso, id=curso_id)
-    if request.method == 'POST':
+    if request.method == "POST":
         form = AulaForm(request.POST)
         if form.is_valid():
-            aula = form.save(commit=False)
+            aula = form
             aula.curso = curso
             aula.save()
-            return redirect('cursos.html', curso_id=curso.id)
+            return redirect('detalhes_curso', curso_id=curso.id)
     else:
         form = AulaForm()
 
-    return render(request, 'criar_aula.html', {'form': form})
+    return render(request, 'criar_aula.html', {'form': form, 'curso': curso})
 
 def detalhes_aula(request, curso_id, aula_id):
     aulas = Aula.objects.all()
