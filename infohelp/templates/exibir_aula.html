@@ -28,7 +28,7 @@
 
             {% for au in aulas %}
 
-                {% if au.titulo == aula.titulo %}
+                {% if au.id == aula.id %}
                         <div class="item-aula-atual">
                             <div class="img-icone_exi">
                                 <img src="{% static "assets/icons/iconeVideo.svg" %}" alt="ícone de vídeo">
@@ -68,6 +68,14 @@
 
             <div class="texto">
                 <p>{{ aula.texto }}</p>
+            </div>
+
+            <div class="adicionar-aula">
+                <p>Edite o material desta aula</p>
+                
+                <a href="{% url "editar_aula" curso.id aula.id %}">
+                    <h1>Editar Aula</h1>
+                </a>
             </div>
 
         </div>

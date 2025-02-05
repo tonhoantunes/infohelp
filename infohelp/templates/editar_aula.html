@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Formulário de Aula - InfoHelp{% endblock title %}
+
+{% block content %}
+    <section class="titulos-pagina container">
+        <div class="titulo-pag">
+            <h1>Formulário de aula</h1>
+        </div>
+    </section>
+
+    <section class="section-criar_aula container">
+        <div class="box-criar_aula">
+            <div class="forms-criar_aula">
+                <form action="{% if request.method == 'POST' %}{% url "criar_aula" curso.id aula.id %}{% endif %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-grupo">
+                        <label for="titulo">Titulo:</label>
+                        <input type="text" id="titulo" name="titulo" value="{{ aula.titulo }}">
+                    </div>
+                    <div class="form-grupo">
+                        <label for="descricao">Descrição:</label>
+                        <input type="text" name="descricao" id="descricao" value="{{ aula.descricao }}">
+                    </div>
+                    <div class="form-grupo">
+                        <label for="capa">Capa:</label>
+                        <input type="file" accept="image/*" id="capa" name="capa" value="{{ aula.capa }}">
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="link">Link:</label>
+                        <input type="text" id="link" name="link" value="{{ aula.link }}">
+                    </div>
+
+                    <div class="form-grupo textarea-form">
+                        <label for="texto">Texto:</label>
+                        <textarea type="text-area" id="texto" name="texto" value="{{ aula.texto }}">{{ aula.texto }}</textarea>
+                    </div>
+
+
+                    <div class="btn-criar_aula"><button id="submitBtn" type="submit">Enviar</button></div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

@@ -20,7 +20,7 @@ class Aula(models.Model):
     capa = models.ImageField(blank=True)
     link = models.CharField(max_length=200)
     texto = models.TextField(max_length=2000)
-    curso = models.ForeignKey(Curso, on_delete=models.CASCADE, null=True)
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.titulo
