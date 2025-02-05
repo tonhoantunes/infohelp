@@ -98,16 +98,40 @@ def excluir_curso(request, curso_id):
 def criar_aula(request, curso_id):
     curso = get_object_or_404(Curso, id=curso_id)
     if request.method == "POST":
-        form = AulaForm(request.POST)
+        form = AulaForm(request.POST, request.FILES)
         if form.is_valid():
-            aula = form
+            aula = form.save(commit=False)
             aula.curso = curso
             aula.save()
             return redirect('detalhes_curso', curso_id=curso.id)
+        else:
+            form["form"] = form
+
     else:
         form = AulaForm()
 
     return render(request, 'criar_aula.html', {'form': form, 'curso': curso})
+
+def editar_aula(request, aula_id, curso_id):
+    aula = get_object_or_404(Aula, id=aula_id)
+    curso = get_object_or_404(Curso, id=curso_id)
+
+    context = {
+        "aula" : aula,
+        "curso" : curso,
+        "form" : AulaForm(instance=aula),
+    }
+
+    if request.method == 'POST':
+        form = AulaForm(request.POST, instance=aula)
+        if form.is_valid():
+            form.save()
+            return redirect('detalhes_aula', curso.id, aula.id)
+        else:
+            context["form"] = form
+    
+    return render(request, "editar_aula.html", context)
+
 
 def detalhes_aula(request, curso_id, aula_id):
     aulas = Aula.objects.all()
@@ -117,6 +141,22 @@ def detalhes_aula(request, curso_id, aula_id):
     
     return render(request, "exibir_aula.html", {'aulas' : aulas, 'curso' : curso, 'aula' : aula})
 
+
+
+def excluir_aula(request, curso_id, aula_id):
+    aula = get_object_or_404(Aula, id=aula_id)
+    curso = get_object_or_404(Curso, id=curso_id)
+
+    context = {
+        "curso": get_object_or_404(Curso, id=curso_id),
+        "aula": get_object_or_404(Aula, id=aula_id)
+    }
+
+    if request.method == "POST":
+        context["aula"].delete()
+        return redirect('detalhes_curso', curso.id)
+    else:
+        return render(request, "excluir_aula.html", context)
 
 
 

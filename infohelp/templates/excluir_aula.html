@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Excluir Curso - InfoHelp{% endblock title %}
+
+{% block content %}
+
+    <section class="section-excluir_curso container">
+        <form id="contactForm" method="POST">
+            {% csrf_token %}
+            <p class="msg-delete">Tem certeza que deseja excluir a aula {{ aula.titulo }} do curso {{ aula.curso.nome }}? Essa ação não poderá ser desfeita.</p>
+            <div class="box-excluir_curso">
+                <button class="btn-excluir_curso" id="submitBtn" type="submit">Sim</button>
+                <a class="btn-cancelar" href="{% url "detalhes_aula" curso.id aula.id %}">Cancelar</a>
+            </div>
+        </form>
+    </section>
+                
+{% endblock content %}

@@ -408,16 +408,10 @@ footer {
 
 
 /*Início*/
-.banner {
-    margin-bottom: 6.25rem;
-    object-fit: fill;
-    max-width: 100%;
-}
-
 .titulo {
     text-align: center;
 
-    margin-bottom: 5rem;
+    margin: 5rem 0 2rem;
 
     font-weight: 700;
     font-size: 1.6rem;

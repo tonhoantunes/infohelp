@@ -28,7 +28,7 @@
 
             {% for au in aulas %}
 
-                {% if au.titulo == aula.titulo %}
+                {% if au.id == aula.id %}
                         <div class="item-aula-atual">
                             <div class="img-icone_exi">
                                 <img src="{% static "assets/icons/iconeVideo.svg" %}" alt="ícone de vídeo">
@@ -38,16 +38,18 @@
                             </h1>
                         </div>
                 {% else %}
-                    <a href="{% url "detalhes_aula" curso.id au.id %}" style="all: unset;">
-                        <div class="item-aulas">
-                            <div class="img-icone_exi">
-                                <img src="{% static "assets/icons/iconeVideo.svg" %}" alt="ícone de vídeo">
+                    {% if au.curso.id == curso.id %}
+                        <a href="{% url "detalhes_aula" curso.id au.id %}" style="all: unset;">
+                            <div class="item-aulas">
+                                <div class="img-icone_exi">
+                                    <img src="{% static "assets/icons/iconeVideo.svg" %}" alt="ícone de vídeo">
+                                </div>
+                                <h1>
+                                    {{ au.titulo }}
+                                </h1>
                             </div>
-                            <h1>
-                                {{ au.titulo }}
-                            </h1>
-                        </div>
-                    </a>
+                        </a>
+                    {% endif %}
                 {% endif %}
 
             {% endfor %}
@@ -68,6 +70,17 @@
 
             <div class="texto">
                 <p>{{ aula.texto }}</p>
+            </div>
+
+            <div class="adicionar-aula">
+                <p>Edite o material desta aula</p>
+                <a href="{% url "editar_aula" curso.id aula.id %}">
+                    <h1>Editar Aula</h1>
+                </a>
+
+                <a href="{% url "excluir_aula" curso.id aula.id %}">
+                    <h1>Excluir Aula</h1>
+                </a>
             </div>
 
         </div>
