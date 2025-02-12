@@ -171,8 +171,11 @@ def biblioteca(request):
     return render(request, "biblioteca.html")
 
 def busca(request):
+    busca = request.POST.get('busca')
+    cursos = Curso.objects.filter(descricao__contains=busca)
 
-    return render(request, "busca.html")
+    return render(request, 'busca.html', {'cursos': cursos})
+
 
 def perfil(request):
 
