@@ -69,7 +69,7 @@ def editar_curso(request, curso_id):
     }
 
     if request.method == 'POST':
-        form = CursoForm(request.POST, instance=curso)
+        form = CursoForm(request.POST, request.FILES, instance=curso)
         if form.is_valid():
             form.save()
             return redirect('listar_cursos')
