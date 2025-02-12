@@ -27,8 +27,14 @@ def inicio(request):
 
 def listar_cursos(request):
     cursos = Curso.objects.all()
+    
+    curso = Curso.objects.all()
 
-    return render(request, "listar_cursos.html", {'cursos': cursos})
+    if request.method == "POST":
+        cate = request.POST.get('categoria')
+        cursos = Curso.objects.filter(categoria__contains=cate)
+
+    return render(request, "listar_cursos.html", {'cursos': cursos, 'curso' : curso})
 
 
 def detalhes_curso(request, curso_id):

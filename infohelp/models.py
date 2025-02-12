@@ -21,7 +21,7 @@ class Curso(models.Model):
     }
 
 
-    categoria = models.CharField(max_length=100, choices=categoria_do_curso, default="Texto", blank=False)
+    categoria = models.CharField(max_length=100, choices=categoria_do_curso, blank=False)
     nivel = models.CharField(max_length=30, choices=nivel_do_curso, default="Fácil", blank=False)
     capa = models.ImageField(blank=True)
 
