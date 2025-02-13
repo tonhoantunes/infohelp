@@ -27,6 +27,14 @@ class Curso(models.Model):
 
     def __str__(self):
         return self.nome
+    
+class Salvos(models.Model):
+    nome = models.CharField(max_length=255)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='salvos')
+    cursos = models.ManyToManyField(Curso, related_name='salvos')
+
+    def __str__(self):
+        return f'{self.nome} - {self.usuario.username}'
 
 
 class Aula(models.Model):

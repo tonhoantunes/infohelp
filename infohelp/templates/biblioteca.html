@@ -12,6 +12,15 @@
     </section>
 
     <section>
+        <h1>Minhas Playlists</h1>
+            <ul>
+                {% for salvo in salvos %}
+                    <li>{{ salvo.nome }} - {{ salvo.cursos.count }} cursos</li>
+                {% endfor %}
+            </ul>
+    </section>
+
+    <section>
         <div class="cursos-cards container">
             <div class="card-curso card_curso-1">
                 <a class="acesso-curso" href="#">

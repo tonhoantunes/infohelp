@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Curso, Aula
-from .forms import CursoForm, AulaForm
+from .models import Curso, Salvos, Aula
+from .forms import CursoForm, SalvosForm, AulaForm
 from django.contrib.auth.decorators import login_required, permission_required
 # Create your views here.
 
@@ -165,10 +165,11 @@ def excluir_aula(request, curso_id, aula_id):
         return render(request, "excluir_aula.html", context)
 
 
-
+@login_required
 def biblioteca(request):
+    salvos = Salvos.objects.filter(usuario=request.user)
+    return render(request, 'biblioteca.html', {'salvos': salvos})
 
-    return render(request, "biblioteca.html")
 
 def busca(request):
     busca = request.POST.get('busca')
@@ -184,3 +185,18 @@ def perfil(request):
 def editar_perfil(request):
 
     return render(request, "editar_perfil.html")
+
+@login_required
+def criar_salvos(request):
+    if request.method == 'POST':
+        form = SalvosForm(request.POST)
+        if form.is_valid():
+            salvos = form.save(commit=False)
+            salvos.usuario = request.user  # Associar a salvos ao usuário logado
+            salvos.save()
+            form.save_m2m()  # Salvar a relação de muitos para muitos com músicas
+            return redirect('listar_cursos')  # Redireciona para uma página de sucesso
+    else:
+        form = SalvosForm()
+
+    return render(request, 'criar_salvos.html', {'form': form})

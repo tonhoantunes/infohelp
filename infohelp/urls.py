@@ -18,6 +18,9 @@ urlpatterns = [
 
     path('aula/<int:curso_id>/<int:aula_id>/editar', views.editar_aula, name="editar_aula"),
 
+
+    path('criar_salvos/', views.criar_salvos, name='criar_salvos'),
+
     path('biblioteca/', views.biblioteca, name="biblioteca"),
     path('busca/', views.busca, name="busca"),
     path('perfil/', views.perfil, name="perfil"),
