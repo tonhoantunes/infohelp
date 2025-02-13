@@ -6,8 +6,23 @@ class Curso(models.Model):
     nome = models.CharField(max_length=100)
     carga_horaria = models.TimeField(max_length=100)
     descricao = models.TextField(max_length=500)
-    categoria = models.CharField(max_length=100)
-    nivel = models.CharField(max_length=100)
+    
+    categoria_do_curso = {
+        ('Planilha', 'Planilha'),
+        ('Texto', 'Texto'),
+        ('Apresentação', 'Apresentação'),
+        ('Design', 'Design'),
+    }
+
+    nivel_do_curso = {
+        ('Fácil', 'Fácil'),
+        ('Médio', 'Médio'),
+        ('Difícil', 'Difícil'),
+    }
+
+
+    categoria = models.CharField(max_length=100, choices=categoria_do_curso, blank=False)
+    nivel = models.CharField(max_length=30, choices=nivel_do_curso, default="Fácil", blank=False)
     capa = models.ImageField(blank=True)
 
     def __str__(self):

@@ -27,8 +27,14 @@ def inicio(request):
 
 def listar_cursos(request):
     cursos = Curso.objects.all()
+    
+    curso = Curso.objects.all()
 
-    return render(request, "listar_cursos.html", {'cursos': cursos})
+    if request.method == "POST":
+        cate = request.POST.get('categoria')
+        cursos = Curso.objects.filter(categoria__contains=cate)
+
+    return render(request, "listar_cursos.html", {'cursos': cursos, 'curso' : curso})
 
 
 def detalhes_curso(request, curso_id):
@@ -69,7 +75,7 @@ def editar_curso(request, curso_id):
     }
 
     if request.method == 'POST':
-        form = CursoForm(request.POST, instance=curso)
+        form = CursoForm(request.POST, request.FILES, instance=curso)
         if form.is_valid():
             form.save()
             return redirect('listar_cursos')
@@ -165,8 +171,11 @@ def biblioteca(request):
     return render(request, "biblioteca.html")
 
 def busca(request):
+    busca = request.POST.get('busca')
+    cursos = Curso.objects.filter(descricao__contains=busca)
 
-    return render(request, "busca.html")
+    return render(request, 'busca.html', {'cursos': cursos})
+
 
 def perfil(request):
 
