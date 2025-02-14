@@ -22,8 +22,7 @@
                 <div class="pesquisar">
 
 
-                    <form action="{% url "busca" %}" method="POST">
-                        {% csrf_token %}
+                    <form action="{% url "listar_cursos" %}" method="GET">
                         <input class="pesquisar-txt" type="text" name="busca" placeholder="Pesquisar">
                         <button class="btn-pesquisar" type="submit">
                             <i class='bx bx-search'></i>

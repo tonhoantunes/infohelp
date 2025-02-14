@@ -8,10 +8,10 @@ class Curso(models.Model):
     descricao = models.TextField(max_length=500)
     
     categoria_do_curso = {
-        ('Planilha', 'Planilha'),
-        ('Texto', 'Texto'),
-        ('Apresentação', 'Apresentação'),
-        ('Design', 'Design'),
+        'Planilha': 'Planilha',
+        'Texto': 'Texto',
+        'Apresentação': 'Apresentação',
+        'Design': 'Design',
     }
 
     nivel_do_curso = {

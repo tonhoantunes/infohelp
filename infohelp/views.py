@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Curso, Salvos, Aula
+from usuarios.models import Perfil
 from .forms import CursoForm, SalvosForm, AulaForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import JsonResponse
@@ -29,14 +30,19 @@ def inicio(request):
 
 def listar_cursos(request):
     cursos = Curso.objects.all()
-    
-    curso = Curso.objects.all()
+    categorias = Curso.categoria_do_curso
 
-    if request.method == "POST":
-        cate = request.POST.get('categoria')
+    cate = request.GET.get('categoria')
+    if cate:
         cursos = Curso.objects.filter(categoria__contains=cate)
+    
+    busca = request.GET.get('busca')
+    if busca:
+        busca_descricao = Curso.objects.filter(descricao__icontains=busca)
+        busca_nome = Curso.objects.filter(nome__icontains=busca)
+        cursos = busca_descricao | busca_nome
 
-    return render(request, "listar_cursos.html", {'cursos': cursos, 'curso' : curso})
+    return render(request, "listar_cursos.html", {'cursos': cursos, 'categorias': categorias})
 
 
 def detalhes_curso(request, curso_id):
@@ -173,11 +179,13 @@ def biblioteca(request):
     return render(request, 'biblioteca.html', {'salvos': salvos})
 
 
-def busca(request):
-    busca = request.POST.get('busca')
-    cursos = Curso.objects.filter(descricao__contains=busca)
-
-    return render(request, 'busca.html', {'cursos': cursos})
+#def busca(request):
+#    busca = request.GET.get('busca')
+#    busca_descricao = Curso.objects.filter(descricao__icontains=busca)
+#    busca_nome = Curso.objects.filter(nome__icontains=busca)
+#    cursos = busca_descricao | busca_nome
+#
+#    return render(request, 'busca.html', {'cursos': cursos})
 
 
 def perfil(request):

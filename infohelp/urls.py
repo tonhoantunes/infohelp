@@ -29,7 +29,11 @@ urlpatterns = [
     path('criar_salvos/', views.criar_salvos, name='criar_salvos'),
 
     path('biblioteca/', views.biblioteca, name="biblioteca"),
-    path('busca/', views.busca, name="busca"),
+
+
+    #path('busca/', views.busca, name="busca"),
+
+
     path('perfil/', views.perfil, name="perfil"),
     path('editar_perfil/', views.editar_perfil, name="editar_perfil"),
 ]
