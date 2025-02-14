@@ -24,6 +24,35 @@
                 <p>0000 Vídeos</p>
                 <p>0000 Artigos</p>  
             </div>
+            <div>
+                
+                <!-- Botão para abrir o modal -->
+                <button id="abrir-modal-salvar" data-curso-id="{{ curso.id }}">Carregando...</button>
+
+                <!-- Botão para remover o curso de todos os salvos -->
+                <button id="remover-de-salvos" style="display: none;">Remover de Salvos</button>
+
+                <!-- Modal para escolher ou criar coleção -->
+                <div id="modal-salvar" style="display: none; border: 1px solid #ccc; padding: 20px; background: white; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                    <h3>Escolha ou crie uma coleção</h3>
+
+                    <!-- Lista de coleções -->
+                    <select id="colecao-salvos">
+                        <option value="">Carregando coleções...</option>
+                    </select>
+                    
+                    <!-- Botão para salvar -->
+                    <button id="confirmar-salvamento">Salvar</button>
+
+                    <!-- Criar nova coleção -->
+                    <h4>Criar nova coleção</h4>
+                    <input type="text" id="nova-colecao-nome" placeholder="Nome da coleção">
+                    <button id="criar-nova-colecao">Criar</button>
+
+                    <button onclick="document.getElementById('modal-salvar').style.display='none'">Fechar</button>
+                </div>
+
+            </div>
         </div>
 
         <div class="video_texto-curso">
@@ -69,4 +98,140 @@
         </div>
     </section>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let cursoId = document.getElementById("abrir-modal-salvar").getAttribute("data-curso-id");
+            let botaoSalvar = document.getElementById("abrir-modal-salvar");
+            let botaoRemover = document.getElementById("remover-de-salvos");
+        
+            // Verificar se o curso já está salvo
+            fetch(`/verificar_curso_salvo/${cursoId}/`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.salvo) {
+                    botaoSalvar.textContent = "Editar Salvos";
+                    botaoRemover.style.display = "inline-block"; // Exibe o botão de remover
+                } else {
+                    botaoSalvar.textContent = "Salvar Curso";
+                    botaoRemover.style.display = "none"; // Esconde o botão de remover
+                }
+            });
+        });
+        
+        // Abrir modal e carregar coleções do usuário
+        document.getElementById("abrir-modal-salvar").addEventListener("click", function() {
+            let cursoId = this.getAttribute("data-curso-id");
+            let selectColecao = document.getElementById("colecao-salvos");
+        
+            selectColecao.innerHTML = "<option value=''>Carregando...</option>";
+            
+            fetch("/listar_colecoes_salvos/")
+            .then(response => response.json())
+            .then(data => {
+                selectColecao.innerHTML = "";
+                if (data.colecoes.length > 0) {
+                    data.colecoes.forEach(colecao => {
+                        let option = document.createElement("option");
+                        option.value = colecao.id;
+                        option.textContent = colecao.nome;
+                        selectColecao.appendChild(option);
+                    });
+                } else {
+                    selectColecao.innerHTML = "<option value=''>Nenhuma coleção disponível</option>";
+                }
+            });
+        
+            document.getElementById("modal-salvar").style.display = "block";
+        });
+        
+        // Criar nova coleção
+        document.getElementById("criar-nova-colecao").addEventListener("click", function() {
+            let nomeNovaColecao = document.getElementById("nova-colecao-nome").value;
+        
+            if (!nomeNovaColecao) {
+                alert("Digite um nome para a coleção!");
+                return;
+            }
+        
+            fetch("/criar_nova_colecao/", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `nome=${nomeNovaColecao}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.id) {
+                    let selectColecao = document.getElementById("colecao-salvos");
+                    let option = document.createElement("option");
+                    option.value = data.id;
+                    option.textContent = data.nome;
+                    selectColecao.appendChild(option);
+                    selectColecao.value = data.id; // Seleciona automaticamente
+                    alert("Coleção criada com sucesso!");
+                } else {
+                    alert("Erro ao criar coleção!");
+                }
+            });
+        });
+        
+        // Salvar curso na coleção escolhida
+            document.getElementById("confirmar-salvamento").addEventListener("click", function() {
+                let cursoId = document.getElementById("abrir-modal-salvar").getAttribute("data-curso-id");
+                let salvosId = document.getElementById("colecao-salvos").value;
+
+                if (!salvosId) {
+                    alert("Escolha ou crie uma coleção primeiro!");
+                    return;
+                }
+
+                fetch("/salvar_curso/", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}",
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `curso_id=${cursoId}&salvos_id=${salvosId}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    document.getElementById("modal-salvar").style.display = "none";
+
+                    // 🔥 Atualiza o botão imediatamente após salvar
+                    let botaoSalvar = document.getElementById("abrir-modal-salvar");
+                    let botaoRemover = document.getElementById("remover-de-salvos");
+
+                    botaoSalvar.textContent = "Editar Salvos";
+                    botaoRemover.style.display = "inline-block"; // Exibe o botão de remover
+                });
+            });
+        
+        // Remover curso de todas as coleções
+        document.getElementById("remover-de-salvos").addEventListener("click", function() {
+            let cursoId = document.getElementById("abrir-modal-salvar").getAttribute("data-curso-id");
+        
+            fetch("/remover_curso_de_salvos/", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `curso_id=${cursoId}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.removido) {
+                    alert("Curso removido de todas as coleções!");
+                    document.getElementById("abrir-modal-salvar").textContent = "Salvar Curso";
+                    document.getElementById("remover-de-salvos").style.display = "none"; // Esconde o botão de remover
+                } else {
+                    alert("Erro ao remover curso!");
+                }
+            });
+        });
+        </script>
+        
 {% endblock content %}

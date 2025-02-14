@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Curso, Salvos, Aula
 from .forms import CursoForm, SalvosForm, AulaForm
 from django.contrib.auth.decorators import login_required, permission_required
+from django.http import JsonResponse
+
 # Create your views here.
 
 def index(request):
@@ -200,3 +202,79 @@ def criar_salvos(request):
         form = SalvosForm()
 
     return render(request, 'criar_salvos.html', {'form': form})
+
+
+
+@login_required
+def salvar_curso(request, curso_id):
+    curso = get_object_or_404(Curso, id=curso_id)
+    salvos, created = Salvos.objects.get_or_create(usuario=request.user)
+    
+    if curso in salvos.cursos.all():
+        salvos.cursos.remove(curso)
+        salvo = False
+    else:
+        salvos.cursos.add(curso)
+        salvo = True
+    
+    return JsonResponse({'salvo': salvo})
+
+
+@login_required
+def salvar_curso_em_colecao(request):
+    if request.method == "POST":
+        curso_id = request.POST.get("curso_id")
+        salvos_id = request.POST.get("salvos_id")
+
+        curso = get_object_or_404(Curso, id=curso_id)
+        salvos = get_object_or_404(Salvos, id=salvos_id, usuario=request.user)
+
+        if curso in salvos.cursos.all():
+            return JsonResponse({"message": f"O curso já está salvo na coleção '{salvos.nome}'!", "salvo": True})
+        else:
+            salvos.cursos.add(curso)
+            return JsonResponse({"message": f"Curso salvo na coleção '{salvos.nome}'!", "salvo": True})
+    
+    return JsonResponse({"error": "Requisição inválida"}, status=400)
+
+@login_required
+def listar_colecoes_salvos(request):
+    colecoes = Salvos.objects.filter(usuario=request.user).values("id", "nome")
+    return JsonResponse({"colecoes": list(colecoes)})
+
+@login_required
+def criar_nova_colecao(request):
+    if request.method == "POST":
+        nome_colecao = request.POST.get("nome")
+        if nome_colecao:
+            nova_colecao, created = Salvos.objects.get_or_create(usuario=request.user, nome=nome_colecao)
+            return JsonResponse({"id": nova_colecao.id, "nome": nova_colecao.nome, "created": created})
+    return JsonResponse({"error": "Nome inválido"}, status=400)
+
+@login_required
+def verificar_curso_salvo(request, curso_id):
+    curso = get_object_or_404(Curso, id=curso_id)
+    colecoes = Salvos.objects.filter(usuario=request.user, cursos=curso).values("id", "nome")
+
+    return JsonResponse({
+        "salvo": colecoes.exists(),
+        "colecoes": list(colecoes),
+    })
+
+@login_required
+def remover_curso_de_salvos(request):
+    if request.method == "POST":
+        curso_id = request.POST.get("curso_id")
+        curso = get_object_or_404(Curso, id=curso_id)
+
+        # Remove o curso de todas as coleções do usuário
+        salvos = Salvos.objects.filter(usuario=request.user, cursos=curso)
+        if salvos.exists():
+            for salvo in salvos:
+                salvo.cursos.remove(curso)
+            return JsonResponse({"removido": True})
+        
+        return JsonResponse({"removido": False, "error": "Curso não estava salvo!"})
+    
+    return JsonResponse({"error": "Requisição inválida"}, status=400)
+
