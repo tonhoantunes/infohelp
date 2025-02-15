@@ -18,8 +18,22 @@ urlpatterns = [
 
     path('aula/<int:curso_id>/<int:aula_id>/editar', views.editar_aula, name="editar_aula"),
 
+
+    path("listar_colecoes_salvos/", views.listar_colecoes_salvos, name="listar_colecoes_salvos"),
+    path("criar_nova_colecao/", views.criar_nova_colecao, name="criar_nova_colecao"),
+    path("salvar_curso/", views.salvar_curso_em_colecao, name="salvar_curso"),
+    path("verificar_curso_salvo/<int:curso_id>/", views.verificar_curso_salvo, name="verificar_curso_salvo"),
+    path("remover_curso_de_salvos/", views.remover_curso_de_salvos, name="remover_curso_de_salvos"),
+
+
+    path('criar_salvos/', views.criar_salvos, name='criar_salvos'),
+
     path('biblioteca/', views.biblioteca, name="biblioteca"),
-    path('busca/', views.busca, name="busca"),
+
+
+    #path('busca/', views.busca, name="busca"),
+
+
     path('perfil/', views.perfil, name="perfil"),
     path('editar_perfil/', views.editar_perfil, name="editar_perfil"),
 ]
