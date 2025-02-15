@@ -8,22 +8,14 @@
         <h2>Cadastro</h2>
         <form method="post" action="{% url 'cadastro' %}">
             {% csrf_token %}
-            <div class="input-group">
-                <i class="fa fa-user"></i>
-                <input type="text" name="username" class="input" placeholder="Usuário" maxlength="150" required="" aria-describedby="id_username_helptext" id="id_username">
-            </div>
-            <div class="input-group">
-                <i class="fa fa-envelope"></i>
-                <input type="email" name="email" class="input" placeholder="E-mail" maxlength="254" id="id_email">
-            </div>
-            <div class="input-group">
-                <i class="fa fa-lock"></i>
-                <input type="password" name="password1" class="input" placeholder="Senha" required="" id="id_password1">
-            </div>
-            <div class="input-group">
-                <i class="fa fa-lock"></i>
-                <input type="password" name="password2" class="input" placeholder="Senha" required="" id="id_password2">
-            </div>
+            {{ form.as_p }}
+            {% if form.errors %}
+                <ul class="errorlist">
+                    {% for error in form.username.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             <button type="submit">Cadastrar</button>
         </form>
 

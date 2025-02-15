@@ -27,6 +27,8 @@ body {
     height: 100vh;
 }
 
+
+
 .form-container {
     background: var(--bg-color);
     padding: 2rem;
@@ -42,25 +44,27 @@ h2 {
     color: var(--text-color);
 }
 
-.input-group {
-    position: relative;
-    margin-bottom: 1rem;
-}
-
-.input-group i {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #666;
-}
-
-.input {
-    width: 100%;
-    padding: 10px 10px 10px 35px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
+label {
+    color: var(--text-color);
     font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+}
+
+input {
+    display: flex;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+span {
+    font-size: 0.8rem;
+    margin: 0.2rem 0;
+    display: block;
+    text-align: left;
 }
 
 button {
@@ -83,7 +87,7 @@ button:hover {
 
 p {
     margin: 1rem 0;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 p a {
@@ -113,4 +117,28 @@ p a:hover {
     .form-container {
         width: 90%;
     }
+}
+
+
+
+/* Estilizando a lista de erros */
+.errorlist {
+    color: #d8000c;           /* Vermelho para chamar a atenção */
+    padding: 5px 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    list-style: none;         /* Remove os marcadores padrão */
+}
+
+/* Estilizando cada item da lista de erros */
+.errorlist li {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+}
+
+/* Destaque para campos com erro (caso você queira aplicar via JS ou renderização condicional) */
+.input-error {
+    border: 2px solid #d8000c;
+    background-color: #ffe6e6;
 }
