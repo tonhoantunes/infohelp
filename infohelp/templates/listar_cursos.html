@@ -7,19 +7,18 @@
     <section class="container">
         <div class="titulo-pag">
             <h1>Cursos da plataforma</h1>
-            <div class="form-categoria">
-                <form action="{% url "listar_cursos" %}" method="GET">
-                    <label for="categoria">Categoria</label>
+            <div>
+                <form action="{% url "listar_cursos" %}" method="GET" class="form-categoria">
+                    <label for="categoria"><p>Categoria:</p></label>
                     <select name="categoria" id="categoria">
                         <option value="">Todas</option>
                         {% for cat in categorias %}
                             <option value="{{ cat }}" {% if request.GET.categoria == cat %}selected{% endif %}>{{ cat }}</option>
                         {% endfor %}
                     </select>
-                    <button type="submit">Filtrar</button>
+                    <button type="submit"><i class="bx bxs-down-arrow"></i></button>
                 </form>
             </div>
-            <p>Categoria <i class='bx bxs-down-arrow'></i></p>
         </div>
     </section>
     

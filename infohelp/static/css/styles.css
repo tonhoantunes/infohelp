@@ -581,6 +581,24 @@ footer {
     font-size: 16px;
 }
 
+/*ESTILO DE CATEGORIA PESQUISA*/
+.form-categoria {
+    display: flex;
+
+    & select, button {
+        border: none;
+    }
+}
+
+.bxs-down-arrow{
+    position: relative;
+    left: -50%;
+}
+
+
+
+
+
 .btn-admin_curso {
     margin: 20px 20px 20px;
     display: flex;
