@@ -584,15 +584,41 @@ footer {
 /*ESTILO DE CATEGORIA PESQUISA*/
 .form-categoria {
     display: flex;
+    align-items: center;
 
     & select, button {
         border: none;
     }
+
+    & select{
+        padding-inline: 1rem;
+        margin-right: .8rem;
+        color: var(--primary-color);
+    }
+
+    & button {
+        background-color: transparent;
+    }
+
+    & p {
+        font-size: 1.4rem;
+        color: var(--primary-color);
+    }
 }
 
-.bxs-down-arrow{
-    position: relative;
-    left: -50%;
+.bxs-search {
+    color: white;
+    background-color: var(--second-color);
+    border-radius: 50%;
+    font-size: 1.8rem;
+    padding: .6rem;
+
+    cursor: pointer;
+}
+
+.bxs-search:hover {
+    font-size: 2rem;
+    padding: .5rem;
 }
 
 
