@@ -17,8 +17,11 @@ def login(request):
 
 
 def inicio(request):
+    usuario = request.user
+    perfil = get_object_or_404(Perfil, usuario=usuario)
     context = {
-        "cursos" : Curso.objects.all()
+        "cursos" : Curso.objects.all(),
+        "perfil" : perfil,
     }
 
     return render(request, "inicio.html", context)
@@ -26,13 +29,28 @@ def inicio(request):
 
 
 
+
+
+
+
+
+
+
+
+
 #CRUD de Cursos
 
 def listar_cursos(request):
+    context = {}
+
     cursos = Curso.objects.all()
+    context['cursos'] = cursos
+
     categorias = Curso.categoria_do_curso
+    context['categorias'] = categorias
 
     cate = request.GET.get('categoria')
+    
     if cate:
         cursos = Curso.objects.filter(categoria__contains=cate)
     
@@ -41,23 +59,41 @@ def listar_cursos(request):
         busca_descricao = Curso.objects.filter(descricao__icontains=busca)
         busca_nome = Curso.objects.filter(nome__icontains=busca)
         cursos = busca_descricao | busca_nome
+        context[cursos] = cursos
+    
+    if request.user.is_authenticated:
+        usuario = request.user
+        perfil = get_object_or_404(Perfil, usuario=usuario)
+        context['perfil'] = perfil
 
-    return render(request, "listar_cursos.html", {'cursos': cursos, 'categorias': categorias})
+    return render(request, "listar_cursos.html", context)
+
+
+
+
+
+
+
 
 
 def detalhes_curso(request, curso_id):
+    usuario = request.user
+    perfil = get_object_or_404(Perfil, usuario=usuario)
 
     cursos = get_object_or_404(Curso, pk=curso_id)
 
     aulas = Aula.objects.all()
 
 
-    return render(request, "pag_curso.html", {'curso': cursos,'aula': aulas})
+    return render(request, "pag_curso.html", {'curso': cursos,'aula': aulas, 'perfil': perfil})
 
 
 @login_required
 @permission_required('infohelp.criar_curso', raise_exception=True)
 def criar_curso(request):
+    usuario = request.user
+    perfil = get_object_or_404(Perfil, usuario=usuario)
+
     if request.method == "POST":
         form = CursoForm(request.POST, request.FILES)
         if form.is_valid():
@@ -70,16 +106,20 @@ def criar_curso(request):
     else:
         form = CursoForm()
     
-    return render(request, "criar_curso.html", {'form': form})
+    return render(request, "criar_curso.html", {'form': form, 'perfil': perfil})
 
 
 @permission_required('infohelp.editar_curso', raise_exception=True)
 def editar_curso(request, curso_id):
+    usuario = request.user
+    perfil = get_object_or_404(Perfil, usuario=usuario)
+
     curso = get_object_or_404(Curso, id=curso_id)
 
     context = {
         "curso" : curso,
         "form" : CursoForm(instance=curso),
+        "perfil" : perfil,
     }
 
     if request.method == 'POST':
@@ -95,8 +135,12 @@ def editar_curso(request, curso_id):
 
 
 def excluir_curso(request, curso_id):
+    usuario = request.user
+    perfil = get_object_or_404(Perfil, usuario=usuario)
+
     context = {
-        "curso": get_object_or_404(Curso, id=curso_id)
+        "curso": get_object_or_404(Curso, id=curso_id),
+        "perfil": perfil,
     }
 
     if request.method == "POST":
@@ -110,6 +154,9 @@ def excluir_curso(request, curso_id):
 #CRUD de Aulas
 
 def criar_aula(request, curso_id):
+    usuario = request.user
+    perfil = get_object_or_404(Perfil, usuario=usuario)
+
     curso = get_object_or_404(Curso, id=curso_id)
     if request.method == "POST":
         form = AulaForm(request.POST, request.FILES)
@@ -124,9 +171,12 @@ def criar_aula(request, curso_id):
     else:
         form = AulaForm()
 
-    return render(request, 'criar_aula.html', {'form': form, 'curso': curso})
+    return render(request, 'criar_aula.html', {'form': form, 'curso': curso, 'perfil': perfil})
 
 def editar_aula(request, aula_id, curso_id):
+    usuario = request.user
+    perfil = get_object_or_404(Perfil, usuario=usuario)
+
     aula = get_object_or_404(Aula, id=aula_id)
     curso = get_object_or_404(Curso, id=curso_id)
 
@@ -134,6 +184,7 @@ def editar_aula(request, aula_id, curso_id):
         "aula" : aula,
         "curso" : curso,
         "form" : AulaForm(instance=aula),
+        "perfil" : perfil,
     }
 
     if request.method == 'POST':
@@ -148,22 +199,29 @@ def editar_aula(request, aula_id, curso_id):
 
 
 def detalhes_aula(request, curso_id, aula_id):
+    usuario = request.user
+    perfil = get_object_or_404(Perfil, usuario=usuario)
+
     aulas = Aula.objects.all()
 
     aula = get_object_or_404(Aula, id=aula_id)
     curso = get_object_or_404(Curso, id=curso_id)
     
-    return render(request, "exibir_aula.html", {'aulas' : aulas, 'curso' : curso, 'aula' : aula})
+    return render(request, "exibir_aula.html", {'aulas' : aulas, 'curso' : curso, 'aula' : aula, 'perfil': perfil})
 
 
 
 def excluir_aula(request, curso_id, aula_id):
+    usuario = request.user
+    perfil = get_object_or_404(Perfil, usuario=usuario)
+
     aula = get_object_or_404(Aula, id=aula_id)
     curso = get_object_or_404(Curso, id=curso_id)
 
     context = {
         "curso": get_object_or_404(Curso, id=curso_id),
-        "aula": get_object_or_404(Aula, id=aula_id)
+        "aula": get_object_or_404(Aula, id=aula_id),
+        "perfil": perfil,
     }
 
     if request.method == "POST":
@@ -175,8 +233,11 @@ def excluir_aula(request, curso_id, aula_id):
 
 @login_required
 def biblioteca(request):
+    usuario = request.user
+    perfil = get_object_or_404(Perfil, usuario=usuario)
+
     salvos = Salvos.objects.filter(usuario=request.user)
-    return render(request, 'biblioteca.html', {'salvos': salvos})
+    return render(request, 'biblioteca.html', {'salvos': salvos, 'perfil': perfil})
 
 
 #def busca(request):
