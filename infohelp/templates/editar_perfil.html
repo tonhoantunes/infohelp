@@ -9,66 +9,118 @@
             <h1>Edite seus dados</h1>
         </div>
     </section>
+       
 
 
-    <h2>Editar Perfil</h2>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
+            <!-- Exibe a imagem atual do avatar -->
+            <!--
+
+            {% if form.avatar.value %}
+                <div>
+                    <label>Avatar atual:</label>
+                    <img src="{{ form.avatar.value.url }}" alt="Avatar" style="max-width: 200px; height: auto;">
+                </div>
+            {% endif %}
+            -->
+
+            <!-- Renderiza o campo de upload de avatar -->
+             <!--
+            <div>
+                <label for="{{ form.avatar.id_for_label }}">Novo Avatar:</label>
+                <input type="file" 
+                    id="{{ form.avatar.id_for_label }}" 
+                    name="{{ form.avatar.name }}" 
+                    class="form-control">
+            </div>
+
+
             <button type="submit">Salvar</button>
+            <a href="{% url "perfil" %}">Cancelar</a>
         </form>
 
+    -->
 
 
-    <!-- Formulário de edição de perfil
+
 
     <section class="section-editar_perfil container">
         <div class="box-editar_perfil">
             <div class="edicao-perfil">
                 <div class="forms-editar_perfil">
                     
-                    <form>
-                        <div class="form-grupo">
-                            <label for="nome">Seu Nome:</label>
-                            <input type="text" id="nome" name="nome">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div>
+                            <!-- Campo de Nome (username) -->
+                            <div class="form-grupo">
+                                <label for="{{ form.username.id_for_label }}">Seu Nome:</label>
+                                <input type="text" value="{{ perfil.usuario.username }}" id="{{ perfil.username.id_for_label }}" name="{{ perfil.username.name }}">
+                            </div>
+
+                            <!-- Linha com Telefone e Data de Nascimento -->
+                            <div class="form-linha">
+                                <div class="form-grupo">
+                                    <label for="{{ form.telefone.id_for_label }}">Telefone:</label>
+                                    {{ form.telefone }}
+                                </div>
+                                <div  class="form-grupo">
+                                    <label for="{{ form.data_nascimento.id_for_label }}">Data de Nascimento:</label>
+                                    <input type="date" 
+                                        id="{{ form.data_nascimento.id_for_label }}" 
+                                        name="{{ form.data_nascimento.name }}" 
+                                        value="{{ form.data_nascimento.value|date:'Y-m-d' }}" 
+                                        class="form-control">
+                                </div>
+                            </div>
+
+                            <!-- Linha com Cidade e Estado -->
+                            <div class="form-linha">
+                                <div class="form-grupo">
+                                    <label for="{{ form.cidade.id_for_label }}">Cidade:</label>
+                                    {{ form.cidade }}
+                                </div>
+                                <div class="form-grupo">
+                                    <label for="{{ form.estado.id_for_label }}">Estado:</label>
+                                    {{ form.estado }}
+                                </div>
+                            </div>
+
+                            <!-- Botão de Salvar -->
+                            <div class="salvar_voltar">
+                                <button type="submit" class="btn-salvar_perfil">Salvar</button>
+                                <a class="voltar-editar_perfil" href="{% url "perfil" %}">Cancelar</a>
+                            </div>
+
                         </div>
-                        <div class="form-linha">
-                            <div class="form-grupo">
-                                <label for="telefone">Telefone:</label>
-                                <input type="tel" id="telefone" name="telefone">
-                            </div>
-                            <div class="form-grupo">
-                                <label for="nascimento">Data de Nascimento:</label>
-                                <input type="date" id="nascimento" name="nascimento">
+
+                        <div>
+                            <!-- Exibe a imagem atual do avatar -->
+                            {% if form.avatar.value %}
+                                <div  class="boxImg-editar_perfil">
+                                    <label>Avatar atual:</label>
+                                    <div class="img-perfil">
+                                        <img src="{{ form.avatar.value.url }}" alt="Avatar">
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <!-- Renderiza o campo de upload de avatar -->
+                            <div class="novo-avatar">
+                                <label for="{{ form.avatar.id_for_label }}">Novo Avatar:</label>
+                                <input type="file" 
+                                    id="{{ form.avatar.id_for_label }}" 
+                                    name="{{ form.avatar.name }}" 
+                                    class="form-control">
                             </div>
                         </div>
-                        <div class="form-linha">
-                            <div class="form-grupo">
-                                <label for="cidade">Cidade:</label>
-                                <input type="text" id="cidade" name="cidade">
-                            </div>
-                            <div class="form-grupo">
-                                <label for="estado">Estado:</label>
-                                <input type="text" id="estado" name="estado">
-                            </div>
-                        </div>
+
                     </form>
+
                 </div>
-    
-                <div class="boxImg-editar_perfil">
-                    <p>FOTO:</p>
-                    <div class="img-perfil"><img src="{% static "assets/placeholder.png" %}" alt=""></div>
-                    <div class="boxBtn-add_img"><a class="btn-add_img" href="#">Adicionar imagem</a></div>
-                </div>
-            </div>
-            
-            
-            <div class="salvar_voltar">
-                <a class="btn-salvar_perfil" href="#">Salvar</a>
-                <a class="voltar-editar_perfil" href="{% url "perfil" %}">Voltar</a>
             </div>
         </div>
     </section>
 
-     -->
+    
 {% endblock content %}

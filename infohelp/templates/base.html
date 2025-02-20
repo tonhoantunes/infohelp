@@ -35,7 +35,13 @@
                     <li class="cursos"><a href="{% url "listar_cursos" %}">Cursos</a></li>
                     <li class="biblioteca"><a href="{% url "biblioteca" %}">Biblioteca</a></li>
                 </ul>
+                {% if perfil.avatar.url %}
+                <a href="{% url "perfil" %}">
+                    <img src="{{perfil.avatar.url}}" alt="" style="width: 40px; height: 40px; border-radius: 50%;">
+                </a>    
+                {% else %}
                 <a class="perfil" href="{% url "perfil" %}"><i class='bx bx-user-circle'></i></a>
+                {% endif %}
             </div>
         </header>
     {% endblock navbar %}
