@@ -16,33 +16,34 @@
                 <table>
                     <tr>
                       <th>Nome:</th>
-                      <td>João Maria</td>
+                      <td>{{ perfil.usuario.username }}</td>
                     </tr>
                     <tr>
                       <th>Email:</th>
-                      <td>jmbass@aqui.com</td>
+                      <td>{{ perfil.usuario.email }}</td>
                     </tr>
                     <tr>
                       <th>Telefone:</th>
-                      <td>(84) 98898-7700</td>
+                      <td>{{ perfil.telefone }}</td>
                     </tr>
                     <tr>
                       <th>Nascimento:</th>
-                      <td>24/04/2006</td>
+                      <td>{{ perfil.data_nascimento }}</td>
                     </tr>
                     <tr>
                       <th>Estado:</th>
-                      <td>RN</td>
+                      <td>{{ perfil.estado }}</td>
                     </tr>
                     <tr>
                       <th>Cidade:</th>
-                      <td>Bom Descanso</td>
+                      <td>{{ perfil.cidade }}</td>
                     </tr>
                   </table>
             </div>
             <div class="links-perfil">
                 <div class="custom-perfil">
-                    <button href="{% url "editar_perfil" %}" class="editar-perfil">Editar meus dados</button>
+                    <a href="{% url 'editar_perfil' %}">Editar Perfil</a>
+                    <!-- <button href="{% url "editar_perfil" %}" class="editar-perfil">Editar meus dados</button> -->
 
                     {% if request.user.is_authenticated %}
                     <form method="post" action="{% url 'logout' %}">

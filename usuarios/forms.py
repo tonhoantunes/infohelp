@@ -76,3 +76,16 @@ class LoginForm(AuthenticationForm):
         label="Senha:",
         widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
+
+
+class EditarPerfilForm(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = ['cidade', 'estado', 'data_nascimento', 'telefone', 'avatar']
+        widgets = {
+            'cidade': forms.TextInput(attrs={'class': 'form-control'}),
+            'estado': forms.TextInput(attrs={'class': 'form-control'}),
+            'data_nascimento': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'telefone': forms.TextInput(attrs={'class': 'form-control'}),
+            'avatar': forms.FileInput(attrs={'class': 'form-control'}),
+        }
