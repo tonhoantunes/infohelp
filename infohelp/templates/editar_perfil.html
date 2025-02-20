@@ -10,10 +10,23 @@
         </div>
     </section>
 
+
+    <h2>Editar Perfil</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Salvar</button>
+        </form>
+
+
+
+    <!-- Formulário de edição de perfil
+
     <section class="section-editar_perfil container">
         <div class="box-editar_perfil">
             <div class="edicao-perfil">
                 <div class="forms-editar_perfil">
+                    
                     <form>
                         <div class="form-grupo">
                             <label for="nome">Seu Nome:</label>
@@ -56,4 +69,6 @@
             </div>
         </div>
     </section>
+
+     -->
 {% endblock content %}

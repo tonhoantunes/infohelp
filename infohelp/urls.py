@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+from usuarios.views import editar_perfil, perfil
+
 urlpatterns = [
     path('', views.index, name="index"),
     path('login/', views.login, name="login"),    
@@ -34,6 +36,6 @@ urlpatterns = [
     #path('busca/', views.busca, name="busca"),
 
 
-    path('perfil/', views.perfil, name="perfil"),
-    path('editar_perfil/', views.editar_perfil, name="editar_perfil"),
+    path('perfil/', perfil, name="perfil"),
+    path('editar_perfil/', editar_perfil, name='editar_perfil'),
 ]

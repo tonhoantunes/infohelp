@@ -24,7 +24,7 @@
                 <p>0000 Vídeos</p>
                 <p>0000 Artigos</p>  
             </div>
-            <div>
+            <div class="botao-salvar">
                 
                 <!-- Botão para abrir o modal -->
                 <button id="abrir-modal-salvar" data-curso-id="{{ curso.id }}">Carregando...</button>
@@ -33,23 +33,34 @@
                 <button id="remover-de-salvos" style="display: none;">Remover de Salvos</button>
 
                 <!-- Modal para escolher ou criar coleção -->
-                <div id="modal-salvar" style="display: none; border: 1px solid #ccc; padding: 20px; background: white; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                    <h3>Escolha ou crie uma coleção</h3>
+                <div id="modal-salvar">
+                    <div class="modal">
 
-                    <!-- Lista de coleções -->
-                    <select id="colecao-salvos">
-                        <option value="">Carregando coleções...</option>
-                    </select>
-                    
-                    <!-- Botão para salvar -->
-                    <button id="confirmar-salvamento">Salvar</button>
+                        <div class="selecionar-salvo">
+                            <h3>Escolha uma coleção para salvar</h3>
+                            <div>
+                                <!-- Lista de coleções -->
+                                <select id="colecao-salvos">
+                                    <option value="">Carregando coleções...</option>
+                                </select>
+                                
+                                <!-- Botão para salvar -->
+                                <button id="confirmar-salvamento">Salvar</button>
+                            </div>
+                        </div>
 
-                    <!-- Criar nova coleção -->
-                    <h4>Criar nova coleção</h4>
-                    <input type="text" id="nova-colecao-nome" placeholder="Nome da coleção">
-                    <button id="criar-nova-colecao">Criar</button>
+                        <div class="criar-salvo">
+                            <!-- Criar nova coleção -->
+                            <h4>ou crie uma nova coleção.</h4>
+                            <div>
+                                <input type="text" id="nova-colecao-nome" placeholder="Nome da coleção">
+                                <button id="criar-nova-colecao">Criar</button>
+                            </div>
+                        </div>
 
-                    <button onclick="document.getElementById('modal-salvar').style.display='none'">Fechar</button>
+                        <button onclick="document.getElementById('modal-salvar').style.display='none'" >Fechar</button>
+                        
+                    </div>
                 </div>
 
             </div>
@@ -112,7 +123,7 @@
                     botaoSalvar.textContent = "Editar Salvos";
                     botaoRemover.style.display = "inline-block"; // Exibe o botão de remover
                 } else {
-                    botaoSalvar.textContent = "Salvar Curso";
+                    botaoSalvar.textContent = "Salvar";
                     botaoRemover.style.display = "none"; // Esconde o botão de remover
                 }
             });
