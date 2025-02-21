@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+import os #importar a biblioteca os deepseek
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -118,9 +120,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL = 'media/'
+# MEDIA_URL = 'media/'
 
-MEDIA_ROOT = BASE_DIR / 'media/' #pasta onde o django armazena os arquivos
+MEDIA_URL = '/media/'  # URL base para servir arquivos de mídia
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Caminho no sistema de arquivos para armazenar mídia
+
+# MEDIA_ROOT = BASE_DIR / 'media/' #pasta onde o django armazena os arquivos
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

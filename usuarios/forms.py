@@ -85,7 +85,8 @@ class EditarPerfilForm(forms.ModelForm):
         widgets = {
             'cidade': forms.TextInput(attrs={'class': 'form-control'}),
             'estado': forms.TextInput(attrs={'class': 'form-control'}),
-            'data_nascimento': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'data_nascimento': forms.DateInput(attrs={ 'type': 'date', 'class': 'form-control'}),
             'telefone': forms.TextInput(attrs={'class': 'form-control'}),
             'avatar': forms.FileInput(attrs={'class': 'form-control'}),
         }
+    

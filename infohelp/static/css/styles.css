@@ -1511,6 +1511,22 @@ footer {
     display: flex;
     justify-content: space-between;
     width: 300px;
+
+    & a {
+        text-decoration: none;
+        color: var(--text-color);
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    & a:hover {
+        color: var(--second-color);
+        transition: 0.2s;
+    }
+}
+
+.sair-perfil {
+    cursor: pointer;
 }
 
 /*Editar Perfil*/
@@ -1524,11 +1540,17 @@ footer {
 .edicao-perfil {
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 
-.forms-editar_perfil form {
-    height: auto;
-    width: 500px;
+.forms-editar_perfil{
+    width: 100%;
+    & form {
+        height: auto;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
 }
 
 .form-grupo {
@@ -1593,11 +1615,12 @@ footer {
 }
 
 .img-perfil {
-    width: 250px;
-    height: 250px;
+   /*deixar proporção 1/1*/
     overflow: hidden;
     border-radius: 15px;
     border: 1px solid var(--border-color);
+
+    background-color: var(--bg-color);
 }
 
 .img-perfil img {
@@ -1625,6 +1648,17 @@ footer {
     font-weight: 500;
 }
 
+
+.novo-avatar {
+    padding-inline: 20px;
+
+    & label {
+        display: block;
+        margin-bottom: .5rem;
+    }
+}
+
+
 .salvar_voltar {
     margin-top: 50px;
     display: flex;
@@ -1632,6 +1666,8 @@ footer {
     align-items: center;
     width: 150px;
     padding: 20px;
+
+    gap: 1rem;
 }
 
 .btn-salvar_perfil {
