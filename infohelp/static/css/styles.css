@@ -172,6 +172,18 @@ div .titulo-pag {
     transition: 0.2s;
 }
 
+.icon-menu {
+    width: 2rem;
+    height: 2rem;
+}
+
+.menu-mobile-icon {
+    display: none;
+}
+
+.menu-mobile {
+    display: none;
+}
 
 /*@media provisória*/
 
@@ -1706,6 +1718,11 @@ footer {
 
 @media (max-width: 1024px) {
     
+    body {
+        overflow-x: hidden;
+    }
+
+
     /* TELA INICIAL */
     .container {
         width: 90%;
@@ -1761,4 +1778,266 @@ footer {
         font-size: 16px;
     }
 
+}
+
+@media screen and (max-width: 768px) {
+
+    /*TELA INICIAL*/
+        
+    body {
+        overflow-x: hidden;
+    }
+        /*navbar*/
+
+    .links {
+        padding: 1.5rem 4rem;
+    }
+
+    .links li {
+        display: none;
+    }
+
+    .pesquisar {
+        display: none;
+    }
+
+    .login {
+        display: none;
+    }
+
+    .menu-mobile-icon {
+        display: block;
+    }
+
+    .menu-mobile-icon button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .menu-mobile ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        padding-bottom: 1.5rem;
+    }
+
+    .menu-mobile .links li {
+        display: block;
+        padding: 1.2rem;
+    }
+
+    .menu-mobile .links a {
+        padding: 2rem;
+    }
+
+    .menu-mobile .links .login {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        display: block;
+        font-size: 16px;
+        color: var(--text-color);
+        font-weight: 400;
+    }
+
+    .menu-mobile .login button {
+        width: 100%;
+    }
+
+    .menu-mobile .login a {
+        padding: 2rem;
+    }
+
+    .open {
+        display: block;
+    }
+
+        /*home*/
+    .textos h1 {
+        font-size: 35px;
+    }
+    
+    .textos p {
+        font-size: 16px;
+    }
+    
+}
+
+@media screen and (max-width: 600px) {
+
+    /*TELA INICIAL*/
+    body {
+        overflow-x: hidden;
+    }
+    
+    .apresentacao {
+        height: 440px;
+    }
+
+    .imagem {
+        height: 30rem;
+    }
+
+    .textos h1 {
+        font-size: 30px;
+    }
+
+    .textos p {
+        font-size: 14px;
+    }
+
+    .btn-recursos {
+        font-size: 14px;
+    }
+
+    .recursos h1 {
+        font-size: 60px;
+    }
+
+    .producao h1 {
+        font-size: 30px;
+    }
+    
+}
+
+@media screen and (max-width: 480px) {
+
+    /*TELA INICIAL*/
+    body {
+        overflow-x: hidden;
+    }
+
+    .apresentacao {
+        height: 400px;
+    }
+
+    .imagem {
+        height: 27.5rem;
+    }
+
+    .textos h1 {
+        font-size: 20px;
+    }
+
+    .textos p {
+        font-size: 12px;
+    }
+
+    .btn-recursos {
+        font-size: 10px;
+        padding: 10px 10px;
+    }
+
+    .recursos h1 {
+        font-size: 50px;
+    }
+
+    .producao h1 {
+        font-size: 20px;
+    }
+    
+}
+
+@media screen and (max-width: 412px) {
+
+    /*TELA INICIAL*/
+    body {
+        overflow-x: hidden;
+    }
+
+    .apresentacao {
+        height: 350px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .imagem {
+        display: none;
+    }
+
+    .textos h1 {
+        font-size: 45px;
+    }
+
+    .textos p {
+        margin: 30px 0;
+        font-size: 16px;
+    }
+
+    .btn-recursos {
+        font-size: 14px;
+        padding: 10px 10px;
+    }
+
+    .recursos h1 {
+        font-size: 45px;
+    }
+
+    .card p {
+        font-size: 20px;
+        margin-inline: 40px;
+    }
+
+    .producao h1 {
+        font-size: 18px;
+    }
+
+    .logo-producao {
+        width: 200px;
+        height: 200px;
+    }
+    
+}
+
+@media screen and (max-width: 390px) {
+    
+    body {
+        overflow-x: hidden;
+    }
+
+    /*TELA INICIAL*/
+    
+    .textos h1 {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    
+    body {
+        overflow-x: hidden;
+    }
+
+    .logo-rodape img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .redes-sociais p {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+}
+
+@media screen and (max-width: 360px) {
+    
+    body {
+        overflow-x: hidden;
+    }
+
+    /*TELA INICIAL*/
+    
+    .textos h1 {
+        font-size: 40px;
+    }
+
+    .logo-rodape img {
+        width: 200px;
+        height: 200px;
+    }
 }
