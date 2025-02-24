@@ -8,6 +8,7 @@
 
 - HTML
 - CSS
-- DJANGO
+- JavaScript
+- Django
 
 # Um sistema feito para você!
