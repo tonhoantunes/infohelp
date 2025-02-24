@@ -155,6 +155,7 @@ def excluir_curso(request, curso_id):
         return render(request, "excluir_curso.html", context)
 
 
+
 #CRUD de Aulas
 @permission_required('infohelp.criar_aula', raise_exception=True)
 def criar_aula(request, curso_id):
@@ -200,7 +201,7 @@ def editar_aula(request, curso_id, aula_id):
         if form.is_valid():
             form.save()
             messages.success(request, "Aula atualizada com sucesso!")  # Mensagem de sucesso
-            return redirect('detalhes_aula', aula.id, curso.id)
+            return redirect('detalhes_aula', curso_id=curso.id, aula_id=aula.id)
         else:
             # Exibe mensagens de erro se o formulário não for válido
             for field, errors in form.errors.items():

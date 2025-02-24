@@ -4,6 +4,19 @@
 {% block title %}{{ curso.nome }}{% endblock title %}
 
 {% block content %}
+
+    <!-- Exibe mensagens de sucesso ou erro -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
     <div class="container">
         <div class="titulo-pag">
             <h1>{{ curso.nome }}</h1>

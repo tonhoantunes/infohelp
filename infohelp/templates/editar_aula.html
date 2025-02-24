@@ -24,7 +24,7 @@
     <section class="section-criar_aula container">
         <div class="box-criar_aula">
             <div class="forms-criar_aula">
-                <form method="POST" action="{% url 'editar_aula' aula.id curso.id %}" enctype="multipart/form-data">
+                <form method="POST" action="{% url 'editar_aula' curso.id aula.id %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-grupo">
                         <label for="titulo">Título:</label>
