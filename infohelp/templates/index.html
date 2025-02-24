@@ -38,7 +38,11 @@
 
         <div class="menu-mobile">
             <ul class="links">
-                <li class="cursos"><a href="{% url "listar_cursos" %}">Cursos</a></li>
+                {% if request.user.is_authenticated %}
+                    <li class="cursos"><a href="{% url "listar_cursos" %}">Cursos</a></li>
+                {% else %}
+                    <li class="cursos"><ahref="{% url "busca" %}">Cursos</a></li>
+                {% endif %}
                 <li class="biblioteca"><a href=" {% url "biblioteca" %} ">Biblioteca</a></li>
                 <li>
                     {% if request.user.is_authenticated %}

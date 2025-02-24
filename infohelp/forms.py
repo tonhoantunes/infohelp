@@ -22,3 +22,8 @@ class AulaForm(forms.ModelForm):
         model = Aula
         fields = "__all__"
         exclude = ["curso"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['texto'].required = False  # Torna o campo texto opcional no formulário
+        self.fields['capa'].required = False  # Torna o campo capa opcional no formulário

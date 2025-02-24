@@ -10,52 +10,18 @@
         </div>
     </section>
        
-
-
-            <!-- Exibe a imagem atual do avatar -->
-            <!--
-
-            {% if form.avatar.value %}
-                <div>
-                    <label>Avatar atual:</label>
-                    <img src="{{ form.avatar.value.url }}" alt="Avatar" style="max-width: 200px; height: auto;">
-                </div>
-            {% endif %}
-            -->
-
-            <!-- Renderiza o campo de upload de avatar -->
-             <!--
-            <div>
-                <label for="{{ form.avatar.id_for_label }}">Novo Avatar:</label>
-                <input type="file" 
-                    id="{{ form.avatar.id_for_label }}" 
-                    name="{{ form.avatar.name }}" 
-                    class="form-control">
-            </div>
-
-
-            <button type="submit">Salvar</button>
-            <a href="{% url "perfil" %}">Cancelar</a>
-        </form>
-
-    -->
-
-
-
-
     <section class="section-editar_perfil container">
         <div class="box-editar_perfil">
             <div class="edicao-perfil">
                 <div class="forms-editar_perfil">
-                    
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
 
                         <div>
                             <!-- Campo de Nome (username) -->
                             <div class="form-grupo">
-                                <label for="{{ form.username.id_for_label }}">Seu Nome:</label>
-                                <input type="text" value="{{ perfil.usuario.username }}" id="{{ perfil.username.id_for_label }}" name="{{ perfil.username.name }}">
+                                <label for="{{ form.username.id_for_label }}">Nome de usuário:</label>
+                                {{ form.username }}
                             </div>
 
                             <!-- Linha com Telefone e Data de Nascimento -->
@@ -89,15 +55,14 @@
                             <!-- Botão de Salvar -->
                             <div class="salvar_voltar">
                                 <button type="submit" class="btn-salvar_perfil">Salvar</button>
-                                <a class="voltar-editar_perfil" href="{% url "perfil" %}">Cancelar</a>
+                                <a class="voltar-editar_perfil" href="{% url 'perfil' %}">Cancelar</a>
                             </div>
-
                         </div>
 
                         <div>
                             <!-- Exibe a imagem atual do avatar -->
                             {% if form.avatar.value %}
-                                <div  class="boxImg-editar_perfil">
+                                <div class="boxImg-editar_perfil">
                                     <label>Avatar atual:</label>
                                     <div class="img-perfil">
                                         <img src="{{ form.avatar.value.url }}" alt="Avatar">
@@ -108,19 +73,12 @@
                             <!-- Renderiza o campo de upload de avatar -->
                             <div class="novo-avatar">
                                 <label for="{{ form.avatar.id_for_label }}">Novo Avatar:</label>
-                                <input type="file" 
-                                    id="{{ form.avatar.id_for_label }}" 
-                                    name="{{ form.avatar.name }}" 
-                                    class="form-control">
+                                {{ form.avatar }}
                             </div>
                         </div>
-
                     </form>
-
                 </div>
             </div>
         </div>
     </section>
-
-    
 {% endblock content %}

@@ -42,7 +42,7 @@ class Aula(models.Model):
     descricao = models.TextField(max_length=200)
     capa = models.ImageField(blank=True)
     link = models.CharField(max_length=200)
-    texto = models.TextField(max_length=2000)
+    texto = models.TextField(max_length=2000, blank=True, null=True)  # Permite valores vazios
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
 
     def __str__(self):
