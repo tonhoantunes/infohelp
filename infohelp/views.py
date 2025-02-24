@@ -231,8 +231,26 @@ def biblioteca(request):
     usuario = request.user
     perfil = get_object_or_404(Perfil, usuario=usuario)
 
+    # Coleções de cursos salvos pelo usuário
     salvos = Salvos.objects.filter(usuario=request.user)
-    return render(request, 'biblioteca.html', {'salvos': salvos, 'perfil': perfil})
+
+    # Filtro por coleção (se fornecido)
+    filtro_salvo = request.GET.get('filtro_salvo')
+    if filtro_salvo:
+        # Filtra os cursos pela coleção selecionada
+        cursos_salvos = Curso.objects.filter(salvos__id=filtro_salvo, salvos__usuario=request.user).distinct()
+    else:
+        # Todos os cursos salvos pelo usuário (independentemente da coleção)
+        cursos_salvos = Curso.objects.filter(salvos__usuario=request.user).distinct()
+
+    context = {
+        'salvos': salvos,
+        'cursos_salvos': cursos_salvos,  # Cursos filtrados ou todos os cursos salvos
+        'perfil': perfil,
+        'filtro_salvo': int(filtro_salvo) if filtro_salvo else None,  # Passa o filtro selecionado para o template
+    }
+
+    return render(request, 'biblioteca.html', context)
 
 # exibiçãpo de cursos para quem não está logado
 def busca(request):

@@ -34,7 +34,7 @@ def fazer_login(request):
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
-            login(request, user)  # Usando a função login do Django
+            # login(request, user)  # Usando a função login do Django
             return redirect("inicio")
     else:
         form = AuthenticationForm()
