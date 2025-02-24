@@ -16,24 +16,19 @@ def login(request):
     return render(request, "login.html")
 
 
-@login_required
 def inicio(request):
     usuario = request.user
-    perfil = get_object_or_404(Perfil, usuario=usuario)
+    perfil = None  # Valor padrão caso o usuário não esteja autenticado
+    
+    if usuario.is_authenticated:
+        perfil = get_object_or_404(Perfil, usuario=usuario)
+    
     context = {
         "cursos": Curso.objects.all(),
         "perfil": perfil,
     }
+    
     return render(request, "inicio.html", context)
-
-
-
-
-
-
-
-
-
 
 
 
@@ -43,33 +38,35 @@ def inicio(request):
 def listar_cursos(request):
     context = {}
 
+    # Obtém todos os cursos inicialmente
     cursos = Curso.objects.all()
-    context['cursos'] = cursos
 
-    categorias = Curso.categoria_do_curso
-    context['categorias'] = categorias
-
+    # Filtra por categoria, se fornecida
     cate = request.GET.get('categoria')
-    
     if cate:
-        cursos = Curso.objects.filter(categoria__contains=cate)
-    
+        cursos = cursos.filter(categoria__icontains=cate)  # Use icontains para busca case-insensitive
+
+    # Filtra por busca, se fornecida
     busca = request.GET.get('busca')
     if busca:
-        busca_descricao = Curso.objects.filter(descricao__icontains=busca)
-        busca_nome = Curso.objects.filter(nome__icontains=busca)
+        busca_descricao = cursos.filter(descricao__icontains=busca)
+        busca_nome = cursos.filter(nome__icontains=busca)
         cursos = busca_descricao | busca_nome
-        context[cursos] = cursos
-    
+
+    # Adiciona os cursos filtrados ao contexto
+    context['cursos'] = cursos
+
+    # Adiciona as categorias ao contexto
+    categorias = Curso.categoria_do_curso  # Certifique-se de que isso retorna as categorias corretamente
+    context['categorias'] = categorias
+
+    # Adiciona o perfil do usuário ao contexto, se autenticado
     if request.user.is_authenticated:
         usuario = request.user
         perfil = get_object_or_404(Perfil, usuario=usuario)
         context['perfil'] = perfil
 
     return render(request, "listar_cursos.html", context)
-
-
-
 
 
 
