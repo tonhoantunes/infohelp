@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-from usuarios.views import editar_perfil, perfil
+from usuarios.views import editar_perfil, perfil, alterar_senha
 
 urlpatterns = [
     path('', views.index, name="index"),
@@ -34,4 +34,6 @@ urlpatterns = [
 
     path('perfil/', perfil, name="perfil"),
     path('editar_perfil/', editar_perfil, name='editar_perfil'),
+
+    path('alterar_senha/', alterar_senha, name='alterar_senha'),
 ]

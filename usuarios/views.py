@@ -8,6 +8,10 @@ from django.contrib import messages
 from .models import Perfil  # Importe o modelo Perfil
 from django.contrib.auth.decorators import login_required, permission_required
 
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+
+
 
 def cadastro(request):
     if request.method == "POST":
@@ -70,3 +74,21 @@ def editar_perfil(request):
         form = EditarPerfilForm(instance=perfil)
     
     return render(request, "editar_perfil.html", {"form": form, "perfil": perfil})
+
+
+@login_required
+def alterar_senha(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Atualiza a sessão do usuário para evitar logout
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Sua senha foi alterada com sucesso!')
+            return redirect('perfil')  # Redireciona para a página de perfil
+        else:
+            messages.error(request, 'Por favor, corrija os erros abaixo.')
+    else:
+        form = PasswordChangeForm(request.user)
+    
+    return render(request, 'alterar_senha.html', {'form': form})

@@ -65,7 +65,9 @@
                     </form>
                     {% endif %}
                 </div>
-                <button href="#" class="link-admin">Acessar como administrador</button>
+                <a href="{% url "alterar_senha" %}">
+                  <button class="link-admin">Alterar Senha</button>
+                </a>
             </div>
         </div>
     </section>

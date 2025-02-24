@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import AuthenticationForm
 from .models import User, Perfil
 import re
+from django.contrib.auth.forms import PasswordChangeForm
 
 class CadastroForm(forms.ModelForm):
     username = forms.CharField(
@@ -105,3 +106,10 @@ class EditarPerfilForm(forms.ModelForm):
         # Torna todos os campos opcionais
         for field in self.fields:
             self.fields[field].required = False
+
+
+class AlterarSenhaForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        label="Senha atual:",
+        widget=forms.PasswordInput(attrs={'class': 'form-control'})
+    )
