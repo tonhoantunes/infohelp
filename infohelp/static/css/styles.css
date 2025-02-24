@@ -1587,6 +1587,10 @@ footer {
         display: flex;
         justify-content: space-around;
     }
+
+    & div:nth-child(3) {
+        width: 40%;
+    }
 }
 
 .form-grupo {
