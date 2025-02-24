@@ -13,7 +13,7 @@
                     <option value="">Todas as Coleções</option>
                     {% for salvo in salvos %}
                         <option value="{{ salvo.id }}" {% if filtro_salvo == salvo.id %}selected{% endif %}>
-                            {{ salvo.nome }} ({{ salvo.cursos.count }} cursos)
+                            {{ salvo.nome }} - {{ salvo.cursos.count }} curso(s)
                         </option>
                     {% endfor %}
                 </select>
@@ -24,8 +24,8 @@
     <!-- Seção de Cursos Salvos Filtrados -->
     <section>
         <h1>
-            {% if filtro_salvo %}
-                Cursos na Coleção: {{ salvos.get(id=filtro_salvo).nome }}
+            {% if colecao_filtrada %}
+                Cursos na Coleção: {{ colecao_filtrada.nome }}
             {% else %}
                 Todos os Cursos Salvos
             {% endif %}

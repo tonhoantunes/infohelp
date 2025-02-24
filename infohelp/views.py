@@ -239,15 +239,19 @@ def biblioteca(request):
     if filtro_salvo:
         # Filtra os cursos pela coleção selecionada
         cursos_salvos = Curso.objects.filter(salvos__id=filtro_salvo, salvos__usuario=request.user).distinct()
+        # Obtém a coleção filtrada
+        colecao_filtrada = Salvos.objects.get(id=filtro_salvo)
     else:
         # Todos os cursos salvos pelo usuário (independentemente da coleção)
         cursos_salvos = Curso.objects.filter(salvos__usuario=request.user).distinct()
+        colecao_filtrada = None
 
     context = {
         'salvos': salvos,
         'cursos_salvos': cursos_salvos,  # Cursos filtrados ou todos os cursos salvos
         'perfil': perfil,
         'filtro_salvo': int(filtro_salvo) if filtro_salvo else None,  # Passa o filtro selecionado para o template
+        'colecao_filtrada': colecao_filtrada,  # Passa a coleção filtrada para o template
     }
 
     return render(request, 'biblioteca.html', context)
