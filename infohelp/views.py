@@ -107,14 +107,22 @@ def criar_curso(request):
             curso = form.save(commit=False)
             curso.usuario = request.user
             curso.save()
-            return redirect('listar_cursos')
+            messages.success(request, "Curso criado com sucesso!")  # Mensagem de sucesso
+            return redirect('detalhes_curso', curso_id=curso.id)
         else:
-            form = CursoForm()
+            # Exibe mensagens de erro se o formulário não for válido
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")  # Mensagem de erro
     else:
         form = CursoForm()
-    
-    return render(request, "criar_curso.html", {'form': form, 'perfil': perfil})
 
+    context = {
+        'form': form,
+        'perfil': perfil,
+    }
+
+    return render(request, "criar_curso.html", context)
 
 @permission_required('infohelp.editar_curso', raise_exception=True)
 def editar_curso(request, curso_id):
@@ -123,20 +131,26 @@ def editar_curso(request, curso_id):
 
     curso = get_object_or_404(Curso, id=curso_id)
 
-    context = {
-        "curso" : curso,
-        "form" : CursoForm(instance=curso),
-        "perfil" : perfil,
-    }
-
     if request.method == 'POST':
         form = CursoForm(request.POST, request.FILES, instance=curso)
         if form.is_valid():
             form.save()
+            messages.success(request, "Curso atualizado com sucesso!")  # Mensagem de sucesso
             return redirect('listar_cursos')
         else:
-            context["form"] = form
-    
+            # Exibe mensagens de erro se o formulário não for válido
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")  # Mensagem de erro
+    else:
+        form = CursoForm(instance=curso)
+
+    context = {
+        "curso": curso,
+        "form": form,
+        "perfil": perfil,
+    }
+
     return render(request, "editar_curso.html", context)
 
 def excluir_curso(request, curso_id):
