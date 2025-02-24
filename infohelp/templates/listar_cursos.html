@@ -8,15 +8,14 @@
         <div class="titulo-pag">
             <h1>Cursos da plataforma</h1>
             <div>
-                <form action="{% url "listar_cursos" %}" method="GET" class="form-categoria">
+                <form action="{% url 'listar_cursos' %}" method="GET" class="form-categoria">
                     <label for="categoria"><p>Categoria:</p></label>
-                    <select name="categoria" id="categoria">
+                    <select name="categoria" id="categoria" onchange="this.form.submit()">
                         <option value="">Todas</option>
                         {% for cat in categorias %}
                             <option value="{{ cat }}" {% if request.GET.categoria == cat %}selected{% endif %}>{{ cat }}</option>
                         {% endfor %}
                     </select>
-                    <button type="submit"><i class="bx bxs-search"></i></button>
                 </form>
             </div>
         </div>
@@ -26,20 +25,18 @@
         <div class="cursos-cards container">
             {% for curso in cursos %}
                 <div class="card-curso card_curso-1">
-                    <a class="acesso-curso" href="{% url "detalhes_curso" curso.id %}">
-
+                    <a class="acesso-curso" href="{% url 'detalhes_curso' curso.id %}">
                         <div class="img-curso">
                             {% if curso.capa %}
-                            <img src="{{ curso.capa.url }}" alt="Capa do curso">
+                                <img src="{{ curso.capa.url }}" alt="Capa do curso">
                             {% else %}
-                            <img src="{% static "assets/placeholder.png" %}" alt="Sem capa">
+                                <img src="{% static 'assets/placeholder.png' %}" alt="Sem capa">
                             {% endif %}
                         </div>
-
                         <h2>{{ curso.nome }}</h2>
                         <div class="categoria"><p>{{ curso.categoria }}</p></div>
                         <div class="horario-nivel">
-                            <img src="{% static "assets/icons/relogioCard.svg" %}" alt="">
+                            <img src="{% static 'assets/icons/relogioCard.svg' %}" alt="">
                             <p>{{ curso.carga_horaria }}</p>
                             <p>{{ curso.nivel }}</p>
                         </div>
@@ -47,18 +44,15 @@
 
                     {% if request.user.is_authenticated and perms.infohelp.editar_curso %}
                         <div class="btn-admin_curso">
-                            
-                            <a class="editar-curso" href="{% url "editar_curso" curso.id %}">
+                            <a class="editar-curso" href="{% url 'editar_curso' curso.id %}">
                                 Editar curso
                             </a>
-                        
-                            <a class="excluir-curso" href="{% url "excluir_curso" curso.id %}">Excluir curso</a>
+                            <a class="excluir-curso" href="{% url 'excluir_curso' curso.id %}">Excluir curso</a>
                         </div>
                     {% endif %}
-
                 </div>
             {% empty %}
-            <h1>TEM NAO</h1>
+                <h1>TEM NAO</h1>
             {% endfor %}
         </div>
     </section>
@@ -67,9 +61,8 @@
     <section>
         <div class="box_criar-curso container">
             <p>Adicione novos cursos à sua lista</p>
-            <a href="{% url "criar_curso" %}" class="btn-criar-curso">Criar novo curso</a>
+            <a href="{% url 'criar_curso' %}" class="btn-criar-curso">Criar novo curso</a>
         </div>
     </section>
     {% endif %}
-
 {% endblock content %}
