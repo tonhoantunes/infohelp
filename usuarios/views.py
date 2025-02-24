@@ -8,6 +8,10 @@ from django.contrib import messages
 from .models import Perfil  # Importe o modelo Perfil
 from django.contrib.auth.decorators import login_required, permission_required
 
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+
+
 
 def cadastro(request):
     if request.method == "POST":
@@ -20,24 +24,24 @@ def cadastro(request):
             # Cria um perfil para o usuário recém-criado
             Perfil.objects.create(usuario=user)
 
-            # Loga o usuário automaticamente após o cadastro (opcional)
-            # login(request, user)
+            # Loga o usuário automaticamente após o cadastro
+            login(request, user)  # Usando a função login do Django
 
-            return redirect("inicio")
+            return redirect("inicio")  # Redireciona para a página inicial
     else:
         form = CadastroForm()
     return render(request, "cadastro.html", {"form": form})
 
-
-def login(request):
+# Renomeie a função login para fazer_login
+def fazer_login(request):
     if request.method == "POST":
-        form = LoginForm(data=request.POST)
+        form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
-            login(request, user)
+            # login(request, user)  # Usando a função login do Django
             return redirect("inicio")
     else:
-        form = LoginForm()
+        form = AuthenticationForm()
     return render(request, "login.html", {"form": form})
 
 
@@ -50,15 +54,41 @@ def perfil(request):
 
 @login_required
 def editar_perfil(request):
-    # Obtém o perfil do usuário logado
     perfil, created = Perfil.objects.get_or_create(usuario=request.user)
     
     if request.method == "POST":
         form = EditarPerfilForm(request.POST, request.FILES, instance=perfil)
         if form.is_valid():
-            form.save()
+            # Salva os dados do perfil
+            perfil = form.save()
+
+            # Atualiza o username do usuário
+            novo_username = form.cleaned_data.get('username')
+            if novo_username:
+                perfil.usuario.username = novo_username
+                perfil.usuario.save()
+
             messages.success(request, "Perfil atualizado com sucesso!")
-            return redirect("perfil") # Redireciona para a página inicial ou para a página de perfil
+            return redirect("perfil")
     else:
         form = EditarPerfilForm(instance=perfil)
-    return render(request, "editar_perfil.html", {"form": form, "perfil" : perfil})
+    
+    return render(request, "editar_perfil.html", {"form": form, "perfil": perfil})
+
+
+@login_required
+def alterar_senha(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Atualiza a sessão do usuário para evitar logout
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Sua senha foi alterada com sucesso!')
+            return redirect('perfil')  # Redireciona para a página de perfil
+        else:
+            messages.error(request, 'Por favor, corrija os erros abaixo.')
+    else:
+        form = PasswordChangeForm(request.user)
+    
+    return render(request, 'alterar_senha.html', {'form': form})

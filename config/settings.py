@@ -136,3 +136,12 @@ AUTH_USER_MODEL = "usuarios.User"
 
 LOGOUT_REDIRECT_URL = "index"
 LOGIN_REDIRECT_URL = "inicio"
+
+
+# Configurações de e-mail (usando o serviço do Gmail como exemplo)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'email@gmail.com'  # Substitua pelo seu e-mail
+EMAIL_HOST_PASSWORD = 'chamaa'  # Substitua pela senha do seu e-mail

@@ -20,5 +20,8 @@
         </form>
         <p>Não tem uma conta? <a href="{% url 'cadastro' %}">Cadastre-se</a></p>
         <a class="sair" href="{% url "index" %}">SAIR</a>
+
+        <a href="{% url 'password_reset' %}">Esqueci minha senha</a>
+
     </div>
 {% endblock content %}

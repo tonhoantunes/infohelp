@@ -4,6 +4,7 @@ from usuarios.models import Perfil
 from .forms import CursoForm, SalvosForm, AulaForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import JsonResponse
+from django.contrib import messages
 
 # Create your views here.
 
@@ -15,52 +16,48 @@ def login(request):
 
     return render(request, "login.html")
 
-
 def inicio(request):
     usuario = request.user
-    perfil = get_object_or_404(Perfil, usuario=usuario)
+    perfil = None  # Valor padrão caso o usuário não esteja autenticado
+    
+    if usuario.is_authenticated:
+        perfil = get_object_or_404(Perfil, usuario=usuario)
+    
     context = {
-        "cursos" : Curso.objects.all(),
-        "perfil" : perfil,
+        "cursos": Curso.objects.all(),
+        "perfil": perfil,
     }
-
+    
     return render(request, "inicio.html", context)
 
 
-
-
-
-
-
-
-
-
-
-
-
 #CRUD de Cursos
-
 def listar_cursos(request):
     context = {}
 
+    # Obtém todos os cursos inicialmente
     cursos = Curso.objects.all()
-    context['cursos'] = cursos
 
-    categorias = Curso.categoria_do_curso
-    context['categorias'] = categorias
-
+    # Filtra por categoria, se fornecida
     cate = request.GET.get('categoria')
-    
     if cate:
-        cursos = Curso.objects.filter(categoria__contains=cate)
-    
+        cursos = cursos.filter(categoria__icontains=cate)  # Use icontains para busca case-insensitive
+
+    # Filtra por busca, se fornecida
     busca = request.GET.get('busca')
     if busca:
-        busca_descricao = Curso.objects.filter(descricao__icontains=busca)
-        busca_nome = Curso.objects.filter(nome__icontains=busca)
+        busca_descricao = cursos.filter(descricao__icontains=busca)
+        busca_nome = cursos.filter(nome__icontains=busca)
         cursos = busca_descricao | busca_nome
-        context[cursos] = cursos
-    
+
+    # Adiciona os cursos filtrados ao contexto
+    context['cursos'] = cursos
+
+    # Adiciona as categorias ao contexto
+    categorias = Curso.categoria_do_curso  # Certifique-se de que isso retorna as categorias corretamente
+    context['categorias'] = categorias
+
+    # Adiciona o perfil do usuário ao contexto, se autenticado
     if request.user.is_authenticated:
         usuario = request.user
         perfil = get_object_or_404(Perfil, usuario=usuario)
@@ -68,25 +65,35 @@ def listar_cursos(request):
 
     return render(request, "listar_cursos.html", context)
 
-
-
-
-
-
-
-
-
 def detalhes_curso(request, curso_id):
     usuario = request.user
-    perfil = get_object_or_404(Perfil, usuario=usuario)
+    perfil = None  # Valor padrão caso o usuário não esteja autenticado
+    
+    # Se o usuário estiver autenticado, tenta carregar o perfil
+    if usuario.is_authenticated:
+        perfil = get_object_or_404(Perfil, usuario=usuario)
 
-    cursos = get_object_or_404(Curso, pk=curso_id)
+    # Carregar o curso
+    curso = get_object_or_404(Curso, pk=curso_id)
+    
+    # Carregar as aulas do curso
+    aulas = Aula.objects.filter(curso=curso)
 
-    aulas = Aula.objects.all()
+    # Contar a quantidade de vídeos (aulas com link)
+    quantidade_videos = aulas.filter(link__isnull=False).count()
 
+    # Contar a quantidade de artigos (aulas com texto não vazio)
+    quantidade_artigos = aulas.exclude(texto__exact='').count()  # Apenas aulas com texto não vazio
 
-    return render(request, "pag_curso.html", {'curso': cursos,'aula': aulas, 'perfil': perfil})
+    context = {
+        'curso': curso,
+        'aula': aulas,
+        'perfil': perfil,  # Pode ser None se o usuário não estiver autenticado
+        'quantidade_videos': quantidade_videos,  # Passa a quantidade de vídeos para o template
+        'quantidade_artigos': quantidade_artigos,  # Passa a quantidade de artigos para o template
+    }
 
+    return render(request, "pag_curso.html", context)
 
 @login_required
 @permission_required('infohelp.criar_curso', raise_exception=True)
@@ -100,14 +107,22 @@ def criar_curso(request):
             curso = form.save(commit=False)
             curso.usuario = request.user
             curso.save()
-            return redirect('listar_cursos')
+            messages.success(request, "Curso criado com sucesso!")  # Mensagem de sucesso
+            return redirect('detalhes_curso', curso_id=curso.id)
         else:
-            form = CursoForm()
+            # Exibe mensagens de erro se o formulário não for válido
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")  # Mensagem de erro
     else:
         form = CursoForm()
-    
-    return render(request, "criar_curso.html", {'form': form, 'perfil': perfil})
 
+    context = {
+        'form': form,
+        'perfil': perfil,
+    }
+
+    return render(request, "criar_curso.html", context)
 
 @permission_required('infohelp.editar_curso', raise_exception=True)
 def editar_curso(request, curso_id):
@@ -116,23 +131,27 @@ def editar_curso(request, curso_id):
 
     curso = get_object_or_404(Curso, id=curso_id)
 
-    context = {
-        "curso" : curso,
-        "form" : CursoForm(instance=curso),
-        "perfil" : perfil,
-    }
-
     if request.method == 'POST':
         form = CursoForm(request.POST, request.FILES, instance=curso)
         if form.is_valid():
             form.save()
+            messages.success(request, "Curso atualizado com sucesso!")  # Mensagem de sucesso
             return redirect('listar_cursos')
         else:
-            context["form"] = form
-    
+            # Exibe mensagens de erro se o formulário não for válido
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")  # Mensagem de erro
+    else:
+        form = CursoForm(instance=curso)
+
+    context = {
+        "curso": curso,
+        "form": form,
+        "perfil": perfil,
+    }
+
     return render(request, "editar_curso.html", context)
-
-
 
 def excluir_curso(request, curso_id):
     usuario = request.user
@@ -152,52 +171,69 @@ def excluir_curso(request, curso_id):
 
 
 #CRUD de Aulas
-
+@permission_required('infohelp.criar_aula', raise_exception=True)
 def criar_aula(request, curso_id):
     usuario = request.user
     perfil = get_object_or_404(Perfil, usuario=usuario)
 
     curso = get_object_or_404(Curso, id=curso_id)
+
     if request.method == "POST":
         form = AulaForm(request.POST, request.FILES)
         if form.is_valid():
             aula = form.save(commit=False)
             aula.curso = curso
             aula.save()
+            messages.success(request, "Aula criada com sucesso!")  # Mensagem de sucesso
             return redirect('detalhes_curso', curso_id=curso.id)
         else:
-            form["form"] = form
-
+            # Exibe mensagens de erro se o formulário não for válido
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")  # Mensagem de erro
     else:
         form = AulaForm()
 
-    return render(request, 'criar_aula.html', {'form': form, 'curso': curso, 'perfil': perfil})
+    context = {
+        'form': form,
+        'curso': curso,
+        'perfil': perfil,
+    }
 
-def editar_aula(request, aula_id, curso_id):
+    return render(request, 'criar_aula.html', context)
+
+@permission_required('infohelp.editar_aula', raise_exception=True)
+def editar_aula(request, curso_id, aula_id):
     usuario = request.user
     perfil = get_object_or_404(Perfil, usuario=usuario)
 
     aula = get_object_or_404(Aula, id=aula_id)
     curso = get_object_or_404(Curso, id=curso_id)
 
-    context = {
-        "aula" : aula,
-        "curso" : curso,
-        "form" : AulaForm(instance=aula),
-        "perfil" : perfil,
-    }
-
     if request.method == 'POST':
-        form = AulaForm(request.POST, instance=aula)
+        form = AulaForm(request.POST, request.FILES, instance=aula)
         if form.is_valid():
             form.save()
-            return redirect('detalhes_aula', curso.id, aula.id)
+            messages.success(request, "Aula atualizada com sucesso!")  # Mensagem de sucesso
+            return redirect('detalhes_aula', curso_id=curso.id, aula_id=aula.id)
         else:
-            context["form"] = form
-    
+            # Exibe mensagens de erro se o formulário não for válido
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")  # Mensagem de erro
+    else:
+        form = AulaForm(instance=aula)
+
+    context = {
+        "aula": aula,
+        "curso": curso,
+        "form": form,
+        "perfil": perfil,
+    }
+
     return render(request, "editar_aula.html", context)
 
-
+@login_required
 def detalhes_aula(request, curso_id, aula_id):
     usuario = request.user
     perfil = get_object_or_404(Perfil, usuario=usuario)
@@ -208,8 +244,6 @@ def detalhes_aula(request, curso_id, aula_id):
     curso = get_object_or_404(Curso, id=curso_id)
     
     return render(request, "exibir_aula.html", {'aulas' : aulas, 'curso' : curso, 'aula' : aula, 'perfil': perfil})
-
-
 
 def excluir_aula(request, curso_id, aula_id):
     usuario = request.user
@@ -231,23 +265,42 @@ def excluir_aula(request, curso_id, aula_id):
         return render(request, "excluir_aula.html", context)
 
 
+
 @login_required
 def biblioteca(request):
     usuario = request.user
     perfil = get_object_or_404(Perfil, usuario=usuario)
 
+    # Coleções de cursos salvos pelo usuário
     salvos = Salvos.objects.filter(usuario=request.user)
-    return render(request, 'biblioteca.html', {'salvos': salvos, 'perfil': perfil})
 
+    # Filtro por coleção (se fornecido)
+    filtro_salvo = request.GET.get('filtro_salvo')
+    if filtro_salvo:
+        # Filtra os cursos pela coleção selecionada
+        cursos_salvos = Curso.objects.filter(salvos__id=filtro_salvo, salvos__usuario=request.user).distinct()
+        # Obtém a coleção filtrada
+        colecao_filtrada = Salvos.objects.get(id=filtro_salvo)
+    else:
+        # Todos os cursos salvos pelo usuário (independentemente da coleção)
+        cursos_salvos = Curso.objects.filter(salvos__usuario=request.user).distinct()
+        colecao_filtrada = None
 
-#def busca(request):
-#    busca = request.GET.get('busca')
-#    busca_descricao = Curso.objects.filter(descricao__icontains=busca)
-#    busca_nome = Curso.objects.filter(nome__icontains=busca)
-#    cursos = busca_descricao | busca_nome
-#
-#    return render(request, 'busca.html', {'cursos': cursos})
+    context = {
+        'salvos': salvos,
+        'cursos_salvos': cursos_salvos,  # Cursos filtrados ou todos os cursos salvos
+        'perfil': perfil,
+        'filtro_salvo': int(filtro_salvo) if filtro_salvo else None,  # Passa o filtro selecionado para o template
+        'colecao_filtrada': colecao_filtrada,  # Passa a coleção filtrada para o template
+    }
 
+    return render(request, 'biblioteca.html', context)
+
+# exibiçãpo de cursos para quem não está logado
+def busca(request):
+    cursos = Curso.objects.all()
+
+    return render(request, 'busca.html', {'cursos': cursos})
 
 
 @login_required
@@ -339,4 +392,3 @@ def remover_curso_de_salvos(request):
         return JsonResponse({"removido": False, "error": "Curso não estava salvo!"})
     
     return JsonResponse({"error": "Requisição inválida"}, status=400)
-

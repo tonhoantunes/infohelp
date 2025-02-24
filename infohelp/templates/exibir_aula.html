@@ -5,6 +5,19 @@
 
 {% block content %}
 <main>
+
+    <!-- Exibe mensagens de sucesso ou erro -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
     <div id="exibir">
         <div class="aulas">
             <div class="topo">
@@ -72,6 +85,7 @@
                 <p>{{ aula.texto }}</p>
             </div>
 
+            {% if request.user.is_authenticated and perms.infohelp.editar_aula %}{% endif %}
             <div class="adicionar-aula">
                 <p>Edite o material desta aula</p>
                 <a href="{% url "editar_aula" curso.id aula.id %}">

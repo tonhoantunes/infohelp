@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}
-    Formulário de Curso - InfoHelp
-{% endblock title %}
+{% block title %}Formulário de Curso - InfoHelp{% endblock title %}
 
 {% block content %}
     <section class="titulos-pagina container">
@@ -12,60 +10,76 @@
         </div>
     </section>
 
+    <!-- Exibe mensagens de sucesso ou erro -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <section class="section-criar_curso container">
         <div class="box-criar_curso">
             <div class="forms-criar_curso">
-                <form action="{% if request.method == 'POST' %}{% url "criar_curso" %}{% endif %}" method="POST" enctype="multipart/form-data">
+                <form id="form-curso" action="{% url 'criar_curso' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-grupo">
                         <label for="nome">Nome:</label>
-                        <input type="text" id="nome" name="nome">
+                        <input type="text" id="nome" name="nome" required>
+                        {% if form.errors.nome %}
+                            <div class="error">{{ form.errors.nome }}</div>
+                        {% endif %}
                     </div>
                     <div class="form-grupo">
                         <label for="descricao">Descrição:</label>
-                        <textarea name="descricao" id="descricao"></textarea>
+                        <textarea name="descricao" id="descricao" required></textarea>
+                        {% if form.errors.descricao %}
+                            <div class="error">{{ form.errors.descricao }}</div>
+                        {% endif %}
                     </div>
-                    <!--
-                    <div class="form-linha">
-                            <div class="form-grupo">
-                                <label for="categoria">Categoria:</label>
-                                <input type="text" id="categoria" name="categoria">
-                            </div>
-                    -->
                     <div class="form-linha">
                         <div class="form-grupo">
                             <label for="categoria">Categoria:</label>
-                            <select name="categoria" id="categoria">
-                                <option value={{form.categoria}}
-                                
-                                </option>
+                            <select name="categoria" id="categoria" required>
+                                <option value="">Selecione uma categoria</option>
+                                {% for value, label in form.fields.categoria.choices %}
+                                    <option value="{{ value }}">{{ label }}</option>
+                                {% endfor %}
                             </select>
+                            {% if form.errors.categoria %}
+                                <div class="error">{{ form.errors.categoria }}</div>
+                            {% endif %}
                         </div>
-                
-                        <!--<div class="form-grupo">
-                                <label for="nivel">Nível:</label>
-                                <input type="text" id="nivel" name="nivel">
-                            </div>
-                        -->
-
                         <div class="form-grupo">
                             <label for="nivel">Nível:</label>
-                            <select name="nivel" id="nivel">
-                                <option value={{form.nivel}}
-                                
-                                </option>
+                            <select name="nivel" id="nivel" required>
+                                <option value="">Selecione um nível</option>
+                                {% for value, label in form.fields.nivel.choices %}
+                                    <option value="{{ value }}">{{ label }}</option>
+                                {% endfor %}
                             </select>
+                            {% if form.errors.nivel %}
+                                <div class="error">{{ form.errors.nivel }}</div>
+                            {% endif %}
                         </div>
-
                     </div>
                     <div class="form-linha">
                         <div class="form-grupo">
                             <label for="carga_horaria">Carga horária:</label>
-                            <input type="time" id="carga_horaria" name="carga_horaria">
+                            <input type="time" id="carga_horaria" name="carga_horaria" required>
+                            {% if form.errors.carga_horaria %}
+                                <div class="error">{{ form.errors.carga_horaria }}</div>
+                            {% endif %}
                         </div>
                         <div class="form-grupo">
                             <label for="capa">Capa:</label>
                             <input type="file" accept="image/*" id="capa" name="capa">
+                            {% if form.errors.capa %}
+                                <div class="error">{{ form.errors.capa }}</div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="btn-criar_curso">
@@ -75,4 +89,44 @@
             </div>
         </div>
     </section>
+
+    <script>
+        document.getElementById("form-curso").addEventListener("submit", function(event) {
+            let nome = document.getElementById("nome").value.trim();
+            let descricao = document.getElementById("descricao").value.trim();
+            let categoria = document.getElementById("categoria").value.trim();
+            let nivel = document.getElementById("nivel").value.trim();
+            let cargaHoraria = document.getElementById("carga_horaria").value.trim();
+
+            if (!nome) {
+                alert("O campo Nome é obrigatório.");
+                event.preventDefault();
+                return;
+            }
+
+            if (!descricao) {
+                alert("O campo Descrição é obrigatório.");
+                event.preventDefault();
+                return;
+            }
+
+            if (!categoria) {
+                alert("O campo Categoria é obrigatório.");
+                event.preventDefault();
+                return;
+            }
+
+            if (!nivel) {
+                alert("O campo Nível é obrigatório.");
+                event.preventDefault();
+                return;
+            }
+
+            if (!cargaHoraria) {
+                alert("O campo Carga Horária é obrigatório.");
+                event.preventDefault();
+                return;
+            }
+        });
+    </script>
 {% endblock content %}

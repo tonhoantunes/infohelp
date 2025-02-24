@@ -4,6 +4,19 @@
 {% block title %}{{ curso.nome }}{% endblock title %}
 
 {% block content %}
+
+    <!-- Exibe mensagens de sucesso ou erro -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
     <div class="container">
         <div class="titulo-pag">
             <h1>{{ curso.nome }}</h1>
@@ -21,13 +34,17 @@
             </div>
             <div class="descricao-curso">{{ curso.descricao }}</div>
             <div class="num-conteudo">
-                <p>0000 Vídeos</p>
-                <p>0000 Artigos</p>  
+                <p>{{ quantidade_videos }} Vídeo(s)</p>
+                <p>{{ quantidade_artigos }} Artigo(s)</p>  
             </div>
             <div class="botao-salvar">
                 
                 <!-- Botão para abrir o modal -->
-                <button id="abrir-modal-salvar" data-curso-id="{{ curso.id }}">Carregando...</button>
+                {% if request.user.is_authenticated %}
+                    <button id="abrir-modal-salvar" data-curso-id="{{ curso.id }}">Salvar Curso</button>
+                {% else %}
+                    <a href="{% url 'login' %}"><button id="salvar">Salvar Curso</button></a>
+                {% endif %}
 
                 <!-- Botão para remover o curso de todos os salvos -->
                 <button id="remover-de-salvos" style="display: none;">Remover de Salvos</button>
@@ -67,24 +84,17 @@
         </div>
 
         <div class="video_texto-curso">
-            <!--Não está servindo
-            <h1> {{ aula.curso }} 1</h1>
-            -->
-            <!-- Nome do curso
-            <h1> {{ curso.nome }} 2</h1>
-            -->
-            <!-- Nome do curso sendo acessado pela aula
-            <h1> {{ aula.curso.nome }} 3</h1>
-            -->
-            
             {% for aula in aula %}
-
                 {% if curso.nome == aula.curso.nome %}
                 <div>
-                    <a href="{% url "detalhes_aula" curso.id aula.id %}" class="link-aula">
+                    <a href="{% url 'detalhes_aula' curso.id aula.id %}" class="link-aula">
                         <div class="conteudo-curso">
                             <div class="img-conteudo_curso">
-                                <img src="{{ aula.capa.url }}" alt="">
+                                {% if aula.capa %}
+                                    <img src="{{ aula.capa.url }}" alt="Capa da aula">
+                                {% else %}
+                                    <img src="{% static 'assets/placeholder.png' %}" alt="Sem capa">
+                                {% endif %}
                             </div>
                             
                             <div class="titulo_desc-conteudo">
@@ -95,16 +105,17 @@
                     </a>
                 </div>
                 {% endif %}
-                
             {% endfor %}
 
+            {% if request.user.is_authenticated and perms.infohelp.criar_aula %}
             <div class="adicionar-aula">
                 <p>Adicione uma nova aula ao seu curso</p>
                 
-                <a href="{% url "criar_aula" curso.id %}">
+                <a href="{% url 'criar_aula' curso.id %}">
                     <h1>Adicionar aula</h1>
                 </a>
             </div>
+            {% endif %}
 
         </div>
     </section>
