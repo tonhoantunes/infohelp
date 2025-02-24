@@ -82,7 +82,7 @@ class EditarPerfilForm(forms.ModelForm):
     username = forms.CharField(
         label="Nome de usuário:",
         widget=forms.TextInput(attrs={'class': 'form-control'}),
-        required=False  # Torna o campo opcional, se necessário
+        required=False  # Torna o campo opcional
     )
 
     class Meta:
@@ -101,3 +101,7 @@ class EditarPerfilForm(forms.ModelForm):
         # Preenche o campo username com o valor atual do usuário
         if self.instance and self.instance.usuario:
             self.fields['username'].initial = self.instance.usuario.username
+
+        # Torna todos os campos opcionais
+        for field in self.fields:
+            self.fields[field].required = False
