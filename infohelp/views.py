@@ -16,14 +16,14 @@ def login(request):
     return render(request, "login.html")
 
 
+@login_required
 def inicio(request):
     usuario = request.user
     perfil = get_object_or_404(Perfil, usuario=usuario)
     context = {
-        "cursos" : Curso.objects.all(),
-        "perfil" : perfil,
+        "cursos": Curso.objects.all(),
+        "perfil": perfil,
     }
-
     return render(request, "inicio.html", context)
 
 

@@ -20,24 +20,24 @@ def cadastro(request):
             # Cria um perfil para o usuário recém-criado
             Perfil.objects.create(usuario=user)
 
-            # Loga o usuário automaticamente após o cadastro (opcional)
-            # login(request, user)
+            # Loga o usuário automaticamente após o cadastro
+            login(request, user)  # Usando a função login do Django
 
-            return redirect("inicio")
+            return redirect("inicio")  # Redireciona para a página inicial
     else:
         form = CadastroForm()
     return render(request, "cadastro.html", {"form": form})
 
-
-def login(request):
+# Renomeie a função login para fazer_login
+def fazer_login(request):
     if request.method == "POST":
-        form = LoginForm(data=request.POST)
+        form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
-            login(request, user)
+            login(request, user)  # Usando a função login do Django
             return redirect("inicio")
     else:
-        form = LoginForm()
+        form = AuthenticationForm()
     return render(request, "login.html", {"form": form})
 
 

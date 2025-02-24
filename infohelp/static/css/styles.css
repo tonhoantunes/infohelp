@@ -1903,8 +1903,7 @@ footer {
     
 }
 
-@media screen and (max-width: 480px) {
-
+@media screen and (max-width: 540px) {
     /*TELA INICIAL*/
     body {
         overflow-x: hidden;
@@ -1938,11 +1937,9 @@ footer {
     .producao h1 {
         font-size: 20px;
     }
-    
 }
 
-@media screen and (max-width: 412px) {
-
+@media screen and (max-width: 430px) {
     /*TELA INICIAL*/
     body {
         overflow-x: hidden;
@@ -1990,7 +1987,7 @@ footer {
         width: 200px;
         height: 200px;
     }
-    
+
 }
 
 @media screen and (max-width: 390px) {
@@ -2007,9 +2004,15 @@ footer {
 }
 
 @media screen and (max-width: 375px) {
+
+    * {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
     
-    body {
+    html, body {
         overflow-x: hidden;
+        width: 100%;
     }
 
     .logo-rodape img {
