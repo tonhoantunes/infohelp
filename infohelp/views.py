@@ -69,20 +69,27 @@ def listar_cursos(request):
     return render(request, "listar_cursos.html", context)
 
 
-
-
-
-
 def detalhes_curso(request, curso_id):
     usuario = request.user
-    perfil = get_object_or_404(Perfil, usuario=usuario)
+    perfil = None  # Valor padrão caso o usuário não esteja autenticado
+    
+    # Se o usuário estiver autenticado, tenta carregar o perfil
+    if usuario.is_authenticated:
+        perfil = get_object_or_404(Perfil, usuario=usuario)
 
+    # Carregar o curso
     cursos = get_object_or_404(Curso, pk=curso_id)
-
+    
+    # Carregar as aulas
     aulas = Aula.objects.all()
 
+    context = {
+        'curso': cursos,
+        'aula': aulas,
+        'perfil': perfil,  # Pode ser None se o usuário não estiver autenticado
+    }
 
-    return render(request, "pag_curso.html", {'curso': cursos,'aula': aulas, 'perfil': perfil})
+    return render(request, "pag_curso.html", context)
 
 
 @login_required

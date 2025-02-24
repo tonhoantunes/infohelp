@@ -27,7 +27,7 @@
             <div class="botao-salvar">
                 
                 <!-- Botão para abrir o modal -->
-                <button id="abrir-modal-salvar" data-curso-id="{{ curso.id }}">Carregando...</button>
+                <button id="abrir-modal-salvar" data-curso-id="{{ curso.id }}">Salvar Curso</button>
 
                 <!-- Botão para remover o curso de todos os salvos -->
                 <button id="remover-de-salvos" style="display: none;">Remover de Salvos</button>
@@ -98,6 +98,7 @@
                 
             {% endfor %}
 
+            {% if request.user.is_authenticated and perms.infohelp.criar_curso %}
             <div class="adicionar-aula">
                 <p>Adicione uma nova aula ao seu curso</p>
                 
@@ -105,6 +106,7 @@
                     <h1>Adicionar aula</h1>
                 </a>
             </div>
+            {% endif %}
 
         </div>
     </section>
