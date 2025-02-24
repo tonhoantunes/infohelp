@@ -79,14 +79,25 @@ class LoginForm(AuthenticationForm):
 
 
 class EditarPerfilForm(forms.ModelForm):
+    username = forms.CharField(
+        label="Nome de usuário:",
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        required=False  # Torna o campo opcional, se necessário
+    )
+
     class Meta:
         model = Perfil
         fields = ['cidade', 'estado', 'data_nascimento', 'telefone', 'avatar']
         widgets = {
             'cidade': forms.TextInput(attrs={'class': 'form-control'}),
             'estado': forms.TextInput(attrs={'class': 'form-control'}),
-            'data_nascimento': forms.DateInput(attrs={ 'type': 'date', 'class': 'form-control'}),
+            'data_nascimento': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'telefone': forms.TextInput(attrs={'class': 'form-control'}),
             'avatar': forms.FileInput(attrs={'class': 'form-control'}),
         }
-    
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Preenche o campo username com o valor atual do usuário
+        if self.instance and self.instance.usuario:
+            self.fields['username'].initial = self.instance.usuario.username
