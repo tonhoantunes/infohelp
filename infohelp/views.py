@@ -4,6 +4,7 @@ from usuarios.models import Perfil
 from .forms import CursoForm, SalvosForm, AulaForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import JsonResponse
+from django.contrib import messages
 
 # Create your views here.
 
@@ -73,15 +74,23 @@ def detalhes_curso(request, curso_id):
         perfil = get_object_or_404(Perfil, usuario=usuario)
 
     # Carregar o curso
-    cursos = get_object_or_404(Curso, pk=curso_id)
+    curso = get_object_or_404(Curso, pk=curso_id)
     
-    # Carregar as aulas
-    aulas = Aula.objects.all()
+    # Carregar as aulas do curso
+    aulas = Aula.objects.filter(curso=curso)
+
+    # Contar a quantidade de vídeos (aulas com link)
+    quantidade_videos = aulas.filter(link__isnull=False).count()
+
+    # Contar a quantidade de artigos (aulas com texto não vazio)
+    quantidade_artigos = aulas.exclude(texto__exact='').count()  # Apenas aulas com texto não vazio
 
     context = {
-        'curso': cursos,
+        'curso': curso,
         'aula': aulas,
         'perfil': perfil,  # Pode ser None se o usuário não estiver autenticado
+        'quantidade_videos': quantidade_videos,  # Passa a quantidade de vídeos para o template
+        'quantidade_artigos': quantidade_artigos,  # Passa a quantidade de artigos para o template
     }
 
     return render(request, "pag_curso.html", context)
@@ -153,44 +162,60 @@ def criar_aula(request, curso_id):
     perfil = get_object_or_404(Perfil, usuario=usuario)
 
     curso = get_object_or_404(Curso, id=curso_id)
+
     if request.method == "POST":
         form = AulaForm(request.POST, request.FILES)
         if form.is_valid():
             aula = form.save(commit=False)
             aula.curso = curso
             aula.save()
+            messages.success(request, "Aula criada com sucesso!")  # Mensagem de sucesso
             return redirect('detalhes_curso', curso_id=curso.id)
         else:
-            form["form"] = form
-
+            # Exibe mensagens de erro se o formulário não for válido
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")  # Mensagem de erro
     else:
         form = AulaForm()
 
-    return render(request, 'criar_aula.html', {'form': form, 'curso': curso, 'perfil': perfil})
+    context = {
+        'form': form,
+        'curso': curso,
+        'perfil': perfil,
+    }
+
+    return render(request, 'criar_aula.html', context)
 
 @permission_required('infohelp.editar_aula', raise_exception=True)
-def editar_aula(request, aula_id, curso_id):
+def editar_aula(request, curso_id, aula_id):
     usuario = request.user
     perfil = get_object_or_404(Perfil, usuario=usuario)
 
     aula = get_object_or_404(Aula, id=aula_id)
     curso = get_object_or_404(Curso, id=curso_id)
 
-    context = {
-        "aula" : aula,
-        "curso" : curso,
-        "form" : AulaForm(instance=aula),
-        "perfil" : perfil,
-    }
-
     if request.method == 'POST':
-        form = AulaForm(request.POST, instance=aula)
+        form = AulaForm(request.POST, request.FILES, instance=aula)
         if form.is_valid():
             form.save()
-            return redirect('detalhes_aula', curso.id, aula.id)
+            messages.success(request, "Aula atualizada com sucesso!")  # Mensagem de sucesso
+            return redirect('detalhes_aula', aula.id, curso.id)
         else:
-            context["form"] = form
-    
+            # Exibe mensagens de erro se o formulário não for válido
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")  # Mensagem de erro
+    else:
+        form = AulaForm(instance=aula)
+
+    context = {
+        "aula": aula,
+        "curso": curso,
+        "form": form,
+        "perfil": perfil,
+    }
+
     return render(request, "editar_aula.html", context)
 
 @login_required
