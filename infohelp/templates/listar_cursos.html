@@ -45,7 +45,7 @@
                         </div>
                     </a>
 
-                    {% if request.user.is_authenticated and perms.infohelp.criar_curso %}
+                    {% if request.user.is_authenticated and perms.infohelp.editar_curso %}
                         <div class="btn-admin_curso">
                             
                             <a class="editar-curso" href="{% url "editar_curso" curso.id %}">
@@ -55,7 +55,7 @@
                             <a class="excluir-curso" href="{% url "excluir_curso" curso.id %}">Excluir curso</a>
                         </div>
                     {% endif %}
-                    
+
                 </div>
             {% empty %}
             <h1>TEM NAO</h1>

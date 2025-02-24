@@ -15,7 +15,6 @@ def login(request):
 
     return render(request, "login.html")
 
-
 def inicio(request):
     usuario = request.user
     perfil = None  # Valor padrão caso o usuário não esteja autenticado
@@ -31,10 +30,7 @@ def inicio(request):
     return render(request, "inicio.html", context)
 
 
-
-
 #CRUD de Cursos
-
 def listar_cursos(request):
     context = {}
 
@@ -68,7 +64,6 @@ def listar_cursos(request):
 
     return render(request, "listar_cursos.html", context)
 
-
 def detalhes_curso(request, curso_id):
     usuario = request.user
     perfil = None  # Valor padrão caso o usuário não esteja autenticado
@@ -90,7 +85,6 @@ def detalhes_curso(request, curso_id):
     }
 
     return render(request, "pag_curso.html", context)
-
 
 @login_required
 @permission_required('infohelp.criar_curso', raise_exception=True)
@@ -136,8 +130,6 @@ def editar_curso(request, curso_id):
     
     return render(request, "editar_curso.html", context)
 
-
-
 def excluir_curso(request, curso_id):
     usuario = request.user
     perfil = get_object_or_404(Perfil, usuario=usuario)
@@ -154,9 +146,8 @@ def excluir_curso(request, curso_id):
         return render(request, "excluir_curso.html", context)
 
 
-
 #CRUD de Aulas
-
+@permission_required('infohelp.criar_aula', raise_exception=True)
 def criar_aula(request, curso_id):
     usuario = request.user
     perfil = get_object_or_404(Perfil, usuario=usuario)
@@ -177,6 +168,7 @@ def criar_aula(request, curso_id):
 
     return render(request, 'criar_aula.html', {'form': form, 'curso': curso, 'perfil': perfil})
 
+@permission_required('infohelp.editar_aula', raise_exception=True)
 def editar_aula(request, aula_id, curso_id):
     usuario = request.user
     perfil = get_object_or_404(Perfil, usuario=usuario)
@@ -201,7 +193,7 @@ def editar_aula(request, aula_id, curso_id):
     
     return render(request, "editar_aula.html", context)
 
-
+@login_required
 def detalhes_aula(request, curso_id, aula_id):
     usuario = request.user
     perfil = get_object_or_404(Perfil, usuario=usuario)
@@ -212,8 +204,6 @@ def detalhes_aula(request, curso_id, aula_id):
     curso = get_object_or_404(Curso, id=curso_id)
     
     return render(request, "exibir_aula.html", {'aulas' : aulas, 'curso' : curso, 'aula' : aula, 'perfil': perfil})
-
-
 
 def excluir_aula(request, curso_id, aula_id):
     usuario = request.user
@@ -235,6 +225,7 @@ def excluir_aula(request, curso_id, aula_id):
         return render(request, "excluir_aula.html", context)
 
 
+
 @login_required
 def biblioteca(request):
     usuario = request.user
@@ -243,15 +234,11 @@ def biblioteca(request):
     salvos = Salvos.objects.filter(usuario=request.user)
     return render(request, 'biblioteca.html', {'salvos': salvos, 'perfil': perfil})
 
+# exibiçãpo de cursos para quem não está logado
+def busca(request):
+    cursos = Curso.objects.all()
 
-#def busca(request):
-#    busca = request.GET.get('busca')
-#    busca_descricao = Curso.objects.filter(descricao__icontains=busca)
-#    busca_nome = Curso.objects.filter(nome__icontains=busca)
-#    cursos = busca_descricao | busca_nome
-#
-#    return render(request, 'busca.html', {'cursos': cursos})
-
+    return render(request, 'busca.html', {'cursos': cursos})
 
 
 @login_required
@@ -343,4 +330,3 @@ def remover_curso_de_salvos(request):
         return JsonResponse({"removido": False, "error": "Curso não estava salvo!"})
     
     return JsonResponse({"error": "Requisição inválida"}, status=400)
-

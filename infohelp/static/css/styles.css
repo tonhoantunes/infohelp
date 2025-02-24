@@ -829,7 +829,31 @@ footer {
         color: var(--bg-color); 
     }
 
+    & #salvar {
+        background-color: var(--second-color);
+        border-radius: 3.125rem;
+        
+        padding: 0.5rem 1rem;
+
+        margin-top: 20rem;
+
+        cursor: pointer;
+        border: none;
+
+        font-weight: 700;
+        font-size: 1rem;
+        line-height: 1.75rem;
+        color: var(--bg-color);
+    }
+
     & #abrir-modal-salvar:hover {
+        font-weight: 600;
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+        color: var(--bg-color);
+    }
+
+    & #salvar:hover {
         font-weight: 600;
         font-size: 1.2rem;
         line-height: 1.8rem;

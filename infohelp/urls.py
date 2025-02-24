@@ -33,7 +33,7 @@ urlpatterns = [
     path('biblioteca/', views.biblioteca, name="biblioteca"),
 
 
-    #path('busca/', views.busca, name="busca"),
+    path('busca/', views.busca, name="busca"),
 
 
     path('perfil/', perfil, name="perfil"),

@@ -27,7 +27,11 @@
             <div class="botao-salvar">
                 
                 <!-- Botão para abrir o modal -->
-                <button id="abrir-modal-salvar" data-curso-id="{{ curso.id }}">Salvar Curso</button>
+                {% if request.user.is_authenticated %}
+                    <button id="abrir-modal-salvar" data-curso-id="{{ curso.id }}">Salvar Curso</button>
+                {% else %}
+                    <a href="{% url 'login' %}"><button id="salvar">Salvar Curso</button></a>
+                {% endif %}
 
                 <!-- Botão para remover o curso de todos os salvos -->
                 <button id="remover-de-salvos" style="display: none;">Remover de Salvos</button>
@@ -98,7 +102,7 @@
                 
             {% endfor %}
 
-            {% if request.user.is_authenticated and perms.infohelp.criar_curso %}
+            {% if request.user.is_authenticated and perms.infohelp.criar_aula %}
             <div class="adicionar-aula">
                 <p>Adicione uma nova aula ao seu curso</p>
                 
