@@ -19,9 +19,15 @@
             <button type="submit">Entrar</button>
         </form>
         <p>Não tem uma conta? <a href="{% url 'cadastro' %}">Cadastre-se</a></p>
-        <a class="sair" href="{% url "index" %}">SAIR</a>
+        <div class="gap1 flex">
+            <a class="sair" href="{% url "index" %}">SAIR</a>
 
-        <a href="{% url 'password_reset' %}">Esqueci minha senha</a>
+            <a href="{% url 'password_reset' %}">
+                <p class="esqueci">
+                    Esqueci minha senha
+                </p>
+            </a>
+        </div>
 
     </div>
 {% endblock content %}

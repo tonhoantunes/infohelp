@@ -27,6 +27,15 @@ body {
     height: 100vh;
 }
 
+.gap1 {
+    gap: 1rem;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
 .form-container {
@@ -37,6 +46,19 @@ body {
     text-align: center;
     width: 100%;
     max-width: 400px;
+}
+
+.esqueci {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    display: inline-block;
+}
+
+.esqueci:hover {
+    color: var(--second-color);
+    transition: 0.2s;
 }
 
 h2 {
@@ -106,6 +128,7 @@ p a:hover {
     text-decoration: none;
     font-weight: 700;
     font-size: 1rem;
+    display: inline-block;
 }
 
 .sair:hover {
@@ -141,4 +164,17 @@ p a:hover {
 .input-error {
     border: 2px solid #d8000c;
     background-color: #ffe6e6;
+}
+
+
+
+/*Passowrd reset form*/
+.btn-resetar_senha {
+    margin-block: 1rem;
+}
+
+/*Password reset done*/
+.box-resetar_senha {
+    text-align: justify;
+    margin-top: 1.8rem;
 }
