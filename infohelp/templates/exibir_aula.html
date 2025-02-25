@@ -8,13 +8,13 @@
 
     <!-- Exibe mensagens de sucesso ou erro -->
     {% if messages %}
-        <div class="messages">
-            {% for message in messages %}
-                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-                    {{ message }}
-                </div>
-            {% endfor %}
+      {% for message in messages %}
+      <div class="container">
+        <div id="alert-{{ forloop.counter }}" class="alert-pag-curso alert-{{ message.tags }}">
+          {{ message }}
         </div>
+      </div>
+      {% endfor %}
     {% endif %}
 
 
@@ -89,15 +89,34 @@
             <div class="adicionar-aula">
                 <p>Edite o material desta aula</p>
                 <a href="{% url "editar_aula" curso.id aula.id %}">
-                    <h1>Editar Aula</h1>
+                    <h2>Editar Aula</h2>
                 </a>
 
                 <a href="{% url "excluir_aula" curso.id aula.id %}">
-                    <h1>Excluir Aula</h1>
+                    <h2>Excluir Aula</h2>
                 </a>
             </div>
 
         </div>
     </div>
 </main>
+
+<script>
+    // Função para esconder o alerta após 5 segundos
+    function hideAlert(alertId) {
+      setTimeout(function() {
+          document.getElementById(alertId).style.opacity = '0';
+          setTimeout(function() {
+              document.getElementById(alertId).style.display = 'none';
+          }, 500); // Tempo para a transição de opacidade
+      }, 5000); // 5000 milissegundos = 5 segundos
+  }
+  
+    // Esconder todos os alertas
+    {% if messages %}
+      {% for message in messages %}
+        hideAlert("alert-{{ forloop.counter }}");
+      {% endfor %}
+    {% endif %}
+  </script>
 {% endblock content %}

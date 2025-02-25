@@ -1076,6 +1076,17 @@ footer {
 
     & a {
         text-decoration: none;
+
+        & h2 {
+            font-weight: 700;
+            font-size: 3rem;
+            text-align: center;
+            border-radius: 3.125rem;
+            color: var(--bg-color);
+            line-height: 3.75rem;
+            margin-block: 3rem 3.125rem;
+            background-color: var(--second-color);
+        }
     }
 
     & h1 {
@@ -1087,6 +1098,13 @@ footer {
         border-radius: 3.125rem;
         color: var(--bg-color);
         line-height: 3.75rem;
+    }
+
+    & a:nth-child(3) {
+        & h2 {
+            background-color: var(--delete);
+            color: var(--border-color);
+        }
     }
 }
 
