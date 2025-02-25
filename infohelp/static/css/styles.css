@@ -100,6 +100,7 @@ img {
 .titulo-secundario {
     margin-left: 1rem;
     color: var(--text-color);
+    margin-bottom: 2rem;
 }
 
 
@@ -963,39 +964,53 @@ footer {
         border-radius: 1.5rem;
 
         & .selecionar-salvo {
-            padding-bottom: 4rem;
+            padding-bottom: 2.5rem;
 
             h3 {
                 font-weight: 700;
                 font-size: 1.5rem;
                 line-height: 1.75rem;
                 color: var(--text-color);
-                margin-bottom: 0.5rem;
+                margin-bottom: 1.5rem;
             }
 
             & div {
                 height: 3rem;
 
-                & select, button {
+                & select {
                     height: 100%;
-                    border: none;
-                    display: inline-block;
+                    border: 1px solid var(--border-color);
+                    padding: .5rem;
+                    border-radius: .5rem;
                 }
 
                 & button {
+                    text-decoration: none;
+                    padding: 10px;
                     background-color: var(--second-color);
-                    padding-inline: 1rem;
-                    border-radius: .8rem;
+                    color: var(--bg-color);
+                    text-transform: uppercase;
+                    font-size: 16px;
+                    font-weight: 600;
+                    border-radius: 10px;
+                    border: 1px solid var(--second-color);
+                    margin-left: .5rem;
+                    display: inline-block;
+                    height: 100%;
+                }
 
-                    font-weight: 700;
-                    font-size: 1rem;
-                    color: var(--bg-color); 
+                & button:hover {
+                    border: 1px solid var(--second-color);
+                    background-color: var(--bg-color);
+                    color: var(--second-color);
+                    transition: 0.2s;
+                    cursor: pointer;
                 }
             }
         }
 
         & .criar-salvo {
-            padding-bottom: 3rem;
+            padding-bottom: 2rem;
 
             h4 {
                 font-weight: 700;
@@ -1008,35 +1023,53 @@ footer {
             & div {
                 height: 3rem;
 
-                & input, button {
+                & input {
                     height: 100%;
-                    border: none;
-                    display: inline-block;
+                    border: 1px solid var(--border-color);
+                    padding-inline: .5rem;
+                    border-radius: .5rem;
                 }
 
                 & button {
+                    text-decoration: none;
+                    padding: 10px;
                     background-color: var(--second-color);
-                    padding-inline: 1rem;
-                    border-radius: .8rem;
+                    color: var(--bg-color);
+                    text-transform: uppercase;
+                    font-size: 16px;
+                    font-weight: 600;
+                    border-radius: 10px;
+                    border: 1px solid var(--second-color);
+                    margin-left: .5rem;
+                    display: inline-block;
+                    height: 100%;
+                }
 
-                    font-weight: 700;
-                    font-size: .8rem;
-                    color: var(--bg-color); 
+                & button:hover {
+                    border: 1px solid var(--second-color);
+                    background-color: var(--bg-color);
+                    color: var(--second-color);
+                    transition: 0.2s;
+                    cursor: pointer;
                 }
             }
         }
 
         & button {
-            background-color: var(--delete);
-
-            border-radius: 1rem;
-            
-            padding: 1rem;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 16px;
+            font-weight: 500;
+            background: transparent;
             border: none;
 
-            font-weight: 500;
-            font-size: 1rem;
-            color: var(--bg-color); 
+            margin-left: .5rem;
+        }
+
+        & button:hover {
+            color: var(--second-color);
+            transition: 0.2s;
+            cursor: pointer;
         }
     }
 }
@@ -1103,14 +1136,10 @@ footer {
     & a:nth-child(3) {
         & h2 {
             background-color: var(--delete);
-            color: var(--border-color);
+            color: var(--bg-color);
         }
     }
 }
-
-
-
-
 
 
 .conteudo-curso {

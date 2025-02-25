@@ -29,7 +29,11 @@
                         </div>
                     </a>
                     {% else %}
-                        <img src="{% static "assets/placeholder.png" %}" alt="Sem capa">
+                    <a href="{% url "detalhes_curso" curso.id %}" style="all: unset;">
+                        <div  class="img-curso_exi">
+                            <img src="{% static "assets/placeholder.png" %}" alt="Sem capa">
+                        </div>
+                    </a>
                     {% endif %}
                 </div>
                 <h1>
