@@ -9,7 +9,7 @@
             <h1>Salvos</h1>
             <!-- Menu de Filtro por Coleção -->
             <form method="GET" action="{% url 'biblioteca' %}">
-                <select name="filtro_salvo" onchange="this.form.submit()">
+                <select name="filtro_salvo" onchange="this.form.submit()" class="filtro-colecao">
                     <option value="">Todas as Coleções</option>
                     {% for salvo in salvos %}
                         <option value="{{ salvo.id }}" {% if filtro_salvo == salvo.id %}selected{% endif %}>
@@ -22,12 +22,12 @@
     </section>
 
     <!-- Seção de Cursos Salvos Filtrados -->
-    <section>
-        <h1>
+    <div class="container salvos">
+        <h1 class="titulo-secundario">
             {% if colecao_filtrada %}
-                Cursos na Coleção: {{ colecao_filtrada.nome }}
+                Cursos na coleção: {{ colecao_filtrada.nome }}
             {% else %}
-                Todos os Cursos Salvos
+                Todos os cursos salvos
             {% endif %}
         </h1>
         <div class="cursos-cards container">
@@ -52,5 +52,5 @@
                 </div>
             {% endfor %}
         </div>
-    </section>
+    </div>
 {% endblock content %}

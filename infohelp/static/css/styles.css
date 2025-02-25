@@ -43,6 +43,32 @@ img {
     max-width: 1068px;
 }
 
+.alert {
+    padding: .75rem;
+    margin-bottom: 3rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    display: inline-block;
+
+    transition: opacity 0.5s ease-out;
+}
+
+.alert-pag-curso {
+    padding: .75rem;
+    margin-top: 3rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    display: inline-block;
+
+    transition: opacity 0.5s ease-out;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
 
 
 
@@ -68,8 +94,15 @@ img {
     justify-content: flex-start;
     align-items: center;
     gap: 50px;
-    margin: 4.5rem 0 2.5rem;
+    margin: 2rem 0 0;
 }
+
+.titulo-secundario {
+    margin-left: 1rem;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+}
+
 
 /*altera o espaçamento do nome na exibição do curso*/
 div .titulo-pag {
@@ -77,7 +110,7 @@ div .titulo-pag {
     justify-content: flex-start;
     align-items: center;
     gap: 50px;
-    margin: 4.5rem 0 .5rem;
+    margin: 3rem 0 .5rem;
     
 }
 
@@ -424,7 +457,7 @@ footer {
 .titulo {
     text-align: center;
 
-    margin: 5rem 0 2rem;
+    margin: 3rem 0 2rem;
 
     font-weight: 700;
     font-size: 1.6rem;
@@ -435,6 +468,7 @@ footer {
 
 .inicio-pag {
     border-bottom: var(--shadow-3);
+    padding-inline: 0;
 }
 
 .inicio-conteudo {
@@ -465,6 +499,13 @@ footer {
     font-weight: 700;
 }
 
+.sem_cursos {
+    text-align: justify;
+
+    & h2 {
+        text-align: center;
+    }
+}
 
 
 
@@ -593,6 +634,22 @@ footer {
     font-size: 16px;
 }
 
+
+
+/*Biblioteca*/
+.filtro-colecao {
+    padding-inline: 1rem;
+    margin-right: .8rem;
+    color: var(--primary-color);
+    border: none;
+}
+
+.salvos {
+    margin-bottom: 1rem;
+}
+
+
+
 /*ESTILO DE CATEGORIA PESQUISA*/
 .form-categoria {
     display: flex;
@@ -613,7 +670,7 @@ footer {
     }
 
     & p {
-        font-size: 1.4rem;
+        font-size: 1.1rem;
         color: var(--primary-color);
     }
 }
@@ -914,39 +971,53 @@ footer {
         border-radius: 1.5rem;
 
         & .selecionar-salvo {
-            padding-bottom: 4rem;
+            padding-bottom: 2.5rem;
 
             h3 {
                 font-weight: 700;
                 font-size: 1.5rem;
                 line-height: 1.75rem;
                 color: var(--text-color);
-                margin-bottom: 0.5rem;
+                margin-bottom: 1.5rem;
             }
 
             & div {
                 height: 3rem;
 
-                & select, button {
+                & select {
                     height: 100%;
-                    border: none;
-                    display: inline-block;
+                    border: 1px solid var(--border-color);
+                    padding: .5rem;
+                    border-radius: .5rem;
                 }
 
                 & button {
+                    text-decoration: none;
+                    padding: 10px;
                     background-color: var(--second-color);
-                    padding-inline: 1rem;
-                    border-radius: .8rem;
+                    color: var(--bg-color);
+                    text-transform: uppercase;
+                    font-size: 16px;
+                    font-weight: 600;
+                    border-radius: 10px;
+                    border: 1px solid var(--second-color);
+                    margin-left: .5rem;
+                    display: inline-block;
+                    height: 100%;
+                }
 
-                    font-weight: 700;
-                    font-size: 1rem;
-                    color: var(--bg-color); 
+                & button:hover {
+                    border: 1px solid var(--second-color);
+                    background-color: var(--bg-color);
+                    color: var(--second-color);
+                    transition: 0.2s;
+                    cursor: pointer;
                 }
             }
         }
 
         & .criar-salvo {
-            padding-bottom: 3rem;
+            padding-bottom: 2rem;
 
             h4 {
                 font-weight: 700;
@@ -959,35 +1030,53 @@ footer {
             & div {
                 height: 3rem;
 
-                & input, button {
+                & input {
                     height: 100%;
-                    border: none;
-                    display: inline-block;
+                    border: 1px solid var(--border-color);
+                    padding-inline: .5rem;
+                    border-radius: .5rem;
                 }
 
                 & button {
+                    text-decoration: none;
+                    padding: 10px;
                     background-color: var(--second-color);
-                    padding-inline: 1rem;
-                    border-radius: .8rem;
+                    color: var(--bg-color);
+                    text-transform: uppercase;
+                    font-size: 16px;
+                    font-weight: 600;
+                    border-radius: 10px;
+                    border: 1px solid var(--second-color);
+                    margin-left: .5rem;
+                    display: inline-block;
+                    height: 100%;
+                }
 
-                    font-weight: 700;
-                    font-size: .8rem;
-                    color: var(--bg-color); 
+                & button:hover {
+                    border: 1px solid var(--second-color);
+                    background-color: var(--bg-color);
+                    color: var(--second-color);
+                    transition: 0.2s;
+                    cursor: pointer;
                 }
             }
         }
 
         & button {
-            background-color: var(--delete);
-
-            border-radius: 1rem;
-            
-            padding: 1rem;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 16px;
+            font-weight: 500;
+            background: transparent;
             border: none;
 
-            font-weight: 500;
-            font-size: 1rem;
-            color: var(--bg-color); 
+            margin-left: .5rem;
+        }
+
+        & button:hover {
+            color: var(--second-color);
+            transition: 0.2s;
+            cursor: pointer;
         }
     }
 }
@@ -1027,6 +1116,17 @@ footer {
 
     & a {
         text-decoration: none;
+
+        & h2 {
+            font-weight: 700;
+            font-size: 3rem;
+            text-align: center;
+            border-radius: 3.125rem;
+            color: var(--bg-color);
+            line-height: 3.75rem;
+            margin-block: 3rem 3.125rem;
+            background-color: var(--second-color);
+        }
     }
 
     & h1 {
@@ -1039,11 +1139,14 @@ footer {
         color: var(--bg-color);
         line-height: 3.75rem;
     }
+
+    & a:nth-child(3) {
+        & h2 {
+            background-color: var(--delete);
+            color: var(--bg-color);
+        }
+    }
 }
-
-
-
-
 
 
 .conteudo-curso {
@@ -1565,6 +1668,8 @@ footer {
     cursor: pointer;
 }
 
+
+
 /*Editar Perfil*/
 .box-editar_perfil {
     border: 1px solid var(--border-color);
@@ -1577,6 +1682,10 @@ footer {
     display: flex;
     justify-content: space-between;
     width: 100%;
+}
+
+.section-perfil {
+    padding-top: 0;
 }
 
 .forms-editar_perfil{
@@ -1688,7 +1797,6 @@ footer {
     font-weight: 500;
 }
 
-
 .novo-avatar {
     padding-inline: 20px;
 
@@ -1697,7 +1805,6 @@ footer {
         margin-bottom: .5rem;
     }
 }
-
 
 .salvar_voltar {
     margin-top: 50px;
@@ -1740,6 +1847,38 @@ footer {
     color: var(--second-color);
     transition: 0.2s;
 }
+
+
+
+/*Alterar Senha*/
+.section-alterar_senha {
+    padding-top: 0;
+
+    & .box-alterar_senha{
+
+        & .forms-alterar_senha{
+
+            & form {
+
+                & div:nth-child(2) {
+                    margin-bottom: 1rem;
+                }
+
+                & .btn-alterar_senha {
+                    padding: 20px;
+                    display: inline-block;
+                }
+
+                & .btn-alterar_senha_cancelar {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
+
+
+
 
 
 /*RESPONSIVIDADE*/
