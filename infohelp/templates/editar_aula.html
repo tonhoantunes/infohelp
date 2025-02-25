@@ -52,8 +52,11 @@
                         <textarea id="texto" name="texto">{{ aula.texto }}</textarea>
                     </div>
 
-                    <div class="btn-criar_aula">
-                        <button id="submitBtn" type="submit">Salvar</button>
+                    <div class="salvar-cancelar">
+                        <div class="btn-criar_aula">
+                            <button id="submitBtn" type="submit">Salvar</button>
+                        </div>
+                        <a class="voltar-editar_perfil" href="{% url "detalhes_aula" curso.id aula.id %}">Cancelar</a>
                     </div>
                 </form>
             </div>

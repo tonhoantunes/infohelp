@@ -89,6 +89,10 @@
                 <p>{{ aula.texto }}</p>
             </div>
 
+            <div class="voltar-exibir_aula">
+                <a href="{% url "detalhes_curso" curso.id %}" class="link-voltar">Voltar</a>
+            </div>
+
             {% if request.user.is_authenticated and perms.infohelp.editar_aula %}{% endif %}
             <div class="adicionar-aula">
                 <p>Edite o material desta aula</p>

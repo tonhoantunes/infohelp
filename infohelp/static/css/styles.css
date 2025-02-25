@@ -737,8 +737,15 @@ footer {
 /*Busca*/
 
 .link-voltar {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.link-voltar:hover{
     color: var(--second-color);
-    font-size: 1rem;
+    transition: 0.2s;
 }
 
 .caixa-busca {
@@ -806,6 +813,18 @@ footer {
 .section-centeudo_curso {
     display: flex;
     justify-content: space-between;
+}
+
+.voltar-pag_curso {
+    text-decoration: none;
+    color: var(--second-color);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.voltar-pag_curso:hover {
+    text-decoration: underline;
+    transition: 0.2s;
 }
 
 .curso-apresentacao {
@@ -1272,11 +1291,11 @@ footer {
     justify-content: center;
 }
 
-.btn-criar_curso {
+.salvar-cancelar {
     margin-top: 40px;
-    width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 30px;
 }
 
@@ -1377,13 +1396,6 @@ footer {
     & form {
         width: 90%;
     }
-}
-
-.btn-criar_aula {
-    margin-top: 40px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
 }
 
 .btn-criar_aula button {
@@ -1577,6 +1589,13 @@ footer {
             margin-block: 1rem;
         }
     }
+}
+
+.voltar-exibir_aula {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3.125rem;
 }
 
 @media  (width > 1068px) {

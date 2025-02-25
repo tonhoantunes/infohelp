@@ -82,9 +82,14 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="btn-criar_curso">
-                        <button id="submitBtn" type="submit">Enviar</button>
+
+                    <div class="salvar-cancelar">
+                        <div class="btn-criar_curso">
+                            <button id="submitBtn" type="submit">Enviar</button>
+                        </div>
+                        <a class="voltar-editar_perfil" href="{% url "listar_cursos" %}">Cancelar</a>
                     </div>
+
                 </form>
             </div>
         </div>
