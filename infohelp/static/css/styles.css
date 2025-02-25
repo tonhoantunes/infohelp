@@ -1758,24 +1758,12 @@ footer {
                 }
 
                 & .btn-alterar_senha {
-                    padding-inline: 20px;
-                    padding-top: 1rem;
+                    padding: 20px;
+                    display: inline-block;
+                }
 
-                    & button {
-                        padding: 1rem;
-                        color: var(--bg-color);
-                        background-color: var(--second-color);
-                        border-radius: 1rem;
-                        border: none;
-                        font-size: .8rem;
-                        cursor: pointer;
-                        height: 3rem;
-                    }
-
-                    & button:hover {
-                        font-size: 1rem;
-                        background-color: var(--primary-color);
-                    }
+                & .btn-alterar_senha_cancelar {
+                    display: inline-block;
                 }
             }
         }
