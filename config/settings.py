@@ -132,16 +132,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Caminho no sistema de arquivos p
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = "usuarios.User"
+AUTH_USER_MODEL = "usuarios.User"  # Substitua pelo seu modelo de usuário personalizado
 
-LOGOUT_REDIRECT_URL = "index"
-LOGIN_REDIRECT_URL = "inicio"
+LOGOUT_REDIRECT_URL = "index"  # URL para redirecionar após logout
+LOGIN_REDIRECT_URL = "inicio"  # URL para redirecionar após login
 
 
-# Configurações de e-mail (usando o serviço do Gmail como exemplo)
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'email@gmail.com'  # Substitua pelo seu e-mail
-EMAIL_HOST_PASSWORD = 'chamaa'  # Substitua pela senha do seu e-mail
+
+LOGIN_URL = "login"  # URL para redirecionar se o usuário não estiver autenticado
+
+
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # Para desenvolvimento
