@@ -1565,6 +1565,8 @@ footer {
     cursor: pointer;
 }
 
+
+
 /*Editar Perfil*/
 .box-editar_perfil {
     border: 1px solid var(--border-color);
@@ -1688,7 +1690,6 @@ footer {
     font-weight: 500;
 }
 
-
 .novo-avatar {
     padding-inline: 20px;
 
@@ -1697,7 +1698,6 @@ footer {
         margin-bottom: .5rem;
     }
 }
-
 
 .salvar_voltar {
     margin-top: 50px;
@@ -1740,6 +1740,50 @@ footer {
     color: var(--second-color);
     transition: 0.2s;
 }
+
+
+
+/*Alterar Senha*/
+.section-alterar_senha {
+    padding-top: 0;
+
+    & .box-alterar_senha{
+
+        & .forms-alterar_senha{
+
+            & form {
+
+                & div:nth-child(2) {
+                    margin-bottom: 1rem;
+                }
+
+                & .btn-alterar_senha {
+                    padding-inline: 20px;
+                    padding-top: 1rem;
+
+                    & button {
+                        padding: 1rem;
+                        color: var(--bg-color);
+                        background-color: var(--second-color);
+                        border-radius: 1rem;
+                        border: none;
+                        font-size: .8rem;
+                        cursor: pointer;
+                        height: 3rem;
+                    }
+
+                    & button:hover {
+                        font-size: 1rem;
+                        background-color: var(--primary-color);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
 
 
 /*RESPONSIVIDADE*/
