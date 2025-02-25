@@ -43,6 +43,22 @@ img {
     max-width: 1068px;
 }
 
+.alert {
+    padding: .75rem;
+    margin-bottom: 3rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    display: inline-block;
+
+    transition: opacity 0.5s ease-out;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
 
 
 
@@ -1579,6 +1595,10 @@ footer {
     display: flex;
     justify-content: space-between;
     width: 100%;
+}
+
+.section-perfil {
+    padding-top: 0;
 }
 
 .forms-editar_perfil{

@@ -13,62 +13,82 @@
     
 
     {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
-            </div>
-        {% endfor %}
+      {% for message in messages %}
+      <div class="container">
+        <div id="alert-{{ forloop.counter }}" class="alert alert-{{ message.tags }}">
+          {{ message }}
+        </div>
+      </div>
+      {% endfor %}
     {% endif %}
+    
 
 
     <section class="section-perfil container">
-        <div class="box-perfil">
-            <div class="info-perfil">
-                <table>
-                    <tr>
+      <div class="box-perfil">
+          <div class="info-perfil">
+              <table>
+                  <tr>
                       <th>Nome:</th>
                       <td>{{ perfil.usuario.username }}</td>
-                    </tr>
-                    <tr>
+                  </tr>
+                  <tr>
                       <th>Email:</th>
                       <td>{{ perfil.usuario.email }}</td>
-                    </tr>
-                    <tr>
+                  </tr>
+                  <tr>
                       <th>Telefone:</th>
-                      <td>{{ perfil.telefone }}</td>
-                    </tr>
-                    <tr>
+                      <td>{{ perfil.telefone|default:"" }}</td>
+                  </tr>
+                  <tr>
                       <th>Nascimento:</th>
-                      <td>{{ perfil.data_nascimento }}</td>
-                    </tr>
-                    <tr>
+                      <td>{{ perfil.data_nascimento|default:"" }}</td>
+                  </tr>
+                  <tr>
                       <th>Estado:</th>
-                      <td>{{ perfil.estado }}</td>
-                    </tr>
-                    <tr>
+                      <td>{{ perfil.estado|default:"" }}</td>
+                  </tr>
+                  <tr>
                       <th>Cidade:</th>
-                      <td>{{ perfil.cidade }}</td>
-                    </tr>
-                  </table>
-            </div>
-            <div class="links-perfil">
-                <div class="custom-perfil">
-                    <a href="{% url 'editar_perfil' %}">Editar Perfil</a>
-                    <!-- <button href="{% url "editar_perfil" %}" class="editar-perfil">Editar meus dados</button> -->
-
-                    {% if request.user.is_authenticated %}
-                    <form method="post" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <button type="submit" class="sair-perfil">
+                      <td>{{ perfil.cidade|default:"" }}</td>
+                  </tr>
+              </table>
+          </div>
+          <div class="links-perfil">
+              <div class="custom-perfil">
+                  <a href="{% url 'editar_perfil' %}">Editar Perfil</a>
+                  {% if request.user.is_authenticated %}
+                  <form method="post" action="{% url 'logout' %}">
+                      {% csrf_token %}
+                      <button type="submit" class="sair-perfil">
                           Sair dessa conta
-                        </button>
-                    </form>
-                    {% endif %}
-                </div>
-                <a href="{% url "alterar_senha" %}">
-                  <button class="link-admin">Alterar Senha</button>
-                </a>
-            </div>
-        </div>
-    </section>
+                      </button>
+                  </form>
+                  {% endif %}
+              </div>
+              <a href="{% url 'alterar_senha' %}">
+                  <button class="sair-perfil">Alterar Senha</button>
+              </a>
+          </div>
+      </div>
+  </section>
+
+    <script>
+      // Função para esconder o alerta após 5 segundos
+      function hideAlert(alertId) {
+        setTimeout(function() {
+            document.getElementById(alertId).style.opacity = '0';
+            setTimeout(function() {
+                document.getElementById(alertId).style.display = 'none';
+            }, 500); // Tempo para a transição de opacidade
+        }, 5000); // 5000 milissegundos = 5 segundos
+    }
+    
+      // Esconder todos os alertas
+      {% if messages %}
+        {% for message in messages %}
+          hideAlert("alert-{{ forloop.counter }}");
+        {% endfor %}
+      {% endif %}
+    </script>
 {% endblock content %}
