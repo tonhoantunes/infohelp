@@ -53,6 +53,16 @@ img {
     transition: opacity 0.5s ease-out;
 }
 
+.alert-pag-curso {
+    padding: .75rem;
+    margin-top: 3rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    display: inline-block;
+
+    transition: opacity 0.5s ease-out;
+}
+
 .alert-success {
     color: #155724;
     background-color: #d4edda;
@@ -99,7 +109,7 @@ div .titulo-pag {
     justify-content: flex-start;
     align-items: center;
     gap: 50px;
-    margin: 4.5rem 0 .5rem;
+    margin: 3rem 0 .5rem;
     
 }
 
