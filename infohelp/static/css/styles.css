@@ -499,6 +499,13 @@ footer {
     font-weight: 700;
 }
 
+.sem_cursos {
+    text-align: justify;
+
+    & h2 {
+        text-align: center;
+    }
+}
 
 
 
