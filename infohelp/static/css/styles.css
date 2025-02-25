@@ -440,7 +440,7 @@ footer {
 .titulo {
     text-align: center;
 
-    margin: 5rem 0 2rem;
+    margin: 3rem 0 2rem;
 
     font-weight: 700;
     font-size: 1.6rem;
@@ -451,6 +451,7 @@ footer {
 
 .inicio-pag {
     border-bottom: var(--shadow-3);
+    padding-inline: 0;
 }
 
 .inicio-conteudo {
