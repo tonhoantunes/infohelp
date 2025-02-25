@@ -20,14 +20,16 @@
                 </a>
 
                 <div class="pesquisar">
-
-
                     <form action="{% url "listar_cursos" %}" method="GET">
                         <input class="pesquisar-txt" type="text" name="busca" placeholder="Pesquisar">
                         <button class="btn-pesquisar" type="submit">
                             <i class='bx bx-search'></i>
                         </button>
                     </form>
+                </div>
+
+                <div class="menu-mobile-icon">
+                    <button onclick="menuShow()"><img src="{% static "assets/icons/menu-hamburguer.svg" %}" alt="menu" class="icon-menu"></button>
                 </div>
                 
                 <ul class="links">
@@ -39,6 +41,7 @@
                     {% endif %}
                     <li class="biblioteca"><a href="{% url "biblioteca" %}">Biblioteca</a></li>
                 </ul>
+
                 {% if perfil %}
                     {% if perfil.avatar and perfil.avatar.url %}
                         <a href="{% url 'perfil' %}">
@@ -51,7 +54,46 @@
                     <a class="perfil" href="{% url 'perfil' %}"><i class='bx bx-user-circle'></i></a>
                 {% endif %}
             </div>
+
+            <div class="menu-mobile">
+                <ul class="links">
+                    <li class="inicio"><a href="{% url "inicio" %}">Início</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li class="cursos"><a href="{% url "listar_cursos" %}">Cursos</a></li>
+                    {% else %}
+                        <li class="cursos"><a href="{% url "busca" %}">Cursos</a></li>
+                    {% endif %}
+                    <li class="biblioteca"><a href="{% url "biblioteca" %}">Biblioteca</a></li>
+                    <li>
+                        {% if perfil %}
+                            {% if perfil.avatar and perfil.avatar.url %}
+                                <a href="{% url 'perfil' %}">
+                                    <img src="{{ perfil.avatar.url }}" alt="" style="width: 40px; height: 40px; border-radius: 50%;">
+                                </a>
+                            {% else %}
+                                <a class="perfil" href="{% url 'perfil' %}"><i class='bx bx-user-circle'></i></a>
+                            {% endif %}
+                        {% else %}
+                            <a class="perfil" href="{% url 'perfil' %}"><i class='bx bx-user-circle'></i></a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+
         </header>
+
+        <script>
+            function menuShow() {
+                let menuMobile = document.querySelector('.menu-mobile');
+                if (menuMobile.classList.contains('open')) {
+                    menuMobile.classList.remove('open');
+                    document.querySelector('.icon-menu').src = "{% static "assets/icons/menu-hamburguer.svg" %}";
+                } else {
+                    menuMobile.classList.add('open');
+                    document.querySelector('.icon-menu').src = '{% static "assets/icons/menu-close.svg" %}';
+                }
+            }
+        </script>
 
     {% endblock navbar %}
 
