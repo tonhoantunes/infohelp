@@ -93,7 +93,7 @@
                 <a href="{% url "detalhes_curso" curso.id %}" class="link-voltar">Voltar</a>
             </div>
 
-            {% if request.user.is_authenticated and perms.infohelp.editar_aula %}{% endif %}
+            {% if request.user.is_authenticated and perms.infohelp.editar_aula %}
             <div class="adicionar-aula">
                 <p>Edite o material desta aula</p>
                 <a href="{% url "editar_aula" curso.id aula.id %}">
@@ -104,6 +104,7 @@
                     <h2>Excluir Aula</h2>
                 </a>
             </div>
+            {% endif %}
 
         </div>
     </div>
