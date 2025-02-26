@@ -145,6 +145,7 @@ div .titulo-pag {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    border: none;
     background: var(--second-color);
     display: flex;
     justify-content: center;
