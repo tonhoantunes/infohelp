@@ -895,7 +895,7 @@ footer {
         
         padding: 0.5rem 1rem;
 
-        margin-top: 20rem;
+        margin-top: 250%;;
 
         cursor: pointer;
         border: none;
@@ -1222,7 +1222,7 @@ footer {
     margin-top: 20px;
     color: var(--text-color);
     display: -webkit-box;
-    -webkit-line-clamp: 7; /*aqui altera a quantidade de linhas*/
+    -webkit-line-clamp: 1; /*aqui altera a quantidade de linhas*/
     -webkit-box-orient: vertical; /*orientação do texto*/
     overflow: hidden;
 }

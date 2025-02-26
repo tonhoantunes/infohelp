@@ -39,7 +39,7 @@ class Salvos(models.Model):
 
 class Aula(models.Model):
     titulo = models.CharField(max_length=100)
-    descricao = models.TextField(max_length=200)
+    descricao = models.TextField(max_length=400)
     capa = models.ImageField(blank=True)
     link = models.CharField(max_length=200)
     texto = models.TextField(max_length=2000, blank=True, null=True)  # Permite valores vazios
