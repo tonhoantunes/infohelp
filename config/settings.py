@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-y7+6smcfyy!hcw%mw_(2)_-h3b++&7@+mo@2)cq*k^(uj1c1nt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['infohelp.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -120,7 +120,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Caminho no sistema de arquivos para armazenar arquivos estáticos
 # MEDIA_URL = 'media/'
 
 MEDIA_URL = '/media/'  # URL base para servir arquivos de mídia
