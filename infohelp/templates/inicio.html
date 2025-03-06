@@ -54,6 +54,10 @@
                 -->
             </div>
         </div>
+        {% empty %}
+                <div class="sem_cursos">
+                    <p>Hum... <br><br> Ainda não há nenhum curso disponível.</p>
+                </div>
         {% endfor %}
     </section>
 {% endblock content %}
