@@ -30,7 +30,7 @@ def inicio(request):
     cursos = Curso.objects.all()
     paginator = Paginator(cursos, 6)  # 6 cursos por página
 
-    page = request.GET.get('page')
+    page = request.GET.get('page')  # Obtém o número da página da URL
     try:
         cursos_paginados = paginator.page(page)
     except PageNotAnInteger:

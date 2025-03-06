@@ -510,6 +510,44 @@ footer {
 
 
 
+.pagination {
+    margin-bottom: 3rem;
+
+    & .step-links {
+        max-width: 100%;
+
+        & div {
+            max-width: fit-content;
+            margin-inline: auto;
+
+            & div {
+                display: inline-block;
+
+                & a:nth-child(1) {
+                    margin-right: .2rem;
+                }
+
+                & a {
+                    text-decoration: none;
+                    color: var(--text-color);
+                }
+
+                & a:hover {
+                    color: var(--second-color);
+                    transition: .2s;
+                }
+            }
+
+            & span {
+                margin-inline: 1.5rem;
+                color: var(--text-color);
+            }
+        }
+    }
+}
+
+
+
 
 /*Card de Curso*/
 .cursos-cards {
