@@ -16,7 +16,7 @@
         </div>
     {% endif %}
 
-    <section class="container">
+    <section class="container" id="topo">
         <div class="titulo-pag">
             <h1>Cursos da plataforma</h1>
             <div>
@@ -72,6 +72,12 @@
             {% endfor %}
         </div>
     </section>
+
+    <div>
+        <a href="#topo">
+            topo
+        </a>
+    </div>
 
     {% if request.user.is_authenticated and perms.infohelp.criar_curso %}
     <section>
