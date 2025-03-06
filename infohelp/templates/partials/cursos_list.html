@@ -1,0 +1,33 @@
+<!-- partials/cursos_list.html -->
+{% load static %}  <!-- Adicione esta linha -->
+
+{% for curso in cursos %}
+<div class="cursos-cards">
+    <div class="card-curso card_curso-1">
+        <a class="acesso-curso" href="{% url 'detalhes_curso' curso.id %}">
+
+            <div class="img-curso">
+                {% if curso.capa %}
+                <img src="{{ curso.capa.url }}" alt="Capa do curso">
+                {% else %}
+                <img src="{% static 'assets/placeholder.png' %}" alt="Sem capa">
+                {% endif %}
+            </div>
+
+            <h2>{{ curso.nome }}</h2>
+            <div class="horario-nivel">
+                <img src="{% static 'assets/icons/relogioCard.svg' %}" alt="">
+                <p>{{ curso.carga_horaria }}</p>
+                <p>{{ curso.nivel }}</p>
+            </div>
+            <div class="categoria">
+                <p>{{ curso.categoria }}</p>
+            </div>
+        </a>
+    </div>
+</div>
+{% empty %}
+<div class="sem_cursos">
+    <p>Hum... <br><br> Ainda não há nenhum curso disponível.</p>
+</div>
+{% endfor %}

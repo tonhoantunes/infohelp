@@ -1,0 +1,18 @@
+<!-- partials/paginacao.html -->
+<div class="pagination">
+    <span class="step-links">
+        {% if cursos.has_previous %}
+            <a href="?page=1" class="ajax-paginate" data-page="1">&laquo; primeira</a>
+            <a href="?page={{ cursos.previous_page_number }}" class="ajax-paginate" data-page="{{ cursos.previous_page_number }}">anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Página {{ cursos.number }} de {{ cursos.paginator.num_pages }}.
+        </span>
+
+        {% if cursos.has_next %}
+            <a href="?page={{ cursos.next_page_number }}" class="ajax-paginate" data-page="{{ cursos.next_page_number }}">próxima</a>
+            <a href="?page={{ cursos.paginator.num_pages }}" class="ajax-paginate" data-page="{{ cursos.paginator.num_pages }}">última &raquo;</a>
+        {% endif %}
+    </span>
+</div>
