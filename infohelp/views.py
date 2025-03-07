@@ -5,6 +5,8 @@ from .forms import CursoForm, SalvosForm, AulaForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import JsonResponse
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.template.loader import render_to_string
 
 # Create your views here.
 
@@ -16,6 +18,7 @@ def login(request):
 
     return render(request, "login.html")
 
+
 def inicio(request):
     usuario = request.user
     perfil = None  # Valor padrão caso o usuário não esteja autenticado
@@ -23,11 +26,31 @@ def inicio(request):
     if usuario.is_authenticated:
         perfil = get_object_or_404(Perfil, usuario=usuario)
     
+    cursos = Curso.objects.all()
+    paginator = Paginator(cursos, 6)  # 6 cursos por página
+
+    page = request.GET.get('page')  # Obtém o número da página da URL
+    try:
+        cursos_paginados = paginator.page(page)
+    except PageNotAnInteger:
+        cursos_paginados = paginator.page(1)
+    except EmptyPage:
+        cursos_paginados = paginator.page(paginator.num_pages)
+
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        # Se for uma requisição AJAX, retorna o HTML dos cursos e da paginação
+        html_cursos = render_to_string('partials/cursos_list.html', {'cursos': cursos_paginados})
+        html_paginacao = render_to_string('partials/paginacao.html', {'cursos': cursos_paginados})
+        return JsonResponse({
+            'html_cursos': html_cursos,
+            'html_paginacao': html_paginacao,
+        })
+
+    # Se não for AJAX, renderiza a página completa
     context = {
-        "cursos": Curso.objects.all(),
+        "cursos": cursos_paginados,
         "perfil": perfil,
     }
-    
     return render(request, "inicio.html", context)
 
 
@@ -41,7 +64,7 @@ def listar_cursos(request):
     # Filtra por categoria, se fornecida
     cate = request.GET.get('categoria')
     if cate:
-        cursos = cursos.filter(categoria__icontains=cate)  # Use icontains para busca case-insensitive
+        cursos = cursos.filter(categoria__icontains=cate)
 
     # Filtra por busca, se fornecida
     busca = request.GET.get('busca')
@@ -50,12 +73,28 @@ def listar_cursos(request):
         busca_nome = cursos.filter(nome__icontains=busca)
         cursos = busca_descricao | busca_nome
 
-    # Adiciona os cursos filtrados ao contexto
-    context['cursos'] = cursos
+    # Paginação
+    paginator = Paginator(cursos, 9)  # 9 cursos por página
+    page = request.GET.get('page')  # Obtém o número da página da URL
+    try:
+        cursos_paginados = paginator.page(page)
+    except PageNotAnInteger:
+        cursos_paginados = paginator.page(1)
+    except EmptyPage:
+        cursos_paginados = paginator.page(paginator.num_pages)
 
-    # Adiciona as categorias ao contexto
-    categorias = Curso.categoria_do_curso  # Certifique-se de que isso retorna as categorias corretamente
-    context['categorias'] = categorias
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        # Se for uma requisição AJAX, retorna o HTML dos cursos e da paginação
+        html_cursos = render_to_string('partials/cursos_partial.html', {'cursos': cursos_paginados})
+        html_paginacao = render_to_string('partials/paginacao.html', {'cursos': cursos_paginados})
+        return JsonResponse({
+            'html_cursos': html_cursos,
+            'html_paginacao': html_paginacao,
+        })
+
+    # Se não for AJAX, renderiza a página completa
+    context['cursos'] = cursos_paginados
+    context['categorias'] = Curso.categoria_do_curso  # Certifique-se de que isso retorna as categorias corretamente
 
     # Adiciona o perfil do usuário ao contexto, se autenticado
     if request.user.is_authenticated:

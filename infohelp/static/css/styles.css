@@ -231,7 +231,7 @@ div .titulo-pag {
     }
 
     .links {
-        gap: 3rem;
+        gap: .5rem;
     }
 }
 
@@ -505,6 +505,44 @@ footer {
 
     & h2 {
         text-align: center;
+    }
+}
+
+
+
+.pagination {
+    margin-bottom: 3rem;
+
+    & .step-links {
+        max-width: 100%;
+
+        & div {
+            max-width: fit-content;
+            margin-inline: auto;
+
+            & div {
+                display: inline-block;
+
+                & a:nth-child(1) {
+                    margin-right: .2rem;
+                }
+
+                & a {
+                    text-decoration: none;
+                    color: var(--text-color);
+                }
+
+                & a:hover {
+                    color: var(--second-color);
+                    transition: .2s;
+                }
+            }
+
+            & span {
+                margin-inline: 1.5rem;
+                color: var(--text-color);
+            }
+        }
     }
 }
 
@@ -895,7 +933,7 @@ footer {
         
         padding: 0.5rem 1rem;
 
-        margin-top: 250%;;
+        margin-top: 15rem;
 
         cursor: pointer;
         border: none;
@@ -945,7 +983,7 @@ footer {
         
         padding: 0.5rem 1rem;
 
-        margin-top: 20rem;
+        margin-top: 15rem;
 
         cursor: pointer;
         border: none;
@@ -2025,9 +2063,11 @@ footer {
         padding: 1.2rem;
     }
 
+    /*
     .menu-mobile .links a {
         padding: 2rem;
     }
+    */
 
     .menu-mobile .links .login {
         background-color: transparent;
@@ -2037,6 +2077,12 @@ footer {
         font-size: 16px;
         color: var(--text-color);
         font-weight: 400;
+        cursor: pointer;
+    }
+
+    .menu-mobile .links .login:hover {
+        color: var(--second-color);
+        transition: 0.2s;
     }
 
     .menu-mobile .login button {
@@ -2049,6 +2095,8 @@ footer {
 
     .open {
         display: block;
+        border-top: 1px solid var(--border-color);
+        margin-bottom: .5rem;
     }
 
     /*Tela de início*/

@@ -1,0 +1,30 @@
+<!-- partials/paginacao.html -->
+<div class="pagination">
+    <span class="step-links">
+        <div>
+            {% if cursos.has_previous %}
+            <div>
+                <!-- Exibe o link "primeira" apenas se não estiver na segunda página -->
+                {% if cursos.number != 2 %}
+                    <a href="?page=1" class="ajax-paginate" data-page="1">&laquo; primeira</a>
+                {% endif %}
+                <a href="?page={{ cursos.previous_page_number }}" class="ajax-paginate" data-page="{{ cursos.previous_page_number }}">&laquo; anterior</a>
+            </div>
+            {% endif %}
+
+            <span class="current">
+                Página {{ cursos.number }} de {{ cursos.paginator.num_pages }}
+            </span>
+
+            {% if cursos.has_next %}
+            <div>
+                <a href="?page={{ cursos.next_page_number }}" class="ajax-paginate" data-page="{{ cursos.next_page_number }}">próxima &raquo;</a>
+                <!-- Exibe o link "última" apenas se não estiver na penúltima página -->
+                {% if cursos.number != cursos.paginator.num_pages|add:"-1" %}
+                    <a href="?page={{ cursos.paginator.num_pages }}" class="ajax-paginate" data-page="{{ cursos.paginator.num_pages }}">última &raquo;</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </span>
+</div>

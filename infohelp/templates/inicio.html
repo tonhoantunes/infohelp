@@ -4,56 +4,71 @@
 {% block title %}Início - InfoHelp{% endblock title %}
 
 {% block content %}
-    <div class="inicio-pag container">
-        <div class="inicio-conteudo">
-            {% if perfil %}
-                <h1>Bem-vindo, {{ perfil.usuario.username }}!</h1>
-            {% else %}
-                <h1>Bem-vindo, visitante!</h1>
-            {% endif %}
-            <p>Tenha bons estudos! Aproveite o InfoHelp.</p>
-        </div>
+<div class="inicio-pag container">
+    <div class="inicio-conteudo">
+        {% if perfil %}
+            <h1>Bem-vindo, {{ perfil.usuario.username }}!</h1>
+        {% else %}
+            <h1>Bem-vindo, visitante!</h1>
+        {% endif %}
+        <p>Tenha bons estudos! Aproveite o InfoHelp.</p>
     </div>
-    
+</div>
 
-    <h1 class="titulo">
-        Principais cursos
-    </h1>
+<h1 class="titulo">Principais cursos</h1>
 
-    <section class="principais-cursos container cursos-cards">
+<section class="principais-cursos container cursos-cards" id="cursos-list">
+    {% include 'partials/cursos_list.html' with cursos=cursos %}
+</section>
 
-        {% for curso in cursos  %}
-        <div class="cursos-cards">
-            <div class="card-curso card_curso-1">
-                <a class="acesso-curso" href="{% url "detalhes_curso" curso.id %}">
+<!-- Contêiner para a paginação -->
+<div id="paginacao" class="container">
+    {% include 'partials/paginacao.html' with cursos=cursos %}
+</div>
 
-                    <div class="img-curso">
-                        {% if curso.capa %}
-                        <img src="{{ curso.capa.url }}" alt="Capa do curso">
-                        {% else %}
-                        <img src="{% static "assets/placeholder.png" %}" alt="Sem capa">
-                        {% endif %}
-                    </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Função para tratar a paginação via AJAX
+        function carregarPagina(page) {
+            $.ajax({
+                url: window.location.pathname,  // URL atual
+                data: {
+                    'page': page
+                },
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'  // Indica que é uma requisição AJAX
+                },
+                success: function(response) {
+                    $('#cursos-list').html(response.html_cursos);  // Atualiza a lista de cursos
+                    $('#paginacao').html(response.html_paginacao);  // Atualiza a paginação
 
-                    <h2>{{ curso.nome }}</h2>
-                    <div class="horario-nivel">
-                        <img src="{% static "assets/icons/relogioCard.svg" %}" alt="">
-                        <p>{{ curso.carga_horaria }}</p>
-                        <p>{{ curso.nivel }}</p>
-                    </div>
-                    <div class="categoria">
-                        <p>{{ curso.categoria }}</p>
-                    </div>
-                </a>
+                    // Atualiza a URL no navegador sem recarregar a página
+                    window.history.pushState(null, '', `?page=${page}`);
 
-                <!--
-                <div class="btn-admin_curso">
-                    <a class="editar-curso" href="#">Editar curso</a>
-                    <a class="excluir-curso" href="#">Excluir curso</a>
-                </div>
-                -->
-            </div>
-        </div>
-        {% endfor %}
-    </section>
+                    // Re-vincula os eventos de clique aos novos links de paginação
+                    $('.ajax-paginate').on('click', function(e) {
+                        e.preventDefault();  // Impede o comportamento padrão do link
+                        var page = $(this).data('page');  // Obtém o número da página
+                        carregarPagina(page);  // Carrega a página via AJAX
+                    });
+                }
+            });
+        }
+
+        // Vincula os eventos de clique aos links de paginação
+        $('.ajax-paginate').on('click', function(e) {
+            e.preventDefault();  // Impede o comportamento padrão do link
+            var page = $(this).data('page');  // Obtém o número da página
+            carregarPagina(page);  // Carrega a página via AJAX
+        });
+
+        // Verifica se há um parâmetro 'page' na URL ao carregar a página
+        var urlParams = new URLSearchParams(window.location.search);
+        var page = urlParams.get('page');
+        if (page) {
+            carregarPagina(page);  // Carrega a página correta
+        }
+    });
+</script>
 {% endblock content %}

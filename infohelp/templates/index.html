@@ -42,11 +42,15 @@
         <div class="menu-mobile">
             <ul class="links">
                 {% if request.user.is_authenticated %}
-                    <li class="cursos"><a href="{% url "listar_cursos" %}">Cursos</a></li>
+                    <a href="{% url "listar_cursos" %}">
+                        <li class="cursos">Cursos</li>
+                    </a>
                 {% else %}
-                    <li class="cursos"><ahref="{% url "listar_cursos" %}">Cursos</a></li>
+                    <li class="cursos"><a href="{% url "listar_cursos" %}">Cursos</a></li>
                 {% endif %}
-                <li class="biblioteca"><a href=" {% url "biblioteca" %} ">Biblioteca</a></li>
+                    <a href=" {% url "biblioteca" %} ">
+                        <li class="biblioteca">Biblioteca</li>
+                    </a>
                 <li>
                     {% if request.user.is_authenticated %}
                         <form method="post" action="{% url 'logout' %}">
