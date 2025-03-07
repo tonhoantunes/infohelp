@@ -1,6 +1,6 @@
 # Projeto InfoHelp
 
-InfoHelp é uma plataforma web gratuita para ensino de informática básica, oferecendo cursos e videoaulas sobre softwares de escritório. Usuários acessam conteúdos organizados, enquanto administradores gerenciam os cursos.
+O InfoHelp é uma plataforma web gratuita voltada para o ensino de informática básica, focada em softwares de escritório como Word, Excel e PowerPoint. Seu objetivo é facilitar o aprendizado de iniciantes, oferecendo cursos organizados por categorias, com videoaulas hospedadas no YouTube e artigos explicativos. O sistema conta com dois módulos principais: um para usuários acessarem conteúdos e gerenciarem perfis, e outro para administradores cadastrarem e organizarem os cursos.
 
 # Tecnologias utilizadas
 
