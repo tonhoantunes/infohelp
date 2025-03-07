@@ -85,7 +85,11 @@ def listar_cursos(request):
 
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         # Se for uma requisição AJAX, retorna o HTML dos cursos e da paginação
-        html_cursos = render_to_string('partials/cursos_partial.html', {'cursos': cursos_paginados})
+        html_cursos = render_to_string('partials/cursos_partial.html', {
+            'cursos': cursos_paginados,
+            'request': request,  # Passa o objeto request para o template parcial
+            'perms': request.user.get_all_permissions(),  # Passa as permissões do usuário
+        })
         html_paginacao = render_to_string('partials/paginacao.html', {'cursos': cursos_paginados})
         return JsonResponse({
             'html_cursos': html_cursos,
