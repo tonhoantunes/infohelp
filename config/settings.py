@@ -120,7 +120,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Caminho no sistema de arquivos para armazenar arquivos estáticos
 # MEDIA_URL = 'media/'
 
 MEDIA_URL = '/media/'  # URL base para servir arquivos de mídia
