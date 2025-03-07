@@ -57,45 +57,61 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    $(document).ready(function() {
-        function carregarCursos(page, categoria) {
-            $.ajax({
-                url: "{% url 'listar_cursos' %}",
-                data: {
-                    'page': page,
-                    'categoria': categoria
-                },
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                },
-                success: function(response) {
-                    console.log("Resposta AJAX recebida:", response);
-                    $('#cursos-list').html(response.html_cursos);
-                    $('#paginacao').html(response.html_paginacao);
-    
-                    // Atualiza a URL no navegador sem recarregar a página
-                    var novaURL = `?page=${page}`;
-                    if (categoria) {
-                        novaURL += `&categoria=${categoria}`;
+        $(document).ready(function() {
+            // Função para carregar cursos via AJAX
+            function carregarCursos(page, categoria) {
+                $.ajax({
+                    url: "{% url 'listar_cursos' %}",
+                    data: {
+                        'page': page,
+                        'categoria': categoria
+                    },
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'  // Indica que é uma requisição AJAX
+                    },
+                    success: function(response) {
+                        $('#cursos-list').html(response.html_cursos);  // Atualiza a lista de cursos
+                        $('#paginacao').html(response.html_paginacao);  // Atualiza a paginação
+
+                        // Atualiza a URL no navegador sem recarregar a página
+                        var novaURL = `?page=${page}`;
+                        if (categoria) {
+                            novaURL += `&categoria=${categoria}`;
+                        }
+                        window.history.pushState(null, '', novaURL);
+
+                        // Re-vincula os eventos de clique aos novos links de paginação
+                        $('.ajax-paginate').on('click', function(e) {
+                            e.preventDefault();  // Impede o comportamento padrão do link
+                            var page = $(this).data('page');  // Obtém o número da página
+                            var categoria = $('#categoria').val();  // Obtém a categoria selecionada
+                            carregarCursos(page, categoria);  // Carrega a página via AJAX
+                        });
                     }
-                    window.history.pushState(null, '', novaURL);
-                }
+                });
+            }
+
+            // Evento para mudança de categoria
+            $('#categoria').change(function() {
+                var categoria = $(this).val();  // Obtém a categoria selecionada
+                carregarCursos(1, categoria);  // Carrega a primeira página com a nova categoria
             });
-        }
-    
-        // Evento para mudança de categoria
-        $('#categoria').change(function() {
-            var categoria = $(this).val();
-            carregarCursos(1, categoria);
-        });
-    
-        // Evento para paginação
-        $(document).on('click', '.ajax-paginate', function(e) {
-            e.preventDefault();
-            var page = $(this).data('page');
-            var categoria = $('#categoria').val();
+
+            // Evento para paginação
+            $('.ajax-paginate').on('click', function(e) {
+                e.preventDefault();  // Impede o comportamento padrão do link
+                var page = $(this).data('page');  // Obtém o número da página
+                var categoria = $('#categoria').val();  // Obtém a categoria selecionada
+                carregarCursos(page, categoria);  // Carrega a página via AJAX
+            });
+
+            // Verifica se há um parâmetro 'page' ou 'categoria' na URL ao carregar a página
+            var urlParams = new URLSearchParams(window.location.search);
+            var page = urlParams.get('page') || 1;  // Obtém o número da página ou usa 1 como padrão
+            var categoria = urlParams.get('categoria');  // Obtém a categoria da URL
+
+            // Carrega a página correta ao carregar a página
             carregarCursos(page, categoria);
         });
-    });
     </script>
 {% endblock content %}
