@@ -7,18 +7,18 @@ class Curso(models.Model):
     carga_horaria = models.TimeField(max_length=100)
     descricao = models.TextField(max_length=500)
     
-    categoria_do_curso = {
-        'Planilha': 'Planilha',
-        'Texto': 'Texto',
-        'Apresentação': 'Apresentação',
-        'Design': 'Design',
-    }
+    categoria_do_curso = [
+        ('Planilha', 'Planilha'),
+        ('Texto', 'Texto'),
+        ('Apresentação', 'Apresentação'),
+        ('Design', 'Design')
+    ]
 
-    nivel_do_curso = {
+    nivel_do_curso = [
         ('Fácil', 'Fácil'),
         ('Médio', 'Médio'),
         ('Difícil', 'Difícil'),
-    }
+    ]
 
 
     categoria = models.CharField(max_length=100, choices=categoria_do_curso, blank=False)
