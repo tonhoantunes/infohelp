@@ -36,4 +36,8 @@ urlpatterns = [
     path('editar_perfil/', editar_perfil, name='editar_perfil'),
 
     path('alterar_senha/', alterar_senha, name='alterar_senha'),
+
+
+
+    path('professor/criar/curso/', views.criar_curso_professor, name="criar_curso_professor"),
 ]

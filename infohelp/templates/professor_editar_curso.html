@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Criar Curso - InfoHelp{% endblock title %}
+
+{% block content %}
+<section class="titulos-pagina container">
+    <div class="titulo-pag">
+        <h1>Criar Curso</h1>
+    </div>
+</section>
+
+<section class="section-criar_curso container">
+    <div class="box-criar_curso">
+        <div class="forms-criar_curso">
+            <form action="{% url 'criar_curso_professor' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-grupo">
+                    <label for="id_titulo">Título:</label>
+                    {{ form.titulo }}
+                    {% if form.errors.titulo %}
+                        <div class="error">{{ form.errors.titulo }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-grupo">
+                    <label for="id_descricao">Descrição:</label>
+                    {{ form.descricao }}
+                    {% if form.errors.descricao %}
+                        <div class="error">{{ form.errors.descricao }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-grupo">
+                    <label for="id_categoria">Categoria:</label>
+                    {{ form.categoria }}
+                    {% if form.errors.categoria %}
+                        <div class="error">{{ form.errors.categoria }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-grupo">
+                    <label for="id_imagem">Imagem:</label>
+                    {{ form.imagem }}
+                    {% if form.errors.imagem %}
+                        <div class="error">{{ form.errors.imagem }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="salvar-cancelar">
+                    <div class="btn-criar_curso">
+                        <button id="submitBtn" type="submit">Salvar</button>
+                    </div>
+                    <a class="voltar-editar_perfil" href="{% url "listar_cursos" %}">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock content %}
