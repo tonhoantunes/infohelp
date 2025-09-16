@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Curso, Salvos, Aula
+from .models import Curso, Salvos, Aula, CursoProfessor
 
 class CursoForm(forms.ModelForm):
     class Meta:
@@ -27,3 +27,9 @@ class AulaForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['texto'].required = False  # Torna o campo texto opcional no formulário
         self.fields['capa'].required = False  # Torna o campo capa opcional no formulário
+
+
+class CursoProfessorForm(forms.ModelForm):
+    class Meta:
+        model = CursoProfessor
+        fields = ['titulo', 'descricao', 'imagem', 'categoria']

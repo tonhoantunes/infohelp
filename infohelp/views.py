@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Curso, Salvos, Aula
+from .models import Curso, Salvos, Aula, CursoProfessor
 from usuarios.models import Perfil
-from .forms import CursoForm, SalvosForm, AulaForm
+from .forms import CursoForm, SalvosForm, AulaForm, CursoProfessorForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import JsonResponse
 from django.contrib import messages
@@ -435,3 +435,37 @@ def remover_curso_de_salvos(request):
         return JsonResponse({"removido": False, "error": "Curso não estava salvo!"})
     
     return JsonResponse({"error": "Requisição inválida"}, status=400)
+
+
+
+
+
+#@login_required
+#@permission_required('infohelp.criar_curso', raise_exception=True)
+
+def criar_curso_professor(request):
+    usuario = request.user
+    perfil = get_object_or_404(Perfil, usuario=usuario)
+
+    if request.method == "POST":
+        form = CursoProfessorForm(request.POST, request.FILES)
+        if form.is_valid():
+            curso = form.save(commit=False)
+            curso.usuario = request.user
+            curso.save()
+            messages.success(request, "Curso criado com sucesso!")  # Mensagem de sucesso
+            return redirect('listar_cursos', curso_id=curso.id)
+        else:
+            # Exibe mensagens de erro se o formulário não for válido
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")  # Mensagem de erro
+    else:
+        form = CursoProfessorForm()
+
+    context = {
+        'form': form,
+        'perfil': perfil,
+    }
+
+    return render(request, "professor_editar_curso.html", context)

@@ -48,3 +48,25 @@ class Aula(models.Model):
     def __str__(self):
         return self.titulo
     
+
+
+
+class CursoProfessor(models.Model):
+    titulo = models.CharField(max_length=200)
+    descricao = models.TextField()
+    
+    categoria_do_curso = [
+        ('Planilha', 'Planilha'),
+        ('Texto', 'Texto'),
+        ('Apresentação', 'Apresentação'),
+        ('Design', 'Design')
+    ]
+
+    imagem = models.ImageField(upload_to='cursos_professor/')
+
+    #capa = models.ImageField(blank=True)
+
+    categoria = models.CharField(max_length=100, choices=categoria_do_curso, blank=False)
+
+    def __str__(self):
+        return self.titulo
