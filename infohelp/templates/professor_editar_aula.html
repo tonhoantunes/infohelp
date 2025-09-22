@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Editar Aula - {{ curso.titulo }}{% endblock title %}
+
+{% block content %}
+<section class="titulos-pagina container">
+    <div class="titulo-pag">
+        <h1>Editar Aula</h1>
+        <p>Curso: {{ curso.titulo }}</p>
+    </div>
+</section>
+
+<section class="section-criar_aula container">
+    <div class="box-criar_aula">
+        <div class="forms-criar_aula">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <div class="salvar-cancelar">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a href="{% url 'detalhes_curso_professor' curso.id %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock content %}

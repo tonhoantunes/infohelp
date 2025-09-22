@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Curso, Salvos, Aula, CursoProfessor
+from .models import Curso, Salvos, Aula, CursoProfessor, AulaProfessor
 from usuarios.models import Perfil
-from .forms import CursoForm, SalvosForm, AulaForm, CursoProfessorForm
+from .forms import CursoForm, SalvosForm, AulaForm, CursoProfessorForm, AulaProfessorForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.http import JsonResponse
 from django.contrib import messages
@@ -469,3 +469,55 @@ def criar_curso_professor(request):
     }
 
     return render(request, "professor_editar_curso.html", context)
+
+
+
+@login_required
+def detalhes_curso_professor(request, curso_id):
+    curso = get_object_or_404(CursoProfessor, id=curso_id)
+    aulas = curso.aulas.all()
+    return render(request, "professor/detalhes_curso.html", {"curso": curso, "aulas": aulas})
+
+
+
+
+@login_required
+def criar_aula_professor(request, curso_id):
+    curso = get_object_or_404(CursoProfessor, id=curso_id)
+    if request.method == "POST":
+        form = AulaProfessorForm(request.POST, request.FILES)
+        if form.is_valid():
+            aula = form.save(commit=False)
+            aula.curso = curso
+            aula.save()
+            messages.success(request, "Aula criada com sucesso!")
+            return redirect("detalhes_curso_professor", curso_id=curso.id)
+    else:
+        form = AulaProfessorForm()
+    return render(request, "professor/criar_aula.html", {"form": form, "curso": curso})
+
+
+@login_required
+def editar_aula_professor(request, curso_id, aula_id):
+    curso = get_object_or_404(CursoProfessor, id=curso_id)
+    aula = get_object_or_404(AulaProfessor, id=aula_id, curso=curso)
+    if request.method == "POST":
+        form = AulaProfessorForm(request.POST, request.FILES, instance=aula)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Aula atualizada com sucesso!")
+            return redirect("detalhes_curso_professor", curso_id=curso.id)
+    else:
+        form = AulaProfessorForm(instance=aula)
+    return render(request, "professor/editar_aula.html", {"form": form, "curso": curso, "aula": aula})
+
+
+@login_required
+def excluir_aula_professor(request, curso_id, aula_id):
+    curso = get_object_or_404(CursoProfessor, id=curso_id)
+    aula = get_object_or_404(AulaProfessor, id=aula_id, curso=curso)
+    if request.method == "POST":
+        aula.delete()
+        messages.success(request, "Aula excluída com sucesso!")
+        return redirect("detalhes_curso_professor", curso_id=curso.id)
+    return render(request, "professor/excluir_aula.html", {"curso": curso, "aula": aula})

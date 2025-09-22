@@ -1,11 +1,15 @@
 from django.db import models
 from usuarios.models import User
+from django.core.exceptions import ValidationError
+
 
 
 class Curso(models.Model):
     nome = models.CharField(max_length=100)
     carga_horaria = models.TimeField(max_length=100)
     descricao = models.TextField(max_length=500)
+
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     
     categoria_do_curso = [
         ('Planilha', 'Planilha'),
@@ -70,3 +74,38 @@ class CursoProfessor(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+class AulaProfessor(models.Model):
+    titulo = models.CharField(max_length=200)
+    descricao = models.TextField(blank=True, null=True)
+    curso = models.ForeignKey(CursoProfessor, on_delete=models.CASCADE, related_name="aulas")
+
+
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+    # Materiais didáticos
+    video = models.FileField(upload_to="aulas/videos/", blank=True, null=True)
+    pdf = models.FileField(upload_to="aulas/pdfs/", blank=True, null=True)
+    ppt = models.FileField(upload_to="aulas/ppts/", blank=True, null=True)
+
+    data_criacao = models.DateTimeField(auto_now_add=True)
+    data_atualizacao = models.DateTimeField(auto_now=True)
+
+    def clean(self):
+        # Restrições de formatos e tamanho
+        if self.video and not self.video.name.endswith(".mp4"):
+            raise ValidationError("O vídeo deve estar no formato MP4.")
+        if self.video and self.video.size > 500 * 1024 * 1024:
+            raise ValidationError("O vídeo não pode ultrapassar 500MB.")
+
+        if self.pdf and not self.pdf.name.endswith(".pdf"):
+            raise ValidationError("O PDF deve estar no formato PDF.")
+        if self.pdf and self.pdf.size > 50 * 1024 * 1024:
+            raise ValidationError("O PDF não pode ultrapassar 50MB.")
+
+        if self.ppt and not (self.ppt.name.endswith(".ppt") or self.ppt.name.endswith(".pptx")):
+            raise ValidationError("O arquivo deve estar no formato PPT ou PPTX.")
+
+    def __str__(self):
+        return f"{self.titulo} ({self.curso.titulo})"
