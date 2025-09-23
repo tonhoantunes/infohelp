@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Curso, Salvos, Aula, CursoProfessor
+from .models import Curso, Salvos, Aula, CursoProfessor, AulaProfessor
 
 class CursoForm(forms.ModelForm):
     class Meta:
@@ -29,7 +29,20 @@ class AulaForm(forms.ModelForm):
         self.fields['capa'].required = False  # Torna o campo capa opcional no formulário
 
 
+
 class CursoProfessorForm(forms.ModelForm):
     class Meta:
         model = CursoProfessor
         fields = ['titulo', 'descricao', 'imagem', 'categoria']
+
+class AulaProfessorForm(forms.ModelForm):
+    class Meta:
+        model = AulaProfessor
+        fields = ["titulo", "descricao", "capa", "videoyt", "video", "pdf", "ppt"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Todos opcionais no form
+        self.fields["video"].required = False
+        self.fields["pdf"].required = False
+        self.fields["ppt"].required = False

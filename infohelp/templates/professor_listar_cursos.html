@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Meus Cursos</h1>
+
+{% load static %}
+
+{% if cursos %}
+        <div class="cursos-cards">
+            {% for curso in cursos %}
+            <div class="card-curso card_curso-1">
+                <a class="acesso-curso" href="{% url 'detalhes_curso_professor' curso.id %}">
+
+                    <div class="img-curso">
+                        {% if curso.capa %}
+                        <img src="{{ curso.capa.url }}" alt="Capa do curso">
+                        {% else %}
+                        <img src="{% static 'assets/placeholder.png' %}" alt="Sem capa">
+                        {% endif %}
+                    </div>
+
+                    <h2>{{ curso.titulo }}</h2>
+                   
+                    <div class="categoria">
+                        <p>{{ curso.descricao }}</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+       
+{% else %}
+
+    <div class="sem_cursos">
+        <p>Hum... <br><br> Ainda não há nenhum curso disponível.</p>
+    </div>
+   
+{% endif %}
+
+<a href="{% url 'criar_curso_professor' %}">Criar novo curso</a>
+{% endblock %}

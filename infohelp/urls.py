@@ -40,4 +40,15 @@ urlpatterns = [
 
 
     path('professor/criar/curso/', views.criar_curso_professor, name="criar_curso_professor"),
+
+    path("professor/cursos/", views.listar_cursos_professor, name="listar_cursos_professor"),
+
+    # Cursos do professor
+    path("professor/cursos/<int:curso_id>/", views.detalhes_curso_professor, name="detalhes_curso_professor"),
+
+    # Aulas do professor
+    path("professor/curso/<int:curso_id>/aula/nova/", views.criar_aula_professor, name="criar_aula_professor"),
+    path("professor/curso/<int:curso_id>/aula/<int:aula_id>/editar/", views.editar_aula_professor, name="editar_aula_professor"),
+    path("professor/curso/<int:curso_id>/aula/<int:aula_id>/excluir/", views.excluir_aula_professor, name="excluir_aula_professor"),
+
 ]

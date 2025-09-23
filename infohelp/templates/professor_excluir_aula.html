@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Excluir Aula - {{ curso.titulo }}{% endblock title %}
+
+{% block content %}
+<section class="titulos-pagina container">
+    <div class="titulo-pag">
+        <h1>Excluir Aula</h1>
+        <p>Curso: {{ curso.titulo }}</p>
+    </div>
+</section>
+
+<section class="section-excluir_aula container">
+    <p>Tem certeza que deseja excluir a aula <strong>{{ aula.titulo }}</strong>?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sim, excluir</button>
+        <a href="{% url 'detalhes_curso_professor' curso.id %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</section>
+{% endblock content %}
