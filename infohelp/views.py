@@ -497,7 +497,7 @@ def listar_cursos_professor(request):
 def detalhes_curso_professor(request, curso_id):
     curso = get_object_or_404(CursoProfessor, id=curso_id)
     aulas = curso.aulas.all()
-    return render(request, "professor/detalhes_curso.html", {"curso": curso, "aulas": aulas})
+    return render(request, "professor_detalhes_curso.html", {"curso": curso, "aulas": aulas})
 
 
 

@@ -6,9 +6,12 @@
     <ul>
     {% for curso in cursos %}
         <li>
-            <a href="{% url 'detalhes_curso_professor' curso.id %}">{{ curso.titulo }}</a>
+            {{ curso.titulo }}</a>
             - {{ curso.categoria }}
-            - <a href="{% url 'editar_curso_professor' curso.id %}">Editar</a>
+        </li>
+        
+        <li>
+            <a href="{% url 'detalhes_curso_professor' curso.id %}">Ver Detalhes</a>
         </li>
     {% endfor %}
     </ul>
