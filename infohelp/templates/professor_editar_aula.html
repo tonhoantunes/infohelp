@@ -74,8 +74,10 @@
                 </div>
 
                 <div class="salvar-cancelar">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
-                    <a href="{% url 'detalhes_curso_professor' curso.id %}" class="btn btn-secondary">Cancelar</a>
+                    <div class="btn-criar_aula">
+                        <button type="submit">Salvar</button>
+                    </div>
+                    <a href="{% url 'detalhes_curso_professor' curso.id %}" class="voltar-editar_perfil">Cancelar</a>
                 </div>
             </form>
         </div>
