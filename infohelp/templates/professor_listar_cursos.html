@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Meus Cursos</h1>
+
+{% if cursos %}
+    <ul>
+    {% for curso in cursos %}
+        <li>
+            <a href="{% url 'detalhes_curso_professor' curso.id %}">{{ curso.titulo }}</a>
+            - {{ curso.categoria }}
+            - <a href="{% url 'editar_curso_professor' curso.id %}">Editar</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Você ainda não criou nenhum curso.</p>
+{% endif %}
+
+<a href="{% url 'criar_curso_professor' %}">Criar novo curso</a>
+{% endblock %}

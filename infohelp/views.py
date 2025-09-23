@@ -454,7 +454,7 @@ def criar_curso_professor(request):
             curso.usuario = request.user
             curso.save()
             messages.success(request, "Curso criado com sucesso!")  # Mensagem de sucesso
-            return redirect('listar_cursos', curso_id=curso.id)
+            return redirect('listar_cursos')
         else:
             # Exibe mensagens de erro se o formulário não for válido
             for field, errors in form.errors.items():
@@ -473,11 +473,31 @@ def criar_curso_professor(request):
 
 
 @login_required
+def listar_cursos_professor(request):
+    usuario = request.user
+    perfil = None
+
+    if usuario.is_authenticated:
+        perfil = Perfil.objects.filter(usuario=usuario).first()
+
+    # Pega todos os cursos criados pelo usuário logado
+    cursos = CursoProfessor.objects.filter(usuario=usuario)
+
+    context = {
+        "cursos": cursos,
+        "perfil": perfil,
+    }
+
+    return render(request, "professor_listar_cursos.html", context)
+
+
+
+
+@login_required
 def detalhes_curso_professor(request, curso_id):
     curso = get_object_or_404(CursoProfessor, id=curso_id)
     aulas = curso.aulas.all()
-    return render(request, "professor_detalhes_curso.html", {"curso": curso, "aulas": aulas})
-
+    return render(request, "professor/detalhes_curso.html", {"curso": curso, "aulas": aulas})
 
 
 

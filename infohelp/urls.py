@@ -41,8 +41,10 @@ urlpatterns = [
 
     path('professor/criar/curso/', views.criar_curso_professor, name="criar_curso_professor"),
 
+    path("professor/cursos/", views.listar_cursos_professor, name="listar_cursos_professor"),
+
     # Cursos do professor
-    path("professor/curso/<int:curso_id>/", views.detalhes_curso_professor, name="detalhes_curso_professor"),
+    path("professor/cursos/", views.detalhes_curso_professor, name="detalhes_curso_professor"),
 
     # Aulas do professor
     path("professor/curso/<int:curso_id>/aula/nova/", views.criar_aula_professor, name="criar_aula_professor"),

@@ -58,6 +58,9 @@ class Aula(models.Model):
 class CursoProfessor(models.Model):
     titulo = models.CharField(max_length=200)
     descricao = models.TextField()
+
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name="cursos_professor")
+
     
     categoria_do_curso = [
         ('Planilha', 'Planilha'),
