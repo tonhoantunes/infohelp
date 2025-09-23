@@ -16,7 +16,62 @@
         <div class="forms-criar_aula">
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
+                <div class="form-grupo">
+                    <label for="id_titulo">Título:</label>
+                    {{ form.titulo }}
+                    {% if form.errors.titulo %}
+                        <div class="error">{{ form.errors.titulo }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-grupo">
+                    <label for="id_descricao">Descrição:</label>
+                    {{ form.descricao }}
+                    {% if form.errors.descricao %}
+                        <div class="error">{{ form.errors.descricao }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-grupo">
+                    <label for="id_capa">Capa:</label>
+                    {{ form.capa }}
+                    {% if form.errors.capa %}
+                        <div class="error">{{ form.errors.capa }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-grupo">
+                    <label for="id_video">Link do Vídeo (YouTube):</label>
+                    {{ form.videoyt }}
+                    {% if form.errors.videoyt %}
+                        <div class="error">{{ form.errors.videoyt }}</div>
+                    {% endif %}
+                </div>
+
+
+                <div class="form-grupo">
+                    <label for="id_video">Vídeo:</label>
+                    {{ form.video }}
+                    {% if form.errors.video %}
+                        <div class="error">{{ form.errors.video }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-grupo">
+                    <label for="id_pdf">Material PDF:</label>
+                    {{ form.pdf }}
+                    {% if form.errors.pdf %}
+                        <div class="error">{{ form.errors.pdf }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-grupo">
+                    <label for="id_ppt">Apresentação PPT:</label>
+                    {{ form.ppt }}
+                    {% if form.errors.ppt %}
+                        <div class="error">{{ form.errors.ppt }}</div>
+                    {% endif %}
+                </div>
 
                 <div class="salvar-cancelar">
                     <button type="submit" class="btn btn-primary">Salvar</button>

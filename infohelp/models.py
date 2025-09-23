@@ -86,6 +86,8 @@ class AulaProfessor(models.Model):
 
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    capa = models.ImageField(upload_to="capas_aulas_professor/", null=True, blank=True)
+    videoyt = models.URLField(null=True, blank=True)
 
     # Materiais didáticos
     video = models.FileField(upload_to="aulas/videos/", blank=True, null=True)

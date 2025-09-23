@@ -41,6 +41,23 @@
                 </div>
 
                 <div class="form-grupo">
+                    <label for="id_capa">Capa:</label>
+                    {{ form.capa }}
+                    {% if form.errors.capa %}
+                        <div class="error">{{ form.errors.capa }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-grupo">
+                    <label for="id_video">Link do Vídeo (YouTube):</label>
+                    {{ form.videoyt }}
+                    {% if form.errors.videoyt %}
+                        <div class="error">{{ form.errors.videoyt }}</div>
+                    {% endif %}
+                </div>
+
+
+                <div class="form-grupo">
                     <label for="id_video">Vídeo:</label>
                     {{ form.video }}
                     {% if form.errors.video %}

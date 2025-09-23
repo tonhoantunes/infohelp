@@ -38,7 +38,7 @@ class CursoProfessorForm(forms.ModelForm):
 class AulaProfessorForm(forms.ModelForm):
     class Meta:
         model = AulaProfessor
-        fields = ["titulo", "descricao", "video", "pdf", "ppt"]
+        fields = ["titulo", "descricao", "capa", "videoyt", "video", "pdf", "ppt"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
