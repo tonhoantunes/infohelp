@@ -508,6 +508,7 @@ def criar_aula_professor(request, curso_id):
         form = AulaProfessorForm(request.POST, request.FILES)
         if form.is_valid():
             aula = form.save(commit=False)
+            aula.usuario = request.user
             aula.curso = curso
             aula.save()
             messages.success(request, "Aula criada com sucesso!")
