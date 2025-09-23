@@ -476,7 +476,7 @@ def criar_curso_professor(request):
 def detalhes_curso_professor(request, curso_id):
     curso = get_object_or_404(CursoProfessor, id=curso_id)
     aulas = curso.aulas.all()
-    return render(request, "professor/detalhes_curso.html", {"curso": curso, "aulas": aulas})
+    return render(request, "professor_detalhes_curso.html", {"curso": curso, "aulas": aulas})
 
 
 
@@ -494,7 +494,7 @@ def criar_aula_professor(request, curso_id):
             return redirect("detalhes_curso_professor", curso_id=curso.id)
     else:
         form = AulaProfessorForm()
-    return render(request, "professor/criar_aula.html", {"form": form, "curso": curso})
+    return render(request, "professor_criar_aula.html", {"form": form, "curso": curso})
 
 
 @login_required
@@ -509,7 +509,7 @@ def editar_aula_professor(request, curso_id, aula_id):
             return redirect("detalhes_curso_professor", curso_id=curso.id)
     else:
         form = AulaProfessorForm(instance=aula)
-    return render(request, "professor/editar_aula.html", {"form": form, "curso": curso, "aula": aula})
+    return render(request, "professor_editar_aula.html", {"form": form, "curso": curso, "aula": aula})
 
 
 @login_required
@@ -520,4 +520,4 @@ def excluir_aula_professor(request, curso_id, aula_id):
         aula.delete()
         messages.success(request, "Aula excluída com sucesso!")
         return redirect("detalhes_curso_professor", curso_id=curso.id)
-    return render(request, "professor/excluir_aula.html", {"curso": curso, "aula": aula})
+    return render(request, "professor_excluir_aula.html", {"curso": curso, "aula": aula})
